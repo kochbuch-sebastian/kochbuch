@@ -1,5 +1,7 @@
 # client
 
+This is the frontend to my kochbuch. 
+
 ## Project setup
 ```
 npm install
