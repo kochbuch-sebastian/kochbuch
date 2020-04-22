@@ -2,20 +2,25 @@
   <div class="container">
     <p class="error" v-if="error">{{ this.error }}</p>
 
-    <h3 v-show="this.keywords !== null">Rezepte, die "{{ keywords }}" enthalten</h3>
+    <h3 v-show="this.keywords !== null">
+      Rezepte, die "{{ keywords }}" enthalten
+    </h3>
     <h3 v-show="this.keywords === null">Alle Rezepte</h3>
 
     <div v-show="items.length === 0">Keine Rezepte gefunden!</div>
-    <div v-show="items.length !== 0">Anzahl Rezepte: {{items.length}}</div>
+    <div v-show="items.length !== 0">Anzahl Rezepte: {{ items.length }}</div>
 
-    <div
-      class="item"
+    <router-link
+      id="recipes"
+      class="item router-links"
       v-for="(recipe, index) in items"
       v-show="items.length > 0"
       :item="recipe"
       :index="index"
       :key="recipe._id"
-    >{{index}}: {{ recipe.title }}</div>
+      :to="{ name: 'Recipe', params: { id: recipe._id } }"
+      >{{ recipe.title }}</router-link
+    >
   </div>
 </template>
 
@@ -52,17 +57,21 @@ export default {
       this.getKeywords();
       try {
         if (this.keywords === null) {
-          ItemService.getItems().then((response) => {
-            this.items = response;
-          }).catch((err) => {
-            this.error = err;
-          });
+          ItemService.getItems()
+            .then((response) => {
+              this.items = response;
+            })
+            .catch((err) => {
+              this.error = err;
+            });
         } else {
-          ItemService.getItemsByTitle(this.$route.params.keywords).then((response) => {
-            this.items = response;
-          }).catch((err) => {
-            this.error = err;
-          });
+          ItemService.getItemsByTitle(this.$route.params.keywords)
+            .then((response) => {
+              this.items = response;
+            })
+            .catch((err) => {
+              this.error = err;
+            });
         }
       } catch (err) {
         this.error = err.message;
