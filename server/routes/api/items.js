@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 });
 
 // @route   GET api/items/:id
-// @desc    Get one Items
+// @desc    Get one Item
 // @access  Public
 router.get('/:id', (req, res) => {
   Item.findById(req.params.id).then((items) => res.json(items));
@@ -29,6 +29,7 @@ router.post('/', (req, res) => {
     ingredients: req.body.ingredients,
     description: req.body.description,
     recipeType: req.body.recipeType,
+    username: req.body.username,
   });
 
   newItem.save().then((item) => res.json(item));
@@ -43,27 +44,34 @@ router.patch('/:id', (req, res) => {
     ingredients: req.body.ingredients,
     description: req.body.description,
     recipeType: req.body.recipeType,
+    username: req.body.username,
   });
 
   const upsertData = newItem.toObject();
 
   delete upsertData._id;
 
-  try {
-    Item.updateOne(
-      { _id: req.params.id },
-      upsertData,
-      { upsert: true },
-      (err, updatedDoc) => {
-        if (err) return res.status(500).send({ error: err });
-        return res.send(updatedDoc);
-      },
-    ).catch((err) => {
-      throw err;
-    });
-  } catch (err) {
-    console.error(err);
-  }
+  Item.findById(req.params.id).then((oldItem) => {
+    if (newItem.username === oldItem.username) {
+      try {
+        Item.updateOne(
+          { _id: req.params.id },
+          upsertData,
+          { upsert: true },
+          (err, updatedDoc) => {
+            if (err) return res.status(500).send({ error: err });
+            return res.send(updatedDoc);
+          },
+        ).catch((err) => {
+          throw err;
+        });
+      } catch (err) {
+        res.status(500).json({ success: false, error: err });
+      }
+    } else {
+      res.status(405).json({ success: false, error: 'Not allowed' });
+    }
+  });
 });
 
 // @route   DELETE api/items/:id
@@ -71,14 +79,24 @@ router.patch('/:id', (req, res) => {
 // @access  Public
 router.delete('/:id', (req, res) => {
   Item.findById(req.params.id)
-    .then((item) => {
-      item.remove().then(() => {
-        res.status(200).json({ success: true });
-      });
+    .then((oldItem) => {
+      if (req.body.username === oldItem.username) {
+        Item.findById(req.params.id)
+          .then((item) => {
+            item.remove().then(() => {
+              res.status(200).json({ success: true });
+            });
+          })
+          .catch((err) => {
+            console.log(`ERROR: \n${err}\n`);
+            return res.json({ success: false });
+          });
+      } else {
+        res.status(405).json({ success: false, error: 'Not allowed' });
+      }
     })
     .catch((err) => {
-      console.log(`ERROR: \n${err}\n`);
-      return res.json({ success: false });
+      res.status(500).json({ success: false, error: err });
     });
 });
 

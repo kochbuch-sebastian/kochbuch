@@ -2,7 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+const passport = require('passport');
+
 const items = require('./routes/api/items');
+const users = require('./routes/api/users');
 
 const app = express();
 
@@ -43,8 +46,15 @@ mongoose
   .then(() => console.log('MongoDB Connected'))
   .catch((err) => console.log(err));
 
+// Passport Config
+require('./config/passport')(passport);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Use routes
 app.use('/api/items', items);
+app.use('/api/users', users);
 
 // Handle production
 if (process.env.NODE_ENV === 'production') {
