@@ -1,8 +1,3 @@
-.vscode
-
-/node_modules
-node_modules
-
 .DS_Store
 node_modules
 /dist
@@ -24,5 +19,3 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
-
-.gitattributes
