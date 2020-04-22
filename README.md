@@ -2,7 +2,7 @@
 
 You can find this application [here](https://kochbuch-sebastian.herokuapp.com/). 
 
-The source code can be found [here](https://github.com/SebastianThomas/vueServer). 
+The source code can be found [here](https://github.com/SebastianThomas/client). 
 
 This app is in fact a school project I did during the "Corona-time" (2020). 
 
