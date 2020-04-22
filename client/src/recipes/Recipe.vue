@@ -33,6 +33,8 @@
 
     <h3>Rezept:</h3>
     <h4>{{ item.title }}</h4>
+    <p>Hinzugefügt von {{ this.item.username }} am {{ this.createdAt }}</p>
+    <hr class="fatHr" />
 
     <table>
       <tr>
@@ -69,6 +71,10 @@ export default {
       item: {},
       error: '',
 
+      date: Date.now(),
+
+      createdAt: '',
+
       // (background-) css colors
       color1: '',
       color2: '',
@@ -104,6 +110,11 @@ export default {
       if (this.item === null) {
         this.error = `Das Rezept mit der id ${this.route.params.id} existiert nicht (mehr)!`;
       }
+
+      this.date = new Date(this.item.date);
+
+      this.createdAt = `${this.date.getDate()}.${this.date.getMonth() +
+        1}.${this.date.getFullYear()}`;
 
       switch (this.item.recipeType) {
         case 'appetizer':
@@ -171,5 +182,9 @@ img {
   top: calc(12rem + 52px);
   padding: 0.5rem 1rem 0.5rem 0.5rem;
   border: 2px solid #555555;
+}
+
+hr {
+  margin-bottom: 1rem;
 }
 </style>
