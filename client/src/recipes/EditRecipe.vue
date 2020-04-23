@@ -69,9 +69,7 @@
                 </tr>
               </table>
 
-              <button @click="addIngredient">
-                Eine weitere Zutat hinzufügen
-              </button>
+              <button @click="addIngredient">Eine weitere Zutat hinzufügen</button>
             </div>
           </td>
         </tr>
@@ -137,9 +135,7 @@
         <tr>
           <td></td>
           <td>
-            <button type="submit" @click="updateItem()" id="submit">
-              Bestätigen
-            </button>
+            <button type="submit" @click="updateItem()" id="submit">Bestätigen</button>
           </td>
         </tr>
       </table>
@@ -149,6 +145,8 @@
 
 <script>
 import ItemService from '../ItemService';
+
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'EditRecipe',
@@ -168,10 +166,10 @@ export default {
       error: '',
     };
   },
-  computed: {},
+  computed: mapGetters(['username']),
   methods: {
     async updateItem() {
-      this.ingredients.filter((ingredient) => {
+      this.ingredients.filter(ingredient => {
         if (ingredient.name === '' || ingredient.amount === '') {
           this.error = 'Eine Zutat ist nicht vollständig eingegeben!';
           return false;
@@ -185,8 +183,9 @@ export default {
         this.ingredients,
         this.description,
         this.recipeType,
+        this.username,
       )
-        .then((response) => {
+        .then(response => {
           if (response.status - 200 > 100) {
             this.error = `Fehler: \nStatuscode: ${response.status}\nFehler: ${response}`;
           } else {
@@ -197,7 +196,7 @@ export default {
             this.$router.go();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           this.error = err;
         });
     },
