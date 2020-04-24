@@ -2,30 +2,17 @@
   <div class="container">
     <p class="error" v-if="error">{{ this.error }}</p>
 
-    <h3 v-show="this.keywords !== null">
-      Rezepte, die "{{ keywords }}" enthalten
-    </h3>
+    <h3 v-show="this.keywords !== null">Rezepte, die "{{ keywords }}" enthalten</h3>
     <h3 v-show="this.keywords === null">Alle Rezepte</h3>
 
-    <div v-show="items.length === 0">Keine Rezepte gefunden!</div>
-    <div v-show="items.length !== 0">Anzahl Rezepte: {{ items.length }}</div>
-
-    <router-link
-      id="recipes"
-      class="item router-links"
-      v-for="(recipe, index) in items"
-      v-show="items.length > 0"
-      :item="recipe"
-      :index="index"
-      :key="recipe._id"
-      :to="{ name: 'Recipe', params: { id: recipe._id } }"
-      >{{ recipe.title }}</router-link
-    >
+    <ShowRecipes :items="items"></ShowRecipes>
   </div>
 </template>
 
 <script>
 import ItemService from '../ItemService';
+
+import ShowRecipes from './ShowRecipes.vue';
 
 export default {
   name: 'SearchRecipes',
@@ -35,6 +22,9 @@ export default {
       keywords: '',
       error: '',
     };
+  },
+  components: {
+    ShowRecipes,
   },
   created() {
     this.getRequestedItems();
@@ -58,18 +48,18 @@ export default {
       try {
         if (this.keywords === null) {
           ItemService.getItems()
-            .then((response) => {
+            .then(response => {
               this.items = response;
             })
-            .catch((err) => {
+            .catch(err => {
               this.error = err;
             });
         } else {
           ItemService.getItemsByTitle(this.$route.params.keywords)
-            .then((response) => {
+            .then(response => {
               this.items = response;
             })
-            .catch((err) => {
+            .catch(err => {
               this.error = err;
             });
         }
