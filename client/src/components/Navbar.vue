@@ -27,6 +27,11 @@
             <router-link :to="{ name: 'Register' }" class="router-links">Registrieren</router-link>
           </td>
           <td>
+            |
+            <router-link :to="{ name: 'FavoriteRecipes' }" class="router-links">Favoriten</router-link>
+          </td>
+
+          <td>
             <div v-show="this.showSearch" style="margin-top: 0;">
               <input
                 id="searchInput"
