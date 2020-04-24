@@ -6,6 +6,7 @@ import Register from '../components/Register.vue';
 import Login from '../components/Login.vue';
 import SearchRecipes from '../recipes/SearchRecipes.vue';
 import BrowseRecipes from '../recipes/BrowseRecipes.vue';
+import ShowFavoriteRecipes from '../recipes/favorites/ShowFavoriteRecipes.vue';
 import Recipe from '../recipes/Recipe.vue';
 import About from '../about/About.vue';
 
@@ -74,6 +75,11 @@ const routes = [
         component: BrowseBakery,
       },
     ],
+  },
+  {
+    path: '/recipes/favorites',
+    name: 'FavoriteRecipes',
+    component: ShowFavoriteRecipes,
   },
   {
     path: '/recipes/add',

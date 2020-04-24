@@ -6,7 +6,7 @@
     <button
       class="delete"
       @click="deleteButtonClicked"
-      v-if="loggedIn && username === item.username"
+      v-if="loggedIn && user.username === item.username"
       style="width: 50px; height: 50px;"
     >
       <img
@@ -20,7 +20,7 @@
     <button
       class="edit"
       @click="editButtonClicked"
-      v-if="loggedIn && username === item.username"
+      v-if="loggedIn && user.username === item.username"
       style="width: 50px; height: 50px;"
     >
       <img
@@ -81,7 +81,7 @@ export default {
   components: {
     Ingredients,
   },
-  computed: { ...mapGetters(['username', 'loggedIn']) },
+  computed: { ...mapGetters(['user', 'loggedIn']) },
   data() {
     return {
       item: {},
@@ -105,12 +105,14 @@ export default {
     favoriteButtonClicked() {
       if (this.isFavorite) {
         console.log(`Removing ${this.item._id} from favorites`);
-        UserService.removeFavorite(this.username, this.item._id).then(() => {
-          this.isFavorite = !this.isFavorite;
-        });
+        UserService.removeFavorite(this.user.username, this.item._id).then(
+          () => {
+            this.isFavorite = !this.isFavorite;
+          },
+        );
       } else {
         console.log(`Adding ${this.item._id} to favorites`);
-        UserService.addFavorite(this.username, this.item._id).then(() => {
+        UserService.addFavorite(this.user.username, this.item._id).then(() => {
           this.isFavorite = !this.isFavorite;
         });
       }
@@ -125,7 +127,7 @@ export default {
       this.$dialog.confirm('Löschen?').then(() => {
         const params = {
           id: this.$route.params.id,
-          username: this.username,
+          username: this.user.username,
         };
         this.$store.dispatch('deleteRecipe', params);
 
@@ -146,7 +148,7 @@ export default {
 
       if (this.loggedIn) {
         const searchedUserArray = await UserService.getUserByUsername(
-          this.username,
+          this.user.username,
         );
         const searchedUser = searchedUserArray[0];
 

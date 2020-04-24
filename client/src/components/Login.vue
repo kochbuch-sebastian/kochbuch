@@ -3,7 +3,7 @@
     <div v-if="loggedIn">
       <h3>Logout</h3>
 
-      <h4>Hallo {{ username }}! Sind Sie sicher, dass Sie sich ausloggen möchten?</h4>
+      <h4>Hallo {{ user.username }}! Sind Sie sicher, dass Sie sich ausloggen möchten?</h4>
 
       <button @click="performLogout" class="logout">Logout</button>
     </div>
@@ -50,7 +50,7 @@ export default {
       error: '',
     };
   },
-  computed: mapGetters(['username', 'loggedIn']),
+  computed: mapGetters(['user', 'loggedIn']),
   methods: {
     ...mapActions(['login', 'logout']),
 

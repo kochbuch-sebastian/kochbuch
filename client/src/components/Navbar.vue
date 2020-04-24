@@ -85,7 +85,7 @@ export default {
       showSearch: false,
     };
   },
-  computed: mapGetters(['username', 'loggedIn']),
+  computed: mapGetters(['user', 'loggedIn']),
   methods: {
     searchButtonClicked() {
       this.showSearch = true;

@@ -169,7 +169,7 @@ export default {
       error: '',
     };
   },
-  computed: mapGetters(['username']),
+  computed: mapGetters(['user']),
   methods: {
     async createItem() {
       await ItemService.insertItem(
@@ -177,7 +177,7 @@ export default {
         this.ingredients,
         this.description,
         this.recipeType,
-        this.username,
+        this.user.username,
       )
         .then(response => {
           if (response.status - 200 > 100) {

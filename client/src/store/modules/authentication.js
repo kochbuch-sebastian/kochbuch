@@ -1,10 +1,12 @@
+import UserService from '../../UserService';
+
 const state = {
-  username: '',
+  user: null,
   loggedIn: false,
 };
 
 const getters = {
-  username: (state) => state.username,
+  user: (state) => state.user,
   loggedIn: (state) => state.loggedIn,
 };
 
@@ -20,7 +22,14 @@ const actions = {
 };
 
 const mutations = {
-  setUsername: (state, username) => (state.username = username),
+  setUsername: async (state, username) => {
+    if (username === '') {
+      state.user = null;
+    } else {
+      const gotUser = await UserService.getUserByUsername(username);
+      state.user = gotUser[0];
+    }
+  },
   setLoggedIn: (state, loggedIn) => (state.loggedIn = loggedIn),
 };
 

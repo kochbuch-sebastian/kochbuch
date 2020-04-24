@@ -3,7 +3,7 @@
     <div class="home">
       <h3 class="hello">
         Herzlich Willkommen
-        <i v-if="loggedIn">{{username}}</i>!
+        <i v-if="loggedIn">{{ user.username }}</i>!
       </h3>
       <i>Hier sind alle Rezepte durch mindestens einmaliges Kochen oder Backen geprüft.</i>
       <p v-if="loggedIn">
@@ -15,22 +15,16 @@
     <hr class="fatHr" />
     <div id="recipesDivision">
       <p>Hier sehen Sie alle unsere Rezepte. Wenn Sie mögen, probieren Sie sie doch direkt aus!</p>
-      <router-link
-        id="recipes"
-        class="item router-links"
-        v-for="(recipe, index) in recipes"
-        v-show="recipes.length > 0"
-        :item="recipe"
-        :index="index"
-        :key="recipe._id"
-        :to="{name: 'Recipe', params: { id: recipe._id } }"
-      >{{ recipe.title }}</router-link>
+
+      <ShowRecipes :items="this.recipes"></ShowRecipes>
     </div>
   </div>
 </template>
 
 <script>
 // import ItemService from '../ItemService';
+
+import ShowRecipes from '../recipes/ShowRecipes.vue'
 
 import { mapGetters, mapActions } from 'vuex';
 
@@ -42,10 +36,13 @@ export default {
       error: '',
     };
   },
-  computed: mapGetters(['username', 'loggedIn', 'recipes']),
+  computed: mapGetters(['user', 'loggedIn', 'recipes']),
   created() {
     // this.getAllItems();
     this.fetchRecipes();
+  },
+  components: {
+    ShowRecipes,
   },
   methods: {
     ...mapActions(['fetchRecipes']),

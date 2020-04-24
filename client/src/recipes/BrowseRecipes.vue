@@ -29,7 +29,7 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'BrowseRecipes',
-  computed: mapGetters(['username', 'loggedIn', 'recipes']),
+  computed: mapGetters(['user', 'loggedIn', 'recipes']),
   created() {
     // this.getAllItems();
     this.fetchRecipes();

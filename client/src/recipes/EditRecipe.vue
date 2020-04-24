@@ -166,7 +166,7 @@ export default {
       error: '',
     };
   },
-  computed: mapGetters(['username']),
+  computed: mapGetters(['user']),
   methods: {
     async updateItem() {
       this.ingredients.filter(ingredient => {
@@ -183,7 +183,7 @@ export default {
         this.ingredients,
         this.description,
         this.recipeType,
-        this.username,
+        this.user.username,
       )
         .then(response => {
           if (response.status - 200 > 100) {
