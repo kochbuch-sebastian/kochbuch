@@ -141,6 +141,9 @@ img {
   margin: 0;
   padding: 0;
 }
+.noMarginExceptRight {
+  margin: 0 4px 0 0;
+}
 
 /* Fat horizontal lines */
 .fatHr {

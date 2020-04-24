@@ -26,7 +26,7 @@
             |
             <router-link :to="{ name: 'Register' }" class="router-links">Registrieren</router-link>
           </td>
-          <td>
+          <td v-if="loggedIn">
             |
             <router-link :to="{ name: 'FavoriteRecipes' }" class="router-links">Favoriten</router-link>
           </td>

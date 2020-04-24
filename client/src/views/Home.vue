@@ -13,7 +13,14 @@
       <p>Wir wünschen Ihnen einen guten Appetit!</p>
     </div>
     <hr class="fatHr" />
+    <div v-if="loggedIn">
+      <div class="favorites">
+        <ShowFavoriteRecipes></ShowFavoriteRecipes>
+      </div>
+      <hr class="fatHr" />
+    </div>
     <div id="recipesDivision">
+      <h3>Alle Rezepte</h3>
       <p>Hier sehen Sie alle unsere Rezepte. Wenn Sie mögen, probieren Sie sie doch direkt aus!</p>
 
       <ShowRecipes :items="this.recipes"></ShowRecipes>
@@ -24,7 +31,8 @@
 <script>
 // import ItemService from '../ItemService';
 
-import ShowRecipes from '../recipes/ShowRecipes.vue'
+import ShowRecipes from '../recipes/ShowRecipes.vue';
+import ShowFavoriteRecipes from '../recipes/favorites/ShowFavoriteRecipes.vue';
 
 import { mapGetters, mapActions } from 'vuex';
 
@@ -43,6 +51,7 @@ export default {
   },
   components: {
     ShowRecipes,
+    ShowFavoriteRecipes,
   },
   methods: {
     ...mapActions(['fetchRecipes']),
@@ -64,7 +73,10 @@ export default {
 </script>
 
 <style scoped>
+.favorites {
+  margin: 1rem 0 1rem 0;
+}
 #recipesDivision {
-  margin-top: 1rem;
+  margin: 1rem;
 }
 </style>
