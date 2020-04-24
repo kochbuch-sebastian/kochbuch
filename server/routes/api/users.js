@@ -65,6 +65,7 @@ router.post('/', (req, res) => {
   const password1 = req.body.password1;
   const password2 = req.body.password2;
   const description = req.body.description;
+  const favorites = req.body.favorites;
 
   User.find().then((users) => {
     const filtered = users.filter((user) => user.username === username);
@@ -87,9 +88,10 @@ router.post('/', (req, res) => {
 
     if (!errors) {
       const newUser = new User({
-        username: username,
+        username,
         password: password1,
-        description: description,
+        description,
+        favorites,
       });
 
       bcrypt.genSalt(10, (err, salt) => {
@@ -130,36 +132,99 @@ router.post('/', (req, res) => {
   });
 });
 
-// TODO
-// @route   Patch/Update one user's password (or other methods for other things)
-// @desc    Update an user
-// @access  Public
-router.patch('/:id/password', (req, res) => {
-  const newUser = new User({
-    username: req.body.username,
-    password: req.body.password1,
-    description: req.body.description,
-  });
+router.patch('/favorite/:id', (req, res) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      const newUser = new User({
+        username: user.username,
+        password: user.password,
+        description: user.description,
+        favorites: user.favorites,
+      });
 
-  const upsertData = newUser.toObject();
+      if (newUser.favorites.includes(req.body.recipeId.toString())) {
+        return res.status(400).json({
+          success: false,
+          err: `${req.body.recipeId.toString()} is already a favourite!`,
+        });
+      } else {
+        newUser.favorites.push(req.body.recipeId.toString());
+      }
+      newUser.favorites = newUser.favorites.filter((el) => el !== '');
 
-  delete upsertData._id;
+      const upsertData = newUser.toObject();
 
-  try {
-    User.updateOne(
-      { _id: req.params.id },
-      upsertData,
-      { upsert: true },
-      (err, updatedDoc) => {
-        if (err) return res.status(500).send({ error: err });
-        return res.send(updatedDoc);
-      },
-    ).catch((err) => {
-      throw err;
+      delete upsertData._id;
+
+      try {
+        User.updateOne(
+          { _id: req.params.id },
+          upsertData,
+          { upsert: true },
+          (err, updatedDoc) => {
+            if (err) return res.status(500).send({ error: err });
+            return res.status(200).json({ success: true, user: updatedDoc });
+          },
+        ).catch((err) => {
+          throw err;
+        });
+      } catch (err) {
+        res.status(500).json({ success: false, error: err });
+      }
+    })
+    .catch((err) => {
+      res.status(400).json({ success: false, error: err });
     });
-  } catch (err) {
-    console.error(err);
-  }
+});
+
+router.patch('/removeFavorite/:id', (req, res) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      const newUser = new User({
+        username: user.username,
+        password: user.password,
+        description: user.description,
+        favorites: user.favorites,
+      });
+
+      if (!newUser.favorites.includes(req.body.recipeId.toString())) {
+        console.log(
+          `${id}'s favorites do not include ${req.body.recipeId.toString()}`,
+        );
+        return res.status(400).json({
+          success: false,
+          err: `${req.body.recipeId.toString()} is not a favorite!`,
+        });
+      } else {
+        newUser.favorites = newUser.favorites.filter(
+          (el) => el !== req.body.recipeId.toString(),
+        );
+      }
+      newUser.favorites = newUser.favorites.filter((el) => el !== '');
+
+      const upsertData = newUser.toObject();
+
+      delete upsertData._id;
+
+      try {
+        User.updateOne(
+          { _id: req.params.id },
+          upsertData,
+          { upsert: true },
+          (err, updatedDoc) => {
+            if (err) return res.status(500).send({ error: err });
+            return res.status(200).json({ success: true, user: updatedDoc });
+          },
+        ).catch((err) => {
+          throw err;
+        });
+      } catch (err) {
+        res.status(500).json({ success: false, error: err });
+      }
+    })
+    .catch((err) => {
+      res.status(400).json({ success: false, error: err });
+    });
 });
 
 // @route   DELETE api/users/:id

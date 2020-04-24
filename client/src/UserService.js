@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const url = 'api/users/';
 
@@ -43,6 +43,7 @@ class ItemService {
       password1,
       password2,
       description,
+      favorites: [],
     });
   }
 
@@ -59,6 +60,40 @@ class ItemService {
     return axios.post(`${url}login`, {
       username,
       password,
+    });
+  }
+
+  static addFavorite(username, recipeId) {
+    return new Promise((resolve, reject) => {
+      this.getUserByUsername(username)
+        .then((user) => {
+          const id = user[0]._id;
+
+          axios.patch(`${url}favorite/${id}`, {
+            recipeId,
+          });
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  static removeFavorite(username, recipeId) {
+    return new Promise((resolve, reject) => {
+      this.getUserByUsername(username)
+        .then((user) => {
+          const id = user[0]._id;
+
+          axios.patch(`${url}removeFavorite/${id}`, {
+            recipeId,
+          });
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
   }
 

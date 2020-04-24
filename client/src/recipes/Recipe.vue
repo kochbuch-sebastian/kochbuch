@@ -31,6 +31,21 @@
       />
     </button>
 
+    <button
+      class="favorite"
+      @click="favoriteButtonClicked"
+      v-if="loggedIn"
+      style="width: 50px; height: 50px;"
+      :class="{favoriteClass: isFavorite}"
+    >
+      <img
+        id="favoriteIcon"
+        src="../assets/favorite_icon.svg"
+        alt="Lieblingsrezept"
+        style="width: 30px; height: 30px;"
+      />
+    </button>
+
     <h3>Rezept:</h3>
     <h4>{{ item.title }}</h4>
     <p>Hinzugefügt von {{ this.item.username }} am {{ this.createdAt }}</p>
@@ -55,6 +70,7 @@
 
 <script>
 import ItemService from '../ItemService';
+import UserService from '../UserService';
 
 import Ingredients from './recipe/Ingredients.vue';
 
@@ -71,6 +87,8 @@ export default {
       item: {},
       error: '',
 
+      isFavorite: false,
+
       date: Date.now(),
 
       createdAt: '',
@@ -84,6 +102,19 @@ export default {
   methods: {
     ...mapActions(['deleteRecipe']),
 
+    favoriteButtonClicked() {
+      if (this.isFavorite) {
+        console.log(`Removing ${this.item._id} from favorites`);
+        UserService.removeFavorite(this.username, this.item._id).then(() => {
+          this.isFavorite = !this.isFavorite;
+        });
+      } else {
+        console.log(`Adding ${this.item._id} to favorites`);
+        UserService.addFavorite(this.username, this.item._id).then(() => {
+          this.isFavorite = !this.isFavorite;
+        });
+      }
+    },
     editButtonClicked() {
       this.$router.push({
         name: 'EditRecipe',
@@ -112,6 +143,17 @@ export default {
       }
 
       this.date = new Date(this.item.date);
+
+      if (this.loggedIn) {
+        const searchedUserArray = await UserService.getUserByUsername(
+          this.username,
+        );
+        const searchedUser = searchedUserArray[0];
+
+        this.isFavorite = searchedUser.favorites.includes(
+          this.item._id.toString(),
+        );
+      }
 
       this.createdAt = `${this.date.getDate()}.${this.date.getMonth() +
         1}.${this.date.getFullYear()}`;
@@ -186,5 +228,9 @@ img {
 
 hr {
   margin-bottom: 1rem;
+}
+
+.favoriteClass {
+  background-color: #01ff2c;
 }
 </style>
