@@ -2,7 +2,6 @@
   <div class="container">
     <p class="error" v-if="error">{{ error }}</p>
 
-    <!-- display: none because it was just for testing purposes. It can be shown just with removing the 'display: none;' line (currently line 9) -->
     <button
       class="delete"
       @click="deleteButtonClicked"
@@ -147,30 +146,7 @@ export default {
           this.error = 'Gute Entscheidung...';
         });
     },
-  },
-  async created() {
-    try {
-      this.item = await ItemService.getItemById(this.$route.params.id);
-      if (this.item === null) {
-        this.error = `Das Rezept mit der id ${this.route.params.id} existiert nicht (mehr)!`;
-      }
-
-      this.date = new Date(this.item.date);
-
-      if (this.loggedIn) {
-        const searchedUserArray = await UserService.getUserByUsername(
-          this.user.username,
-        );
-        const searchedUser = searchedUserArray[0];
-
-        this.isFavorite = searchedUser.favorites.includes(
-          this.item._id.toString(),
-        );
-      }
-
-      this.createdAt = `${this.date.getDate()}.${this.date.getMonth() +
-        1}.${this.date.getFullYear()}`;
-
+    initColors() {
       switch (this.item.recipeType) {
         case 'appetizer':
           this.color1 = '102, 255, 102, 1';
@@ -207,9 +183,31 @@ export default {
       document.documentElement.style.setProperty('--color1', this.color1);
       document.documentElement.style.setProperty('--color2', this.color2);
       document.documentElement.style.setProperty('--textColor', this.textColor);
+    },
+  },
+  async created() {
+    try {
+      this.item = await ItemService.getItemById(this.$route.params.id);
+      if (this.item === null) {
+        this.error = `Das Rezept mit der id ${this.route.params.id} existiert nicht (mehr)!`;
+      }
+
+      this.date = new Date(this.item.date);
+      this.createdAt = `${this.date.getDate()}.${this.date.getMonth() +
+        1}.${this.date.getFullYear()}`;
+
+      if (this.loggedIn) {
+        this.fetchUser(sessionStorage.username).then(() => {
+          this.isFavorite = this.user.favorites.includes(
+            this.item._id.toString(),
+          );
+        });
+      }
     } catch (err) {
+      console.log('ERR: ' + err);
       this.error = err.message;
     }
+    this.initColors();
   },
 };
 </script>
