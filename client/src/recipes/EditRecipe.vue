@@ -170,7 +170,7 @@ export default {
   methods: {
     async updateItem() {
       this.ingredients.filter(ingredient => {
-        if (ingredient.name === '' || ingredient.amount === '') {
+        if (!ingredient.name || !ingredient.amount) {
           this.error = 'Eine Zutat ist nicht vollständig eingegeben!';
           return false;
         }

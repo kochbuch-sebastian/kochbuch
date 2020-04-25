@@ -3,7 +3,7 @@
     <div class="home">
       <h3 class="hello">
         Herzlich Willkommen
-        <i v-if="loggedIn">{{ user.username }}</i>!
+        <i v-if="loggedIn">{{ username }}</i>!
       </h3>
       <i>Hier sind alle Rezepte durch mindestens einmaliges Kochen oder Backen geprüft.</i>
       <p v-if="loggedIn">
@@ -41,12 +41,19 @@ export default {
   data() {
     return {
       items: [],
+
+      username: '',
       error: '',
     };
   },
+  beforeMount() {
+    this.username = this.user === null ? '' : this.user.username;
+  },
   computed: mapGetters(['user', 'loggedIn', 'recipes']),
   created() {
-    // this.getAllItems();
+    if (sessionStorage) {
+      if (sessionStorage.username) this.fetchUser(sessionStorage.username);
+    }
     this.fetchRecipes();
   },
   components: {
@@ -54,20 +61,17 @@ export default {
     ShowFavoriteRecipes,
   },
   methods: {
-    ...mapActions(['fetchRecipes']),
-    /* getAllItems() {
-      try {
-        ItemService.getItems()
-          .then(response => {
-            this.items = response;
-          })
-          .catch(err => {
-            this.error = err;
-          });
-      } catch (err) {
-        this.error = err.message;
-      }
-    },*/
+    ...mapActions(['fetchRecipes', 'fetchUser']),
+  },
+  mounted() {
+    if (sessionStorage) {
+      if (sessionStorage.username) this.fetchUser(sessionStorage.username);
+    }
+  },
+  updated() {
+    if (sessionStorage) {
+      if (sessionStorage.username) this.fetchUser(sessionStorage.username);
+    }
   },
 };
 </script>

@@ -19,15 +19,21 @@ const actions = {
     commit('setUsername', '');
     commit('setLoggedIn', false);
   },
+  fetchUser({ commit }, username) {
+    commit('setUsername', username);
+    commit('setLoggedIn', true);
+  },
 };
 
 const mutations = {
   setUsername: async (state, username) => {
     if (username === '') {
       state.user = null;
+      sessionStorage.username = '';
     } else {
       const gotUser = await UserService.getUserByUsername(username);
       state.user = gotUser[0];
+      sessionStorage.username = state.user.username;
     }
   },
   setLoggedIn: (state, loggedIn) => (state.loggedIn = loggedIn),

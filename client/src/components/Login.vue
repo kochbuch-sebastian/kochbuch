@@ -46,12 +46,26 @@ export default {
   name: 'Login',
   data() {
     return {
+      // on Login
       typedUsername: '',
       typedPassword: '',
       error: '',
+
+      // on Logout
+      username: '',
     };
   },
   computed: mapGetters(['user', 'loggedIn']),
+  created() {
+    document.onkeypress = event => {
+      if (event.which === 13 || event.keyCode === 13) {
+        this.loggedIn ? this.performLogout() : this.performLogin();
+      }
+    };
+  },
+  beforeMount() {
+    this.username = this.user === null ? '' : this.user.username;
+  },
   methods: {
     ...mapActions(['login', 'logout']),
 

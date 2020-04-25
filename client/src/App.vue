@@ -9,7 +9,7 @@
 <script>
 import Navbar from './components/Navbar.vue';
 
-// import { mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'app',
@@ -17,14 +17,22 @@ export default {
   components: {
     Navbar,
   },
-  created() {
+  mounted() {
     // this.fetchRecipes();
+    if (sessionStorage) {
+      if (sessionStorage.username) this.fetchUser(sessionStorage.username);
+    }
+  },
+  updated() {
+    if (sessionStorage) {
+      if (sessionStorage.username) this.fetchUser(sessionStorage.username);
+    }
   },
   data() {
     return {};
   },
   methods: {
-    // ...mapActions(['fetchRecipes']),
+    ...mapActions(['fetchRecipes', 'fetchUser']),
   },
 };
 </script>

@@ -100,19 +100,21 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['deleteRecipe']),
+    ...mapActions(['deleteRecipe', 'fetchUser']),
 
     favoriteButtonClicked() {
       if (this.isFavorite) {
         console.log(`Removing ${this.item._id} from favorites`);
         UserService.removeFavorite(this.user.username, this.item._id).then(
           () => {
+            this.fetchUser(sessionStorage.username);
             this.isFavorite = !this.isFavorite;
           },
         );
       } else {
         console.log(`Adding ${this.item._id} to favorites`);
         UserService.addFavorite(this.user.username, this.item._id).then(() => {
+          this.fetchUser(sessionStorage.username);
           this.isFavorite = !this.isFavorite;
         });
       }
@@ -124,17 +126,26 @@ export default {
       });
     },
     deleteButtonClicked() {
-      this.$dialog.confirm('Löschen?').then(() => {
-        const params = {
-          id: this.$route.params.id,
-          username: this.user.username,
-        };
-        this.$store.dispatch('deleteRecipe', params);
+      this.$dialog
+        .confirm('Wollen Sie dieses Rezept wirklich löschen?', {
+          okText: 'Ja, Löschen!',
+          cancelText: 'Nein! Nicht Löschen!',
+          animation: 'zoom',
+        })
+        .then(() => {
+          const params = {
+            id: this.$route.params.id,
+            username: this.user.username,
+          };
+          this.$store.dispatch('deleteRecipe', params);
 
-        this.$router.push({
-          name: 'BrowseRecipes',
+          this.$router.push({
+            name: 'BrowseRecipes',
+          });
+        })
+        .catch(() => {
+          this.error = 'Gute Entscheidung...';
         });
-      });
     },
   },
   async created() {
