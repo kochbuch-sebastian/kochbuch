@@ -67,12 +67,12 @@
         <div class="hamburger">
           <div></div>
         </div>
-        <div class="menu">
+        <div class="menu" @click="closeNav()">
           <div>
             <div>
               <ul class="navItem">
                 <li v-for="(item, index) in navLinks" :key="index">
-                  <span v-if="item.vif" @click="closeNav()">
+                  <span v-if="item.vif">
                     <router-link
                       :to="{ name: item.name }"
                       class="router-links"
