@@ -46,4 +46,8 @@ export default {
   color: white;
   text-decoration: none;
 }
+
+.browseMenu > li {
+  list-style: none;
+}
 </style>
