@@ -137,7 +137,7 @@
           </td>
         </tr>
         <tr>
-          <td></td>
+          <td>Hinzufügen:</td>
           <td>
             <button type="submit" @click="createItem()" id="submit">Bestätigen</button>
           </td>
@@ -171,11 +171,18 @@ export default {
   },
   computed: mapGetters(['user']),
   methods: {
+    removeEmptyIngredients() {
+      console.log(this.ingredients);
+      this.ingredients = this.ingredients.filter(el => el.name !== '');
+      console.log(this.ingredients);
+    },
     async createItem() {
       if (!this.recipeType) {
         this.error = 'Sie müssen einen Rezept-Typ auswählen!';
         return;
       }
+
+      this.removeEmptyIngredients();
 
       await ItemService.insertItem(
         this.title,
