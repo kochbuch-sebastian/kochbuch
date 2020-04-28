@@ -33,8 +33,9 @@ export default {
   created() {
     this.getAppetizerItems();
 
-    this.color1 = '102, 255, 102, 1';
-    this.color2 = '153, 255, 153, 1';
+    this.color1 = '0, 204, 3, 0.56';
+    this.color2 = '0, 204, 3, 0.28';
+    this.textColor = '#2c3e50';
 
     document.documentElement.style.setProperty('--color1', this.color1);
     document.documentElement.style.setProperty('--color2', this.color2);

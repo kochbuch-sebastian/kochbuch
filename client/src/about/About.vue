@@ -3,7 +3,7 @@
     <h3>About</h3>
     <p>
       Diese Seite wird von mir betrieben.
-      Ich bin 15 Jahre alt und gehe in die 10. Klasse.
+      Ich bin 2004 geboren und ging während dem Programmieren dieser App in die 10. Klasse.
       In meiner Freizeit programmiere ich gerne.
     </p>
     <p>
