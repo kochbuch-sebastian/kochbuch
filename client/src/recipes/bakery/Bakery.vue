@@ -33,8 +33,8 @@ export default {
   created() {
     this.getBakeryItems();
 
-    this.color1 = '255, 119, 51, 1';
-    this.color2 = '255, 136, 77, 0.9';
+    this.color1 = '233, 142, 5, 0.56';
+    this.color2 = '233, 142, 5, 0.28';
     this.textColor = '#2c3e50';
 
     document.documentElement.style.setProperty('--color1', this.color1);

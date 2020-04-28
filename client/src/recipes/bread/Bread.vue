@@ -33,9 +33,9 @@ export default {
   created() {
     this.getBreadItems();
 
-    this.color1 = '128, 42, 0, 60';
-    this.color2 = '255, 128, 102, 1';
-    this.textColor = '#aacccc';
+    this.color1 = '243, 98, 6, 0.56';
+    this.color2 = '243, 98, 6, 0.28';
+    this.textColor = '#2c3e50';
 
     document.documentElement.style.setProperty('--color1', this.color1);
     document.documentElement.style.setProperty('--color2', this.color2);

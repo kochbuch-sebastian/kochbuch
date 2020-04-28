@@ -149,28 +149,28 @@ export default {
     initColors() {
       switch (this.item.recipeType) {
         case 'appetizer':
-          this.color1 = '102, 255, 102, 1';
-          this.color2 = '153, 255, 153, 1';
+          this.color1 = '0, 204, 3, 0.56';
+          this.color2 = '0, 204, 3, 0.28';
           this.textColor = '#2c3e50';
           break;
         case 'hearty':
-          this.color1 = '77, 106, 255, 1';
-          this.color2 = '153, 187, 255, 1';
+          this.color1 = '63, 97, 191, 0.56';
+          this.color2 = '63, 97, 191, 0.28';
           this.textColor = '#222244';
           break;
         case 'sweet':
-          this.color1 = '255, 128, 234, 1';
-          this.color2 = '255, 204, 246, 1';
+          this.color1 = '161, 63, 191, 0.56';
+          this.color2 = '161, 63, 191, 0.28';
           this.textColor = '#2c3e50';
           break;
         case 'bread':
-          this.color1 = '128, 42, 0, 60';
-          this.color2 = '255, 128, 102, 1';
-          this.textColor = '#aacccc';
+          this.color1 = '243, 98, 6, 0.56';
+          this.color2 = '243, 98, 6, 0.28';
+          this.textColor = '#2c3e50';
           break;
         case 'bakery':
-          this.color1 = '255, 119, 51, 1';
-          this.color2 = '255, 136, 77, 0.9';
+          this.color1 = '233, 142, 5, 0.56';
+          this.color2 = '233, 142, 5, 0.28';
           this.textColor = '#2c3e50';
           break;
 

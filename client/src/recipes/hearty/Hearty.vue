@@ -33,8 +33,8 @@ export default {
   created() {
     this.getHeartyItems();
 
-    this.color1 = '77, 106, 255, 1';
-    this.color2 = '153, 187, 255, 1';
+    this.color1 = '63, 97, 191, 0.56';
+    this.color2 = '63, 97, 191, 0.28';
     this.textColor = '#222244';
 
     document.documentElement.style.setProperty('--color1', this.color1);

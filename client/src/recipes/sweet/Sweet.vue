@@ -33,8 +33,8 @@ export default {
   created() {
     this.getSweetItems();
 
-    this.color1 = '255, 128, 234, 1';
-    this.color2 = '255, 204, 246, 1';
+    this.color1 = '161, 63, 191, 0.56';
+    this.color2 = '161, 63, 191, 0.28';
     this.textColor = '#2c3e50';
 
     document.documentElement.style.setProperty('--color1', this.color1);
