@@ -4,6 +4,8 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Register from '../components/Register.vue';
 import Login from '../components/Login.vue';
+import UpdateUser from '../components/UpdateUser.vue';
+
 import SearchRecipes from '../recipes/SearchRecipes.vue';
 import BrowseRecipes from '../recipes/BrowseRecipes.vue';
 import ShowFavoriteRecipes from '../recipes/favorites/ShowFavoriteRecipes.vue';
@@ -38,6 +40,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register,
+  },
+  {
+    path: '/update',
+    name: 'UpdateUser',
+    component: UpdateUser,
   },
   {
     path: '/recipes/search/:keywords?',

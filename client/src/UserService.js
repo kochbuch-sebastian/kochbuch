@@ -48,10 +48,18 @@ class ItemService {
   }
 
   // Update Item
-  static updateUser(id, username, password, description) {
-    return axios.patch(`${url}${id}`, {
+  static async updateUser(username, password1, password2, description) {
+    username = username.trim();
+    description = description.trim();
+
+    const currentUser = await this.getUserByUsername(username);
+
+    const thisUser = currentUser[0];
+
+    return axios.patch(`${url}${thisUser._id}`, {
       username,
-      password,
+      password1,
+      password2,
       description,
     });
   }

@@ -135,6 +135,11 @@ export default {
           text: 'Logout',
         },
         {
+          vif: this.loggedIn,
+          name: 'UpdateUser',
+          text: 'Account',
+        },
+        {
           vif: !this.loggedIn,
           name: 'Login',
           text: 'Login',
