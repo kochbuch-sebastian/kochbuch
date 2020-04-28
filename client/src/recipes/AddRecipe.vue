@@ -172,6 +172,11 @@ export default {
   computed: mapGetters(['user']),
   methods: {
     async createItem() {
+      if (!this.recipeType) {
+        this.error = 'Sie müssen einen Rezept-Typ auswählen!';
+        return;
+      }
+
       await ItemService.insertItem(
         this.title,
         this.ingredients,
