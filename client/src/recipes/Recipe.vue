@@ -47,7 +47,14 @@
 
     <h3>Rezept:</h3>
     <h4>{{ item.title }}</h4>
-    <p>Hinzugefügt von {{ this.item.username }} am {{ this.createdAt }}</p>
+    <p>
+      Hinzugefügt von
+      <router-link
+        :to="{name: 'User', params: {username: this.item.username}}"
+        class="router-links noMargin"
+      >{{ this.item.username }}</router-link>
+      am {{ this.createdAt }}
+    </p>
     <hr class="fatHr" />
 
     <table>

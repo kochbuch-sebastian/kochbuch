@@ -6,6 +6,8 @@ import Register from '../components/Register.vue';
 import Login from '../components/Login.vue';
 import UpdateUser from '../components/UpdateUser.vue';
 
+import User from '../components/users/User.vue';
+
 import SearchRecipes from '../recipes/SearchRecipes.vue';
 import BrowseRecipes from '../recipes/BrowseRecipes.vue';
 import ShowFavoriteRecipes from '../recipes/favorites/ShowFavoriteRecipes.vue';
@@ -107,6 +109,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About,
+  },
+  {
+    path: '/user/:username',
+    name: 'User',
+    component: User,
   },
   {
     path: '/backend',
