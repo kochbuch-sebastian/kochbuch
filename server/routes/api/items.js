@@ -100,4 +100,48 @@ router.delete('/:id', (req, res) => {
     });
 });
 
+router.patch('/addimage/:id', (req, res) => {
+  if (!req.body.imageId) {
+    res.status(401).json({ success: false, error: 'No imageId provided' });
+  }
+
+  console.log('Patching addimage/:id');
+  Item.findById(req.params.id).then((oldItem) => {
+    const pictures = oldItem.pictures ? oldItem.pictures : [];
+
+    pictures.push(req.body.imageId);
+
+    console.log(pictures);
+
+    const newItem = new Item({
+      title: oldItem.title,
+      ingredients: oldItem.ingredients,
+      description: oldItem.description,
+      recipeType: oldItem.recipeType,
+      username: oldItem.username,
+      pictures: pictures,
+    });
+
+    const upsertData = newItem.toObject();
+
+    delete upsertData._id;
+
+    try {
+      Item.updateOne(
+        { _id: req.params.id },
+        upsertData,
+        { upsert: true },
+        (err, updatedDoc) => {
+          if (err) return res.status(500).send({ error: err });
+          return res.send(updatedDoc);
+        },
+      ).catch((err) => {
+        throw err;
+      });
+    } catch (err) {
+      res.status(500).json({ success: false, error: err });
+    }
+  });
+});
+
 module.exports = router;

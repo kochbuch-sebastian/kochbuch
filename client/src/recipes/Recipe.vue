@@ -71,6 +71,13 @@
         </td>
       </tr>
     </table>
+
+    <div class="pictures">
+      <router-link
+        :to="{name: 'AddPicture', params: {recipeId: this.item._id}}"
+        class="router-links"
+      >Bild Hinzufügen</router-link>
+    </div>
   </div>
 </template>
 

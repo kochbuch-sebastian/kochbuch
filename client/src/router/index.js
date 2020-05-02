@@ -23,6 +23,8 @@ import BrowseBread from '../recipes/bread/Bread.vue';
 import EditRecipe from '../recipes/EditRecipe.vue';
 import AddRecipe from '../recipes/AddRecipe.vue';
 
+import UploadPicture from '../components/UploadPicture.vue';
+
 import Backend from '../Backend.vue';
 
 Vue.use(VueRouter);
@@ -99,6 +101,11 @@ const routes = [
     path: '/recipes/edit/:id',
     name: 'EditRecipe',
     component: EditRecipe,
+  },
+  {
+    path: '/recipes/addpicture/:recipeId',
+    name: 'AddPicture',
+    component: UploadPicture,
   },
   {
     path: '/recipes/:id',

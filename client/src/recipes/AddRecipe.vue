@@ -65,10 +65,10 @@
                 </tr>
                 <tr v-for="(ingredient, index) in ingredients" :key="index">
                   <td>
-                    <input type="text" v-model="ingredient.name" />
+                    <input type="text" v-model="ingredient.name" @keypress="keyPressOnInput(e)" />
                   </td>
                   <td>
-                    <input type="text" v-model="ingredient.amount" />
+                    <input type="text" v-model="ingredient.amount" @keypress="keyPressOnInput(e)" />
                   </td>
                 </tr>
               </table>
@@ -171,10 +171,14 @@ export default {
   },
   computed: mapGetters(['user']),
   methods: {
+    keyPressOnInput(e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        this.addIngredient();
+      }
+    },
     removeEmptyIngredients() {
-      console.log(this.ingredients);
       this.ingredients = this.ingredients.filter(el => el.name !== '');
-      console.log(this.ingredients);
     },
     async createItem() {
       if (!this.recipeType) {
@@ -209,6 +213,16 @@ export default {
         amount: '',
       });
     },
+  },
+  created() {
+    document.onkeypress = event => {
+      if (event.keyCode) {
+        if (event.which === 13 || event.keyCode === 13) {
+          event.preventDefault();
+          this.addIngredient();
+        }
+      }
+    };
   },
   mounted() {
     this.addIngredient();

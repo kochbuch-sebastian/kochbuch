@@ -61,10 +61,10 @@
                 </tr>
                 <tr v-for="(ingredient, index) in ingredients" :key="index">
                   <td>
-                    <input type="text" v-model="ingredient.name" />
+                    <input type="text" v-model="ingredient.name" @keypress="keyPressOnInput(e)" />
                   </td>
                   <td>
-                    <input type="text" v-model="ingredient.amount" />
+                    <input type="text" v-model="ingredient.amount" @keypress="keyPressOnInput(e)" />
                   </td>
                 </tr>
               </table>
@@ -168,14 +168,18 @@ export default {
   },
   computed: mapGetters(['user']),
   methods: {
+    keyPressOnInput(e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        this.addIngredient();
+      }
+    },
+    removeEmptyIngredients() {
+      this.ingredients = this.ingredients.filter(el => el.name !== '');
+    },
+
     async updateItem() {
-      this.ingredients.filter(ingredient => {
-        if (!ingredient.name || !ingredient.amount) {
-          this.error = 'Eine Zutat ist nicht vollständig eingegeben!';
-          return false;
-        }
-        return true;
-      });
+      this.removeEmptyIngredients();
 
       await ItemService.updateItem(
         this.$route.params.id,

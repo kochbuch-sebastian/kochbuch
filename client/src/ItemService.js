@@ -114,6 +114,15 @@ class ItemService {
     });
   }
 
+  static async addPictureToItem(recipeId, imageId) {
+    console.log(`recipeId in addPictureToItem: ${recipeId}`);
+
+    // axios post (image array)
+    return await axios.patch(`${url}addimage/${recipeId}`, {
+      imageId,
+    });
+  }
+
   // Delete Item
   static deleteItem(id, username) {
     const body = {
