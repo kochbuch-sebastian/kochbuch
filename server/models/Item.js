@@ -11,6 +11,10 @@ const ItemSchema = new Schema({
     type: Array,
     required: true,
   },
+  pictures: {
+    type: Array,
+    required: false,
+  },
   description: {
     type: String,
     required: false,

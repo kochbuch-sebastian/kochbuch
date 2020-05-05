@@ -1,4 +1,8 @@
+/server/config
+
 .vscode
+
+.github
 
 /node_modules
 node_modules

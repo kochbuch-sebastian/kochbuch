@@ -4,8 +4,13 @@ import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
 import Register from '../components/Register.vue';
 import Login from '../components/Login.vue';
+import UpdateUser from '../components/UpdateUser.vue';
+
+import User from '../components/users/User.vue';
+
 import SearchRecipes from '../recipes/SearchRecipes.vue';
 import BrowseRecipes from '../recipes/BrowseRecipes.vue';
+import ShowFavoriteRecipes from '../recipes/favorites/ShowFavoriteRecipes.vue';
 import Recipe from '../recipes/Recipe.vue';
 import About from '../about/About.vue';
 
@@ -17,6 +22,8 @@ import BrowseBread from '../recipes/bread/Bread.vue';
 
 import EditRecipe from '../recipes/EditRecipe.vue';
 import AddRecipe from '../recipes/AddRecipe.vue';
+
+import UploadPicture from '../components/UploadPicture.vue';
 
 import Backend from '../Backend.vue';
 
@@ -37,6 +44,11 @@ const routes = [
     path: '/register',
     name: 'Register',
     component: Register,
+  },
+  {
+    path: '/update',
+    name: 'UpdateUser',
+    component: UpdateUser,
   },
   {
     path: '/recipes/search/:keywords?',
@@ -76,6 +88,11 @@ const routes = [
     ],
   },
   {
+    path: '/recipes/favorites',
+    name: 'FavoriteRecipes',
+    component: ShowFavoriteRecipes,
+  },
+  {
     path: '/recipes/add',
     name: 'AddRecipe',
     component: AddRecipe,
@@ -86,6 +103,11 @@ const routes = [
     component: EditRecipe,
   },
   {
+    path: '/recipes/addpicture/:recipeId',
+    name: 'AddPicture',
+    component: UploadPicture,
+  },
+  {
     path: '/recipes/:id',
     name: 'Recipe',
     component: Recipe,
@@ -94,6 +116,11 @@ const routes = [
     path: '/about',
     name: 'About',
     component: About,
+  },
+  {
+    path: '/user/:username',
+    name: 'User',
+    component: User,
   },
   {
     path: '/backend',

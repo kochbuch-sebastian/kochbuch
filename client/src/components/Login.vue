@@ -3,7 +3,7 @@
     <div v-if="loggedIn">
       <h3>Logout</h3>
 
-      <h4>Hallo {{ username }}! Sind Sie sicher, dass Sie sich ausloggen möchten?</h4>
+      <h4>Hallo {{ user.username }}! Sind Sie sicher, dass Sie sich ausloggen möchten?</h4>
 
       <button @click="performLogout" class="logout">Logout</button>
     </div>
@@ -31,7 +31,8 @@
           </td>
         </tr>
         <button @click="performLogin" class="login">Login</button>
-      </table>
+      </table>Noch kein Konto?
+      <router-link :to="{ name: 'Register' }" class="router-links noMarginExceptRight">Hier</router-link>registrieren.
     </div>
   </div>
 </template>
@@ -45,12 +46,26 @@ export default {
   name: 'Login',
   data() {
     return {
+      // on Login
       typedUsername: '',
       typedPassword: '',
       error: '',
+
+      // on Logout
+      username: '',
     };
   },
-  computed: mapGetters(['username', 'loggedIn']),
+  computed: mapGetters(['user', 'loggedIn']),
+  created() {
+    document.onkeypress = event => {
+      if (event.which === 13 || event.keyCode === 13) {
+        this.loggedIn ? this.performLogout() : this.performLogin();
+      }
+    };
+  },
+  beforeMount() {
+    this.username = this.user === null ? '' : this.user.username;
+  },
   methods: {
     ...mapActions(['login', 'logout']),
 
@@ -72,34 +87,9 @@ export default {
         this.error = 'Bitte Benutzernamen und Passwort überprüfen!';
       }
     },
-
-    /*async login() {      
-        await UserService.getUserByUsername(this.typedUsername)
-          .then((response) => {
-            if (response.status - 200 > 100) {
-              this.error = `Fehler: \nStatuscode: ${response.status}\nFehler: ${response}`;
-            } else {
-              console.log(response);
-              if (response.length === 0) {
-                this.error = `Kein Benutzer mit Benutzernamen ${this.typedUsername}`;
-              } else if (response.length >= 2) {
-                this.error = `Bitte Server-internen Fehler melden: ${response.length} Benutzer mit dem gleichen Benutzernamen!`;
-              } else {
-                if (response[0].) {
-                  this.$router.push({ name: 'Home' });
-                  this.$router.go();
-                } else {
-                  this.error = 'Falsches Passwort';
-                }
-              }
-            }
-          })
-          .catch((err) => {
-            this.error = err;
-          });
-        }*/
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+</style>

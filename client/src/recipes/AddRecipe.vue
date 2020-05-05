@@ -65,10 +65,10 @@
                 </tr>
                 <tr v-for="(ingredient, index) in ingredients" :key="index">
                   <td>
-                    <input type="text" v-model="ingredient.name" />
+                    <input type="text" v-model="ingredient.name" @keypress="keyPressOnInput(e)" />
                   </td>
                   <td>
-                    <input type="text" v-model="ingredient.amount" />
+                    <input type="text" v-model="ingredient.amount" @keypress="keyPressOnInput(e)" />
                   </td>
                 </tr>
               </table>
@@ -137,7 +137,7 @@
           </td>
         </tr>
         <tr>
-          <td></td>
+          <td>Hinzufügen:</td>
           <td>
             <button type="submit" @click="createItem()" id="submit">Bestätigen</button>
           </td>
@@ -169,15 +169,31 @@ export default {
       error: '',
     };
   },
-  computed: mapGetters(['username']),
+  computed: mapGetters(['user']),
   methods: {
+    keyPressOnInput(e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        this.addIngredient();
+      }
+    },
+    removeEmptyIngredients() {
+      this.ingredients = this.ingredients.filter(el => el.name !== '');
+    },
     async createItem() {
+      if (!this.recipeType) {
+        this.error = 'Sie müssen einen Rezept-Typ auswählen!';
+        return;
+      }
+
+      this.removeEmptyIngredients();
+
       await ItemService.insertItem(
         this.title,
         this.ingredients,
         this.description,
         this.recipeType,
-        this.username,
+        this.user.username,
       )
         .then(response => {
           if (response.status - 200 > 100) {
@@ -197,6 +213,16 @@ export default {
         amount: '',
       });
     },
+  },
+  created() {
+    document.onkeypress = event => {
+      if (event.keyCode) {
+        if (event.which === 13 || event.keyCode === 13) {
+          event.preventDefault();
+          this.addIngredient();
+        }
+      }
+    };
   },
   mounted() {
     this.addIngredient();

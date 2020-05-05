@@ -3,7 +3,7 @@
     <div class="home">
       <h3 class="hello">
         Herzlich Willkommen
-        <i v-if="loggedIn">{{username}}</i>!
+        <i v-if="loggedIn">{{ username }}</i>!
       </h3>
       <i>Hier sind alle Rezepte durch mindestens einmaliges Kochen oder Backen geprüft.</i>
       <p v-if="loggedIn">
@@ -13,24 +13,26 @@
       <p>Wir wünschen Ihnen einen guten Appetit!</p>
     </div>
     <hr class="fatHr" />
+    <div v-if="loggedIn">
+      <div class="favorites">
+        <ShowFavoriteRecipes></ShowFavoriteRecipes>
+      </div>
+      <hr class="fatHr" />
+    </div>
     <div id="recipesDivision">
+      <h3>Alle Rezepte</h3>
       <p>Hier sehen Sie alle unsere Rezepte. Wenn Sie mögen, probieren Sie sie doch direkt aus!</p>
-      <router-link
-        id="recipes"
-        class="item router-links"
-        v-for="(recipe, index) in recipes"
-        v-show="recipes.length > 0"
-        :item="recipe"
-        :index="index"
-        :key="recipe._id"
-        :to="{name: 'Recipe', params: { id: recipe._id } }"
-      >{{ recipe.title }}</router-link>
+
+      <ShowRecipes :items="this.recipes"></ShowRecipes>
     </div>
   </div>
 </template>
 
 <script>
 // import ItemService from '../ItemService';
+
+import ShowRecipes from '../recipes/ShowRecipes.vue';
+import ShowFavoriteRecipes from '../recipes/favorites/ShowFavoriteRecipes.vue';
 
 import { mapGetters, mapActions } from 'vuex';
 
@@ -39,35 +41,46 @@ export default {
   data() {
     return {
       items: [],
+
+      username: '',
       error: '',
     };
   },
-  computed: mapGetters(['username', 'loggedIn', 'recipes']),
+  beforeMount() {
+    this.username = this.user === null ? '' : this.user.username;
+  },
+  computed: mapGetters(['user', 'loggedIn', 'recipes']),
   created() {
-    // this.getAllItems();
+    if (sessionStorage) {
+      if (sessionStorage.username) this.fetchUser(sessionStorage.username);
+    }
     this.fetchRecipes();
   },
+  components: {
+    ShowRecipes,
+    ShowFavoriteRecipes,
+  },
   methods: {
-    ...mapActions(['fetchRecipes']),
-    /* getAllItems() {
-      try {
-        ItemService.getItems()
-          .then(response => {
-            this.items = response;
-          })
-          .catch(err => {
-            this.error = err;
-          });
-      } catch (err) {
-        this.error = err.message;
-      }
-    },*/
+    ...mapActions(['fetchRecipes', 'fetchUser']),
+  },
+  mounted() {
+    if (sessionStorage) {
+      if (sessionStorage.username) this.fetchUser(sessionStorage.username);
+    }
+  },
+  updated() {
+    if (sessionStorage) {
+      if (sessionStorage.username) this.fetchUser(sessionStorage.username);
+    }
   },
 };
 </script>
 
 <style scoped>
+.favorites {
+  margin: 1rem 0 1rem 0;
+}
 #recipesDivision {
-  margin-top: 1rem;
+  margin: 1rem;
 }
 </style>

@@ -5,24 +5,14 @@
 
     <p class="error" v-if="error">{{ this.error }}</p>
 
-    <div v-show="items.length === 0">Keine Rezepte gefunden!</div>
-    <div v-show="items.length !== 0">Anzahl Rezepte: {{ items.length }}</div>
-
-    <router-link
-      id="recipes"
-      class="item router-links"
-      v-for="(recipe, index) in items"
-      v-show="items.length > 0"
-      :item="recipe"
-      :index="index"
-      :key="recipe._id"
-      :to="{ name: 'Recipe', params: { id: recipe._id } }"
-    >{{ recipe.title }}</router-link>
+    <ShowRecipes :items="items"></ShowRecipes>
   </div>
 </template>
 
 <script>
 import ItemService from '../../ItemService';
+
+import ShowRecipes from '../ShowRecipes.vue';
 
 export default {
   name: 'Bakery',
@@ -37,11 +27,14 @@ export default {
       textColor: '',
     };
   },
+  components: {
+    ShowRecipes,
+  },
   created() {
     this.getBakeryItems();
 
-    this.color1 = '255, 119, 51, 1';
-    this.color2 = '255, 136, 77, 0.9';
+    this.color1 = '233, 142, 5, 0.56';
+    this.color2 = '233, 142, 5, 0.28';
     this.textColor = '#2c3e50';
 
     document.documentElement.style.setProperty('--color1', this.color1);
@@ -52,10 +45,10 @@ export default {
     getBakeryItems() {
       try {
         ItemService.getItemsByRecipeType('bakery')
-          .then((response) => {
+          .then(response => {
             this.items = response;
           })
-          .catch((err) => {
+          .catch(err => {
             this.error = err;
           });
       } catch (err) {

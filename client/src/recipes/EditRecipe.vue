@@ -61,17 +61,15 @@
                 </tr>
                 <tr v-for="(ingredient, index) in ingredients" :key="index">
                   <td>
-                    <input type="text" v-model="ingredient.name" />
+                    <input type="text" v-model="ingredient.name" @keypress="keyPressOnInput(e)" />
                   </td>
                   <td>
-                    <input type="text" v-model="ingredient.amount" />
+                    <input type="text" v-model="ingredient.amount" @keypress="keyPressOnInput(e)" />
                   </td>
                 </tr>
               </table>
 
-              <button @click="addIngredient">
-                Eine weitere Zutat hinzufügen
-              </button>
+              <button @click="addIngredient">Eine weitere Zutat hinzufügen</button>
             </div>
           </td>
         </tr>
@@ -137,9 +135,7 @@
         <tr>
           <td></td>
           <td>
-            <button type="submit" @click="updateItem()" id="submit">
-              Bestätigen
-            </button>
+            <button type="submit" @click="updateItem()" id="submit">Bestätigen</button>
           </td>
         </tr>
       </table>
@@ -149,6 +145,8 @@
 
 <script>
 import ItemService from '../ItemService';
+
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'EditRecipe',
@@ -168,16 +166,20 @@ export default {
       error: '',
     };
   },
-  computed: {},
+  computed: mapGetters(['user']),
   methods: {
+    keyPressOnInput(e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        this.addIngredient();
+      }
+    },
+    removeEmptyIngredients() {
+      this.ingredients = this.ingredients.filter(el => el.name !== '');
+    },
+
     async updateItem() {
-      this.ingredients.filter((ingredient) => {
-        if (ingredient.name === '' || ingredient.amount === '') {
-          this.error = 'Eine Zutat ist nicht vollständig eingegeben!';
-          return false;
-        }
-        return true;
-      });
+      this.removeEmptyIngredients();
 
       await ItemService.updateItem(
         this.$route.params.id,
@@ -185,8 +187,9 @@ export default {
         this.ingredients,
         this.description,
         this.recipeType,
+        this.user.username,
       )
-        .then((response) => {
+        .then(response => {
           if (response.status - 200 > 100) {
             this.error = `Fehler: \nStatuscode: ${response.status}\nFehler: ${response}`;
           } else {
@@ -197,7 +200,7 @@ export default {
             this.$router.go();
           }
         })
-        .catch((err) => {
+        .catch(err => {
           this.error = err;
         });
     },

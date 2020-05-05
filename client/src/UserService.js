@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const url = 'api/users/';
 
@@ -43,14 +43,23 @@ class ItemService {
       password1,
       password2,
       description,
+      favorites: [],
     });
   }
 
   // Update Item
-  static updateUser(id, username, password, description) {
-    return axios.patch(`${url}${id}`, {
+  static async updateUser(username, password1, password2, description) {
+    username = username.trim();
+    description = description.trim();
+
+    const currentUser = await this.getUserByUsername(username);
+
+    const thisUser = currentUser[0];
+
+    return axios.patch(`${url}${thisUser._id}`, {
       username,
-      password,
+      password1,
+      password2,
       description,
     });
   }
@@ -59,6 +68,40 @@ class ItemService {
     return axios.post(`${url}login`, {
       username,
       password,
+    });
+  }
+
+  static addFavorite(username, recipeId) {
+    return new Promise((resolve, reject) => {
+      this.getUserByUsername(username)
+        .then((user) => {
+          const id = user[0]._id;
+
+          axios.patch(`${url}favorite/${id}`, {
+            recipeId,
+          });
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
+  }
+
+  static removeFavorite(username, recipeId) {
+    return new Promise((resolve, reject) => {
+      this.getUserByUsername(username)
+        .then((user) => {
+          const id = user[0]._id;
+
+          axios.patch(`${url}removeFavorite/${id}`, {
+            recipeId,
+          });
+          resolve();
+        })
+        .catch((err) => {
+          reject(err);
+        });
     });
   }
 
