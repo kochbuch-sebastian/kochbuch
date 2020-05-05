@@ -40,28 +40,23 @@ class ImageService {
     });
   }
 
-  // Get one Image by recipeTitle
-  static getImagesByTitle(title) {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: 'get',
-        url,
-      })
-        .then((res) => {
-          resolve(
-            res.data.filter((image) => this.checkContains(image.title, title)),
-          );
-        })
-        .catch((err) => reject(err));
-    });
-  }
-
   // Get one Image
   static getImageById(id) {
     // image._id or image.id???
     return new Promise((resolve, reject) => {
       axios
-        .get(`${url}${id}`)
+        .get(`${url}image/${id}`)
+        .then((res) => {
+          resolve(res.data);
+        })
+        .catch((err) => reject(err));
+    });
+  }
+
+  static getImageByName(filename) {
+    return new Promise((resolve, reject) => {
+      axios
+        .get(`${url}image/name/${filename}`)
         .then((res) => {
           resolve(res.data);
         })

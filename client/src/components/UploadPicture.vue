@@ -2,8 +2,6 @@
   <div class="container">
     <h3>Bild uploaden</h3>
 
-    <p class="message">{{ message }}</p>
-
     <form enctype="multipart/form-data" @submit.prevent="submitFile">
       <table>
         <tr>
@@ -23,6 +21,7 @@
         </tr>
       </table>
     </form>
+    <p class="message">{{ message }}</p>
 
     <!--<form enctype="multipart/form-data">
       <div>

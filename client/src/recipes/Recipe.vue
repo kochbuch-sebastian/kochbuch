@@ -73,6 +73,7 @@
     </table>
 
     <div class="pictures">
+      <ShowPictures :recipeId="this.$route.params.id"></ShowPictures>
       <router-link
         :to="{name: 'AddPicture', params: {recipeId: this.item._id}}"
         class="router-links"
@@ -86,6 +87,7 @@ import ItemService from '../ItemService';
 import UserService from '../UserService';
 
 import Ingredients from './recipe/Ingredients.vue';
+import ShowPictures from '../components/ShowPictures.vue';
 
 import { mapGetters, mapActions } from 'vuex';
 
@@ -93,6 +95,7 @@ export default {
   name: 'Recipe',
   components: {
     Ingredients,
+    ShowPictures,
   },
   computed: { ...mapGetters(['user', 'loggedIn']) },
   data() {
