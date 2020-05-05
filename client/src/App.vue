@@ -138,6 +138,12 @@ img {
   padding: 0;
   margin: 0;
 }
+.border {
+  border: 2px solid #000000;
+}
+.shadow {
+  box-shadow: 8px 5px 5px #444444;
+}
 
 /* Errors */
 .error {

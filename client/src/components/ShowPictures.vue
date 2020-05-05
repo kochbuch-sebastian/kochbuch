@@ -3,7 +3,11 @@
     <h4>Bilder</h4>
     <div v-if="pictureNames.length > 0">
       <div v-for="(pictureName, index) in pictureNames" :key="index">
-        <img :src="'/api/images/image/name/' + pictureName" :style="pictureWidth" />
+        <img
+          :src="'/api/images/image/name/' + pictureName"
+          :style="pictureWidth"
+          class="border shadow"
+        />
       </div>
     </div>
     <p v-else>Keine Bilder gefunden!</p>
