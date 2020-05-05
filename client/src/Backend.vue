@@ -2,8 +2,12 @@
   <div class="container">
     <p>
       Das Backend ist
-      <!-- TODO:  -->
-      <a href="/api/items" class="router-links" target="_blank" rel="noopener noreferrer">hier</a>.
+      <a
+        href="/api/items"
+        class="router-links"
+        target="_blank"
+        rel="noopener noreferrer"
+      >hier</a>.
     </p>
   </div>
 </template>

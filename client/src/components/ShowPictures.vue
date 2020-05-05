@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container border shadow">
     <h4>Bilder</h4>
     <div v-if="pictureNames.length > 0">
       <div v-for="(pictureName, index) in pictureNames" :key="index">

@@ -1,6 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container border shadow">
     <div>
+      <h4>Zutaten</h4>
       <table>
         <tr>
           <th>Zutat</th>
@@ -27,5 +28,8 @@ td {
   padding: 5px 3px 5px 3px;
   min-width: 100px;
   margin: 0;
+}
+.container {
+  max-width: fit-content;
 }
 </style>

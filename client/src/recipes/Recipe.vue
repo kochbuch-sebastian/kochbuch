@@ -57,27 +57,22 @@
     </p>
     <hr class="fatHr" />
 
-    <table>
-      <tr>
-        <th>Zutaten</th>
-        <th>Beschreibung</th>
-      </tr>
-      <tr>
-        <td>
-          <Ingredients :ingredients="item.ingredients"></Ingredients>
-        </td>
-        <td>
-          <pre>{{ this.item.description }}</pre>
-        </td>
-      </tr>
-    </table>
+    <div class="table">
+      <div style="max-width: fit-content;">
+        <Ingredients :ingredients="item.ingredients" />
+      </div>
+      <div>
+        <h4>Beschreibung</h4>
+        <pre>{{ this.item.description }}</pre>
+      </div>
 
-    <div class="pictures">
-      <ShowPictures :recipeId="this.$route.params.id"></ShowPictures>
-      <router-link
-        :to="{name: 'AddPicture', params: {recipeId: this.item._id}}"
-        class="router-links"
-      >Bild Hinzufügen</router-link>
+      <div class="pictures">
+        <ShowPictures :recipeId="this.$route.params.id"></ShowPictures>
+        <router-link
+          :to="{name: 'AddPicture', params: {recipeId: this.item._id}}"
+          class="router-links"
+        >Bild Hinzufügen</router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -230,9 +225,6 @@ export default {
 </script>
 
 <style scoped>
-table {
-  margin: 2px 0 2px 0;
-}
 img {
   padding: 0;
   margin: 0;
@@ -252,6 +244,16 @@ img {
   top: calc(12rem + 52px);
   padding: 0.5rem 1rem 0.5rem 0.5rem;
   border: 2px solid #555555;
+}
+
+.table {
+  display: flex;
+  flex-wrap: wrap;
+}
+.table > * {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 280px;
 }
 
 hr {
