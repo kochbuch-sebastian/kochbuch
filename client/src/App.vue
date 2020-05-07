@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Navbar />
-    <h1>Sebastians Kochbuch</h1>
+    <div>
+      <h1 id="title">Sebastians Kochbuch</h1>
+    </div>
     <router-view />
   </div>
 </template>
@@ -163,6 +165,15 @@ img {
 .fatHr {
   height: 0.5px;
   background-color: #000000;
+}
+
+#img_kochtopf {
+  top: 7.5%;
+  left: 7%;
+}
+#img_muetze {
+  top: 7.5%;
+  right: 7%;
 }
 
 /* General margins etc.  */

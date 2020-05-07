@@ -114,12 +114,12 @@ class ItemService {
     });
   }
 
-  static async addPictureToItem(recipeId, imageId) {
+  static async addPictureToItem(recipeId, imageName) {
     console.log(`recipeId in addPictureToItem: ${recipeId}`);
 
     // axios post (image array)
     return await axios.patch(`${url}addimage/${recipeId}`, {
-      imageId,
+      imageName,
     });
   }
 

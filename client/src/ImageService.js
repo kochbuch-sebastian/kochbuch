@@ -71,11 +71,10 @@ class ImageService {
 
     try {
       const imageRequest = await axios.post(url, formData);
-      console.log(imageRequest);
       const image = imageRequest.data.file;
-      const imageId = image.id;
+      const imageName = image.filename;
 
-      return await ItemService.addPictureToItem(recipeId, imageId);
+      return await ItemService.addPictureToItem(recipeId, imageName);
     } catch (err) {
       console.log(err);
     }

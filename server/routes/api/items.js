@@ -30,6 +30,7 @@ router.post('/', (req, res) => {
     description: req.body.description,
     recipeType: req.body.recipeType,
     username: req.body.username,
+    pictures: [],
   });
 
   newItem.save().then((item) => res.json(item));
@@ -39,19 +40,20 @@ router.post('/', (req, res) => {
 // @desc    Update an item
 // @access  Public
 router.patch('/:id', (req, res) => {
-  const newItem = new Item({
-    title: req.body.title,
-    ingredients: req.body.ingredients,
-    description: req.body.description,
-    recipeType: req.body.recipeType,
-    username: req.body.username,
-  });
-
-  const upsertData = newItem.toObject();
-
-  delete upsertData._id;
-
   Item.findById(req.params.id).then((oldItem) => {
+    const newItem = new Item({
+      title: req.body.title,
+      ingredients: req.body.ingredients,
+      description: req.body.description,
+      recipeType: req.body.recipeType,
+      username: req.body.username,
+      pictures: oldItem.pictures,
+    });
+
+    const upsertData = newItem.toObject();
+
+    delete upsertData._id;
+
     if (newItem.username === oldItem.username) {
       try {
         Item.updateOne(
@@ -101,17 +103,15 @@ router.delete('/:id', (req, res) => {
 });
 
 router.patch('/addimage/:id', (req, res) => {
-  if (!req.body.imageId) {
-    res.status(401).json({ success: false, error: 'No imageId provided' });
+  if (!req.body.imageName) {
+    res.status(401).json({ success: false, error: 'No imageName provided' });
   }
 
   console.log('Patching addimage/:id');
   Item.findById(req.params.id).then((oldItem) => {
     const pictures = oldItem.pictures ? oldItem.pictures : [];
 
-    pictures.push(req.body.imageId);
-
-    console.log(pictures);
+    pictures.push(req.body.imageName);
 
     const newItem = new Item({
       title: oldItem.title,

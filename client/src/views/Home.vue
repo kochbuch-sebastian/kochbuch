@@ -1,17 +1,34 @@
 <template>
-  <div class="container">
-    <div class="home">
-      <h3 class="hello">
-        Herzlich Willkommen
-        <i v-if="loggedIn">{{ username }}</i>!
-      </h3>
-      <i>Hier sind alle Rezepte durch mindestens einmaliges Kochen oder Backen geprüft.</i>
-      <p v-if="loggedIn">
-        Sie möchten ein Rezept hinzufügen? Dann klicken Sie doch
-        <router-link :to="{name: 'AddRecipe'}" exact class="router-links noMargin">hier</router-link>.
-      </p>
-      <p>Wir wünschen Ihnen einen guten Appetit!</p>
-    </div>
+  <div class="containter">
+    <table>
+      <tr>
+        <td v-if="showImages" style="min-width: fit-content;" :width="imgWidth">
+          <img
+            src="../assets/painted_kochtopf.png"
+            alt="Ein Kochtopf"
+            width="100%"
+            id="img_kochtopf"
+          />
+        </td>
+        <td>
+          <div class="home">
+            <h3 class="hello">
+              Herzlich Willkommen
+              <i v-if="loggedIn">{{ username }}</i>!
+            </h3>
+            <i>Hier sind alle Rezepte durch mindestens einmaliges Kochen oder Backen geprüft.</i>
+            <p v-if="loggedIn">
+              Sie möchten ein Rezept hinzufügen? Dann klicken Sie doch
+              <router-link :to="{name: 'AddRecipe'}" exact class="router-links noMargin">hier</router-link>.
+            </p>
+            <p>Wir wünschen Ihnen einen guten Appetit!</p>
+          </div>
+        </td>
+        <td v-if="showImages" style="min-width: fit-content;" :width="imgWidth">
+          <img src="../assets/painted_mütze.png" alt="Eine Kochmütze" width="100%" id="img_muetze" />
+        </td>
+      </tr>
+    </table>
     <hr class="fatHr" />
     <div v-if="loggedIn">
       <div class="favorites">
@@ -41,6 +58,9 @@ export default {
   data() {
     return {
       items: [],
+
+      showImages: window.innerWidth > 500,
+      imgWidth: window.innerWidth < 600 ? '100%' : '15%',
 
       username: '',
       error: '',
