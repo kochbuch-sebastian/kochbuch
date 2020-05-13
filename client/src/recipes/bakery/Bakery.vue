@@ -41,6 +41,9 @@ export default {
     document.documentElement.style.setProperty('--color2', this.color2);
     document.documentElement.style.setProperty('--textColor', this.textColor);
   },
+  mounted() {
+    this.$emit('change-image', 'bakery');
+  },
   methods: {
     getBakeryItems() {
       try {
