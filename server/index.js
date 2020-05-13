@@ -7,6 +7,7 @@ const passport = require('passport');
 const items = require('./routes/api/items');
 const users = require('./routes/api/users');
 const images = require('./routes/api/images');
+const icons = require('./routes/api/icons');
 
 const app = express();
 
@@ -57,6 +58,7 @@ app.use(passport.session());
 app.use('/api/items', items);
 app.use('/api/users', users);
 app.use('/api/images', images);
+app.use('/api/icons', icons);
 
 // Handle production
 if (process.env.NODE_ENV === 'production') {

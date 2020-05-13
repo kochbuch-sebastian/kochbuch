@@ -2,10 +2,10 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '../views/Home.vue';
+
 import Register from '../components/Register.vue';
 import Login from '../components/Login.vue';
 import UpdateUser from '../components/UpdateUser.vue';
-
 import User from '../components/users/User.vue';
 
 import SearchRecipes from '../recipes/SearchRecipes.vue';
@@ -23,6 +23,7 @@ import BrowseBread from '../recipes/bread/Bread.vue';
 import EditRecipe from '../recipes/EditRecipe.vue';
 import AddRecipe from '../recipes/AddRecipe.vue';
 
+import UploadIcon from '../components/UploadIcon.vue';
 import UploadPicture from '../components/UploadPicture.vue';
 
 import Backend from '../Backend.vue';
@@ -49,6 +50,11 @@ const routes = [
     path: '/update',
     name: 'UpdateUser',
     component: UpdateUser,
+  },
+  {
+    path: '/icon',
+    name: 'UploadIcon',
+    component: UploadIcon,
   },
   {
     path: '/recipes/search/:keywords?',
