@@ -9,7 +9,7 @@
           :height="imgHeight"
         >
           <img
-            src="/api/icons/icon/name/7a12730c7c8432cef48a6ba59d989dac.png"
+            :src="'/api/icons/icon/name/' + firstImagePath"
             alt="Ein Kochtopf"
             id="img_kochtopf"
             :height="imgHeight"
@@ -68,12 +68,15 @@ export default {
         ? document.querySelector('#img_muetze')
         : null,
 
+      firstImageAlt: 'Eine Mütze',
+      firstImagePath: '0895f35d11c37cad72b0ba6634064842.png',
+
       secondImageAlt: 'Ein Bild',
       secondImagePath: '',
 
       secondImageWidth: '',
 
-      initialSecondImagePath: '0895f35d11c37cad72b0ba6634064842.png',
+      initialSecondImagePath: '7a12730c7c8432cef48a6ba59d989dac.png',
 
       appetizerImagePath: 'e47ca23dddf33f575991be332566c6af.png',
       heartyImagePath: 'cace83d9063c695d8e74966d9dcf9d40.png',
