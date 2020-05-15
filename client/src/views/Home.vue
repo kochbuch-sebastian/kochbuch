@@ -12,10 +12,11 @@
         </td>
         <td>
           <div class="home">
-            <h3 class="hello">
+            <h3 class="hello" v-if="loggedIn">
               Herzlich Willkommen
-              <i v-if="loggedIn">{{ username }}</i>!
+              {{ username }}!
             </h3>
+            <h3 class="hello" v-if="!loggedIn">Herzlich Willkommen!</h3>
             <i>Hier sind alle Rezepte durch mindestens einmaliges Kochen oder Backen geprüft.</i>
             <p v-if="loggedIn">
               Sie möchten ein Rezept hinzufügen? Dann klicken Sie doch
@@ -72,7 +73,8 @@ export default {
     };
   },
   beforeMount() {
-    this.username = this.user === null ? '' : this.user.username;
+    // this.username = this.user === null ? '' : this.user.username;
+    this.username = sessionStorage.username ? sessionStorage.username : '';
   },
   computed: mapGetters(['user', 'loggedIn', 'recipes']),
   created() {
