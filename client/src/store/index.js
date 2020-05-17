@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import authentication from './modules/authentication';
 import recipes from './modules/recipes';
+import shoppinglist from './modules/shoppinglist';
 
 Vue.use(Vuex);
 
@@ -13,5 +14,6 @@ export default new Vuex.Store({
   modules: {
     authentication,
     recipes,
+    shoppinglist,
   },
 });

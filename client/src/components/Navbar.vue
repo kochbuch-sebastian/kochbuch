@@ -125,6 +125,11 @@ export default {
           text: 'Über mich',
         },
         {
+          vif: true,
+          name: 'ShoppingList',
+          text: 'Einkaufsliste',
+        },
+        {
           vif: this.loggedIn,
           name: 'FavoriteRecipes',
           text: 'Favoriten',

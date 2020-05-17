@@ -8,6 +8,7 @@ const items = require('./routes/api/items');
 const users = require('./routes/api/users');
 const images = require('./routes/api/images');
 const icons = require('./routes/api/icons');
+const send = require('./routes/api/send');
 
 const app = express();
 
@@ -59,6 +60,8 @@ app.use('/api/items', items);
 app.use('/api/users', users);
 app.use('/api/images', images);
 app.use('/api/icons', icons);
+
+app.use('/api/send', send);
 
 // Handle production
 if (process.env.NODE_ENV === 'production') {
