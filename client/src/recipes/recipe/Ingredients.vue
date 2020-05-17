@@ -6,10 +6,14 @@
         <tr>
           <th>Zutat</th>
           <th>Menge</th>
+          <th>Zur Liste</th>
         </tr>
         <tr v-for="(ingredient, index) in ingredients" :key="index">
           <td>{{ ingredient.name }}</td>
           <td>{{ ingredient.amount }}</td>
+          <td>
+            <AddToList :showTextField="false" :name="ingredient.name" :amount="ingredient.amount" />
+          </td>
         </tr>
       </table>
     </div>
@@ -17,9 +21,14 @@
 </template>
 
 <script>
+import AddToList from '../../components/shopping/AddToList.vue';
+
 export default {
   name: 'Ingredients',
   props: ['ingredients'],
+  components: {
+    AddToList,
+  },
 };
 </script>
 

@@ -26,6 +26,9 @@ import AddRecipe from '../recipes/AddRecipe.vue';
 import UploadIcon from '../components/UploadIcon.vue';
 import UploadPicture from '../components/UploadPicture.vue';
 
+import ShoppingList from '../components/shopping/ShoppingList.vue';
+import SendList from '../components/email/SendList.vue';
+
 import Backend from '../Backend.vue';
 
 Vue.use(VueRouter);
@@ -127,6 +130,16 @@ const routes = [
     path: '/user/:username',
     name: 'User',
     component: User,
+  },
+  {
+    path: '/shoppingList',
+    name: 'ShoppingList',
+    component: ShoppingList,
+  },
+  {
+    path: '/shoppingList/send',
+    name: 'SendList',
+    component: SendList,
   },
   {
     path: '/backend',

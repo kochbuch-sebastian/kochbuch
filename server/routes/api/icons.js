@@ -63,8 +63,6 @@ router.get('/', (req, res) => {
         .status(500)
         .json({ error: 'Error while Grid().files.find().toArray()' });
     } else {
-      console.log(Grid(conn.db, mongoose.mongo).files.find());
-      console.log(files);
       return res.status(200).send(files);
     }
   });
