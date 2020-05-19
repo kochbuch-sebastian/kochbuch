@@ -59,6 +59,7 @@ export default {
   created() {
     document.onkeypress = event => {
       if (event.which === 13 || event.keyCode === 13) {
+        event.preventDefault();
         this.loggedIn ? this.performLogout() : this.performLogin();
       }
     };

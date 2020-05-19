@@ -64,6 +64,34 @@ class ItemService {
     });
   }
 
+  static async updatePassword(username, password1, password2) {
+    username = username.trim();
+
+    const currentUser = await this.getUserByUsername(username);
+
+    const thisUser = currentUser[0];
+
+    return axios.patch(`${url}${thisUser._id}/password`, {
+      username,
+      password1,
+      password2,
+    });
+  }
+
+  static async updateDescription(username, description) {
+    username = username.trim();
+    description = description.trim();
+
+    const currentUser = await this.getUserByUsername(username);
+
+    const thisUser = currentUser[0];
+
+    return axios.patch(`${url}${thisUser._id}/description`, {
+      username,
+      description,
+    });
+  }
+
   static login(username, password) {
     return axios.post(`${url}login`, {
       username,

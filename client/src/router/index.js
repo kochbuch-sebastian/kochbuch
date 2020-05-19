@@ -6,6 +6,8 @@ import Home from '../views/Home.vue';
 import Register from '../components/Register.vue';
 import Login from '../components/Login.vue';
 import UpdateUser from '../components/UpdateUser.vue';
+import UpdatePassword from '../components/updateUser/UpdatePassword.vue';
+import UpdateDescription from '../components/updateUser/UpdateDescription.vue';
 import User from '../components/users/User.vue';
 
 import SearchRecipes from '../recipes/SearchRecipes.vue';
@@ -53,6 +55,16 @@ const routes = [
     path: '/update',
     name: 'UpdateUser',
     component: UpdateUser,
+  },
+  {
+    path: '/update/password',
+    name: 'UpdatePassword',
+    component: UpdatePassword,
+  },
+  {
+    path: '/update/description',
+    name: 'UpdateDescription',
+    component: UpdateDescription,
   },
   {
     path: '/icon',

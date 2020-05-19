@@ -192,6 +192,98 @@ router.patch('/:id', (req, res) => {
   }
 });
 
+router.patch('/:id/password', (req, res) => {
+  if (req.body.password1 !== req.body.password2) {
+    res
+      .status(405)
+      .json({ success: false, err: 'The two passwords do not match!' });
+  } else {
+    User.findById(req.params.id).then((oldUser) => {
+      const newUser = new User({
+        username: oldUser.username,
+        password: req.body.password1,
+        description: oldUser.description,
+        favorites: oldUser.favorites,
+      });
+
+      if (newUser.username === oldUser.username) {
+        bcrypt.genSalt(10, (err, salt) => {
+          if (err) {
+            return res.status(500).json({
+              success: false,
+              errors:
+                'Server internal error while generating salt for password, please try again!',
+            });
+          } else {
+            bcrypt.hash(newUser.password, salt, (err, hash) => {
+              if (err) {
+                return res.status(500).json({
+                  success: false,
+                  errors:
+                    'Server internal error while hashing password, please try again!',
+                });
+              } else {
+                newUser.password = hash;
+
+                const upsertData = newUser.toObject();
+                delete upsertData._id;
+
+                User.updateOne(
+                  { _id: req.params.id },
+                  upsertData,
+                  { upsert: false },
+                  (err, updatedDoc) => {
+                    if (err) return res.status(500).json({ error: err });
+                    return res.status(200).json(updatedDoc);
+                  },
+                ).catch((err) => {
+                  throw err;
+                });
+              }
+            });
+          }
+        });
+      } else {
+        res
+          .status(405)
+          .json({ success: false, error: 'The username has changed..?' });
+      }
+    });
+  }
+});
+
+router.patch('/:id/description', (req, res) => {
+  User.findById(req.params.id).then((oldUser) => {
+    const newUser = new User({
+      username: oldUser.username,
+      password: oldUser.password,
+      description: req.body.description,
+      favorites: oldUser.favorites,
+    });
+
+    if (newUser.username === oldUser.username) {
+      const upsertData = newUser.toObject();
+      delete upsertData._id;
+
+      User.updateOne(
+        { _id: req.params.id },
+        upsertData,
+        { upsert: false },
+        (err, updatedDoc) => {
+          if (err) return res.status(500).json({ error: err });
+          return res.status(200).json(updatedDoc);
+        },
+      ).catch((err) => {
+        throw err;
+      });
+    } else {
+      res
+        .status(405)
+        .json({ success: false, error: 'The username has changed..?' });
+    }
+  });
+});
+
 router.patch('/favorite/:id', (req, res) => {
   User.findById(req.params.id)
     .then((user) => {
