@@ -28,6 +28,10 @@ const actions = {
   async removeIndexFromShoppingList({ commit }, id) {
     commit('removeRecipe', id);
   },
+  clearShoppingList({ commit }, total) {
+    if (total) commit('clearShoppingList');
+    else commit('clearShoppingList');
+  },
 };
 
 const mutations = {
@@ -49,6 +53,11 @@ const mutations = {
     (state.shoppingList = state.shoppingList.filter(
       (element) => element.id != id,
     )),
+  clearShoppingList: (state) =>
+    (state.shoppingList = state.shoppingList.filter((element) => {
+      if (element) return false;
+      else return false;
+    })),
 };
 
 export default {

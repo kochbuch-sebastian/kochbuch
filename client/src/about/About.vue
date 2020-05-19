@@ -10,12 +10,14 @@
         href="https://github.com/kochbuch-sebastian/kochbuch/issues"
         target="_blank"
         rel="noopener noreferrer"
+        class="router-links noMargin"
       >hier</a> unter "New issue" mit dem Label "bug" melden.
       Einen Verbesserungsvorschlag können Sie gerne
       <a
         href="https://github.com/kochbuch-sebastian/kochbuch/issues"
         target="_blank"
         rel="noopener noreferrer"
+        class="router-links noMargin"
       >hier</a> unter "New issue" mit dem Label "enhancement" vorschlagen.
     </p>
     <p>

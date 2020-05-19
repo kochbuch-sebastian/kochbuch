@@ -19,16 +19,29 @@
           </td>
         </tr>
       </table>
-      <button @click="sendEmail">An angegebene Email-Adresse senden.</button>
+      <div>
+        <label for="sendAsHtml">Als HTML senden (empfohlen)</label>
+        <input type="checkbox" v-model="sendAsHtml" name="sendAsHtml" id="sendAsHtml" />
+      </div>
+      <div>
+        <label
+          for="clearListAfter"
+        >Nach erfolgreichem Senden der Email alle Elemente aus der Liste entfernen</label>
+        <input type="checkbox" v-model="clearListAfter" name="clearListAfter" id="clearListAfter" />
+      </div>
+      <div>
+        <button @click="sendEmail">An angegebene Email-Adresse senden.</button>
+      </div>
     </div>
     <div>
       <p class="error" v-if="error">{{ error }}</p>
+      <p class="message" v-if="message">{{ message }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 import SendEmail from '../../SendEmail';
 
@@ -40,13 +53,19 @@ export default {
       addressdata: '',
       subjectData: '',
 
+      sendAsHtml: true,
+
+      clearListAfter: true,
+
       error: '',
+      message: '',
     };
   },
   computed: {
     ...mapGetters(['shoppingList']),
   },
   methods: {
+    ...mapActions(['clearShoppingList']),
     async sendEmail() {
       console.log(`Send Email ${this.subjectData} to ${this.addressdata}`);
 
@@ -56,29 +75,84 @@ export default {
       ) {
         this.error = '';
 
-        let stringShoppingList = '';
+        const today = new Date();
+        let stringShoppingList = `
+                <html>
+                  <body>
+                    <div>
+                      <h1>Ihre Einkaufsliste vom ${today.getDate()}.${today.getMonth()}.${today.getFullYear()}</h1>
+                    </div>
+                    <div>
+                      <table style="margin: 10px;>`;
 
-        this.shoppingList.forEach(object => {
-          let name = '';
-          let amount = '';
-          for (let [key, value] of Object.entries(object)) {
-            if (key === 'amount') {
-              amount = value.replace(/\n/g, ' + ');
-            } else if (key === 'name') {
-              name = value;
+        if (this.sendAsHtml) {
+          this.shoppingList.forEach(object => {
+            let name = '';
+            let amount = '';
+            for (let [key, value] of Object.entries(object)) {
+              if (key === 'amount') {
+                amount = value.replace(/\n/g, ' + ');
+              } else if (key === 'name') {
+                name = value;
+              }
             }
+            stringShoppingList += `
+              <tr>
+                <td>${name}</td>
+                <td>${amount}</td>
+              </tr>`;
+          });
+
+          stringShoppingList += `
+                      </table>
+                    </div>
+                  </body>
+                </html>`;
+
+          this.message = 'Wird gesendet...';
+          const worked = await SendEmail.sendHTML(
+            this.addressdata,
+            this.subjectData,
+            stringShoppingList,
+          );
+
+          if (!worked) {
+            this.error = 'Etwas hat nicht funktioniert';
+          } else {
+            if (this.clearListAfter) {
+              this.clearShoppingList(true);
+            }
+            this.$router.push({ name: 'Home' });
           }
-          stringShoppingList += `\n ${name}: \t ${amount}`;
-        });
+        } else {
+          this.shoppingList.forEach(object => {
+            let name = '';
+            let amount = '';
+            for (let [key, value] of Object.entries(object)) {
+              if (key === 'amount') {
+                amount = value.replace(/\n/g, ' + ');
+              } else if (key === 'name') {
+                name = value;
+              }
+            }
+            stringShoppingList += `\n ${name}: \t ${amount}`;
+          });
 
-        const worked = await SendEmail.send(
-          this.addressdata,
-          this.subjectData,
-          stringShoppingList,
-        );
+          this.message = 'Wird gesendet...';
+          const worked = await SendEmail.send(
+            this.addressdata,
+            this.subjectData,
+            stringShoppingList,
+          );
 
-        if (!worked) {
-          this.error = 'Etwas hat nicht funktioniert';
+          if (!worked) {
+            this.error = 'Etwas hat nicht funktioniert';
+          } else {
+            if (this.clearListAfter) {
+              this.clearShoppingList(true);
+            }
+            this.$router.push({ name: 'Home' });
+          }
         }
       } else {
         this.error =
