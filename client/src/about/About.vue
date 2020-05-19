@@ -18,10 +18,11 @@
         target="_blank"
         rel="noopener noreferrer"
         class="router-links noMargin"
-      >hier</a> unter "New issue" mit dem Label "enhancement" vorschlagen.
+      >hier</a> unter "New issue" mit dem Label "enhancement" vorschlagen. Sie können gerne auch eines der beiden Vorlagen nutzen.
+      Alternativ können Sie auch eine Email mit "enhancement" oder "bug" im Betreff an kochbuch-sebastian@web.de schreiben. Ich freue mich auf Ihr Feedback!
     </p>
     <p>
-      Das Frontend wie auch das Backend dieser Applikation habe ich in den Osterferien 2020 (während der Corona-Zeit) entwickelt.
+      Das Frontend wie auch das Backend dieser Applikation habe ich in der Zeit seit den Osterferien 2020 (während der Corona-Zeit) entwickelt.
       Das Backend finden Sie
       <router-link :to="{ name: 'Backend' }" class="router-links noMargin">hier</router-link>.
     </p>
