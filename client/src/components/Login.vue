@@ -57,18 +57,23 @@ export default {
   },
   computed: mapGetters(['user', 'loggedIn']),
   created() {
-    document.onkeypress = event => {
-      if (event.which === 13 || event.keyCode === 13) {
-        event.preventDefault();
-        this.loggedIn ? this.performLogout() : this.performLogin();
-      }
-    };
+    document.addEventListener('keypress', event => this.keyListener(event));
   },
   beforeMount() {
     this.username = this.user === null ? '' : this.user.username;
   },
+  destroyed() {
+    document.removeEventListener('keypress', event => this.keyListener(event));
+  },
   methods: {
     ...mapActions(['login', 'logout']),
+
+    keyListener(event) {
+      if (event.which === 13 || event.keyCode === 13) {
+        event.preventDefault();
+        this.loggedIn ? this.performLogout() : this.performLogin();
+      }
+    },
 
     performLogout() {
       this.logout();

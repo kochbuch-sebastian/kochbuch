@@ -170,6 +170,15 @@ export default {
     };
   },
   computed: mapGetters(['user']),
+  created() {
+    document.addEventListener('keypress', event => this.keyListener(event));
+  },
+  mounted() {
+    this.addIngredient();
+  },
+  destroyed() {
+    document.removeEventListener('keypress', event => this.keyListener(event));
+  },
   methods: {
     keyPressOnInput(e) {
       if (e.keyCode === 13) {
@@ -213,19 +222,6 @@ export default {
         amount: '',
       });
     },
-  },
-  created() {
-    document.onkeypress = event => {
-      if (event.keyCode) {
-        if (event.which === 13 || event.keyCode === 13) {
-          event.preventDefault();
-          this.addIngredient();
-        }
-      }
-    };
-  },
-  mounted() {
-    this.addIngredient();
   },
 };
 </script>

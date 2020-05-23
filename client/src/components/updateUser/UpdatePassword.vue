@@ -54,12 +54,7 @@ export default {
     };
   },
   async created() {
-    document.onkeypress = event => {
-      if (event.which === 13 || event.keyCode === 13) {
-        event.preventDefault();
-        this.updateUser();
-      }
-    };
+    document.addEventListener('keypress', event => this.keyListener(event));
 
     try {
       const userArray = await UserService.getUserByUsername(this.username);
@@ -72,7 +67,17 @@ export default {
       this.error = err.message;
     }
   },
+  destroyed() {
+    document.removeEventListener('keypress', event => this.keyListener(event));
+  },
   methods: {
+    keyListener(event) {
+      if (event.which === 13 || event.keyCode === 13) {
+        event.preventDefault();
+        this.updateUser();
+      }
+    },
+
     async updateUser() {
       await UserService.updatePassword(
         this.username,
