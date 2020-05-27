@@ -14,6 +14,36 @@ workbox.routing.registerRoute(
   }),
 );
 
+workbox.routing.registerRoute(
+  new RegExp('icons/'),
+  workbox.strategies.networkFirst({
+    cacheName: 'v2',
+    method: 'GET',
+    plugins: [],
+    cacheableResponse: { statuses: [0, 200, 201, 202, 203, 204] },
+  }),
+);
+
+workbox.routing.registerRoute(
+  new RegExp('images/'),
+  workbox.strategies.networkFirst({
+    cacheName: 'v2',
+    method: 'GET',
+    plugins: [],
+    cacheableResponse: { statuses: [0, 200, 201, 202, 203, 204] },
+  }),
+);
+
+workbox.routing.registerRoute(
+  new RegExp('users/'),
+  workbox.strategies.networkFirst({
+    cacheName: 'v2',
+    method: 'GET',
+    plugins: [],
+    cacheableResponse: { statuses: [0, 200, 201, 202, 203, 204] },
+  }),
+);
+
 let click_open_url;
 self.addEventListener('push', (event) => {
   let message = event.data.text();
