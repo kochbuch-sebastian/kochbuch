@@ -18,7 +18,8 @@ self.addEventListener('push', (event) => {
 
   click_open_url = 'https://kochbuch-sebastian.herokuapp.com';
   const options = {
-    body: message.body,
+    body: 'This is the body' /*message.body*/,
+    text: 'This here might not exist: the text',
     icon: './img/icons/android-chrome-192x192.png',
     vibrate: [200, 100, 200, 100, 200, 100, 200],
     tag: 'vibration-sample',
