@@ -65,8 +65,6 @@ router.get('/', (req, res) => {
         .status(500)
         .json({ error: 'Error while Grid().files.find().toArray()' });
     } else {
-      console.log(Grid(conn.db, mongoose.mongo).files.find());
-      console.log(files);
       return res.status(200).send(files);
     }
   });
@@ -76,7 +74,6 @@ router.get('/', (req, res) => {
 // @desc    Get one Image
 // @access  Public
 router.get('/image/:id', (req, res) => {
-  console.log(req.params.id);
   gfs.files.findOne({ _id: req.params.id }, (err, file) => {
     if (err)
       return res
@@ -90,7 +87,6 @@ router.get('/image/:id', (req, res) => {
         file.contentType.includes('image') ||
         file.contentType.includes('img')
       ) {
-        console.log('creating ReadStream');
         const readstream = gfs.createReadStream(file.id);
         readstream.pipe(res);
       } else {
@@ -104,7 +100,6 @@ router.get('/image/:id', (req, res) => {
 // @desc    Get one Image
 // @access  Public
 router.get('/image/name/:filename', (req, res) => {
-  console.log(req.params.filename);
   gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
     if (err)
       return res
@@ -128,7 +123,6 @@ router.get('/image/name/:filename', (req, res) => {
 });
 
 router.post('/', upload.single('file'), (req, res) => {
-  console.log('Posted');
   res.json({ file: req.file });
 });
 
