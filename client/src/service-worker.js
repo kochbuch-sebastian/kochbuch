@@ -17,6 +17,9 @@ self.addEventListener('push', (event) => {
   let message = event.data.text();
 
   click_open_url = 'https://kochbuch-sebastian.herokuapp.com';
+
+  console.log(event);
+
   const options = {
     body: 'This is the body' /*message.body*/,
     text: 'This here might not exist: the text',
