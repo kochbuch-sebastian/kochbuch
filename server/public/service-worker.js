@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.e28c5b04484db1e0b6a1d6fdb8170df4.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.05438ed004a5bc8ad1d982566b7a2330.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 
@@ -9,7 +9,31 @@ workbox.routing.registerRoute(
   workbox.strategies.networkFirst({
     cacheName: 'v2',
     method: 'GET',
+    plugins: [],
     cacheableResponse: { statuses: [0, 200, 201, 202, 203, 204] },
   }),
 );
+
+let click_open_url;
+self.addEventListener('push', (event) => {
+  let message = event.data.text();
+
+  click_open_url = 'https://kochbuch-sebastian.herokuapp.com';
+  const options = {
+    body: message.body,
+    icon: './img/icons/android-chrome-192x192.png',
+    vibrate: [200, 100, 200, 100, 200, 100, 200],
+    tag: 'vibration-sample',
+  };
+  event.waitUntil(self.registration.showNotification('kochbuch', options));
+});
+
+self.addEventListener('notificationclick', (event) => {
+  const clickedNotification = event.notification;
+  clickedNotification.close();
+  if (click_open_url) {
+    const promiseChain = clients.openWindow(click_open_url);
+    event.waitUntil(promiseChain);
+  }
+});
 
