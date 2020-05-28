@@ -16,13 +16,13 @@
       "type": "image/png"
     },
     {
-      "src": "apple-touch-icon-180x180.png",
-      "sizes": "180x180",
+      "src": "msapplication-icon-144x144.png",
+      "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "msapplication-icon-144x144.png",
-      "sizes": "144x144",
+      "src": "apple-touch-icon-180x180.png",
+      "sizes": "180x180",
       "type": "image/png"
     }
   ]
