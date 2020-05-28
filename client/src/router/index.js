@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 
 import Home from '../views/Home.vue';
 
+import Offline from '../components/Offline.vue';
+
 import Register from '../components/Register.vue';
 import Login from '../components/Login.vue';
 import UpdateUser from '../components/UpdateUser.vue';
@@ -40,6 +42,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home,
+  },
+  {
+    path: '/offline',
+    name: 'Offline',
+    component: Offline,
   },
   {
     path: '/login',

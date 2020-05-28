@@ -9,4 +9,11 @@ module.exports = {
       },
     },
   },
+  pwa: {
+    name: 'kochbuch-sebastian',
+    workboxPluginMode: 'InjectManifest',
+    workboxOptions: {
+      swSrc: 'src/service-worker.js',
+    },
+  },
 };

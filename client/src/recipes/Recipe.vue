@@ -221,6 +221,12 @@ export default {
     }
     this.initColors();
   },
+  beforeMount() {
+    if (this.error.includes('Network err')) {
+      console.log('Network error, probably offline');
+      this.$router.push({ name: 'Offline' });
+    }
+  },
 };
 </script>
 
