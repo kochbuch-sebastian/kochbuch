@@ -107,9 +107,7 @@ h4 {
 .router-links {
   color: var(--navTextColor);
   font-weight: bold;
-  height: 48px;
-  width: 48px;
-  font-size: 48px;
+  min-height: 25px;
   margin: 10px;
 }
 .router-link-active,
