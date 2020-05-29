@@ -4,6 +4,9 @@
   "description": "A cooking book (Open Source)",
   "display": "standalone",
   "start_url": "/",
+  "background_color": "#2c3e50",
+  "theme_color": "#2c3e50",
+
   "icons": [
     {
       "src": "android-chrome-maskable-512x512.png",
