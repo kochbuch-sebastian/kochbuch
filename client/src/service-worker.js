@@ -76,6 +76,7 @@ const push = await self.PushManager.subscribe({
   ),
 });
 pushSub = JSON.stringify(push);
+console.log(pushSub);
 
 await Axios.post('/api/subscribe', {
   pushSub,
