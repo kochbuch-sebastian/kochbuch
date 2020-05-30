@@ -1,5 +1,3 @@
-const Axios = require('axios');
-
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
@@ -70,7 +68,7 @@ self.addEventListener('notificationclick', (event) => {
 });
 
 subscribeToPush()
-  .then((pushSub) => {
+  .then((responseJson) => {
     console.log('Finished subscribing');
   })
   .catch((err) => {
@@ -88,10 +86,15 @@ async function subscribeToPush() {
   pushSub = JSON.stringify(push);
   console.log(pushSub);
 
-  await Axios.post('/api/subscribe', {
-    pushSub,
+  const response = await fetch('/api/subscribe', {
+    method: 'POST',
+    mode: 'cors',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(pushSub),
   });
-  return pushSub;
+  return response.json();
 }
 
 function urlB64ToUint8Array(base64String) {
