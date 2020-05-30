@@ -1,4 +1,4 @@
-import Axios from 'axios';
+const Axios = require('axios');
 
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 
