@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <GetPushNotifications />
     <Navbar />
     <div>
       <h1 id="title">Sebastians Kochbuch</h1>
@@ -9,6 +10,7 @@
 </template>
 
 <script>
+import GetPushNotifications from './components/banners/GetPushNotifications.vue';
 import Navbar from './components/Navbar.vue';
 
 import { mapActions } from 'vuex';
@@ -17,6 +19,7 @@ export default {
   name: 'app',
 
   components: {
+    GetPushNotifications,
     Navbar,
   },
   mounted() {

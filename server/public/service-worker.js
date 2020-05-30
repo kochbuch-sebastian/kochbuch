@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.b29146a7953cf3843b533a60df4001a0.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.830b65312a605dd53b9898e14af1ed95.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 
@@ -68,49 +68,4 @@ self.addEventListener('notificationclick', (event) => {
     event.waitUntil(promiseChain);
   }
 });
-
-subscribeToPush()
-  .then((responseJson) => {
-    console.log('Finished subscribing');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-async function subscribeToPush() {
-  console.log('SubscribeToPush');
-  const push = await self.PushManager.subscribe({
-    userVisibleOnly: true,
-    applicationServerKey: urlB64ToUint8Array(
-      'BJ7W-pBAXF91XktUlW4smzlr5DKSn3HZI5ubRO2FL9xzvo3s5r0duXXKCH1o6MWgegXat4JT7uM0eooeYO0xpzE',
-    ),
-  });
-  pushSub = JSON.stringify(push);
-  console.log(pushSub);
-
-  const response = await fetch('/api/subscribe', {
-    method: 'POST',
-    mode: 'cors',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(pushSub),
-  });
-  return response.json();
-}
-
-function urlB64ToUint8Array(base64String) {
-  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
-  const base64 = (base64String + padding)
-    .replace(/\-/g, '+')
-    .replace(/_/g, '/');
-
-  const rawData = window.atob(base64);
-  const outputArray = new Uint8Array(rawData.length);
-
-  for (let i = 0; i < rawData.length; ++i) {
-    outputArray[i] = rawData.charCodeAt(i);
-  }
-  return outputArray;
-}
 
