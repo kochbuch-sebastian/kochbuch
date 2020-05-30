@@ -71,18 +71,30 @@ self.addEventListener('notificationclick', (event) => {
   }
 });
 
-const push = await self.PushManager.subscribe({
-  userVisibleOnly: true,
-  applicationServerKey: urlB64ToUint8Array(
-    'BJ7W-pBAXF91XktUlW4smzlr5DKSn3HZI5ubRO2FL9xzvo3s5r0duXXKCH1o6MWgegXat4JT7uM0eooeYO0xpzE',
-  ),
-});
-pushSub = JSON.stringify(push);
-console.log(pushSub);
+subscribeToPush()
+  .then((pushSub) => {
+    console.log('Finished subscribing');
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
-await Axios.post('/api/subscribe', {
-  pushSub,
-});
+async function subscribeToPush() {
+  console.log('SubscribeToPush');
+  const push = await self.PushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: urlB64ToUint8Array(
+      'BJ7W-pBAXF91XktUlW4smzlr5DKSn3HZI5ubRO2FL9xzvo3s5r0duXXKCH1o6MWgegXat4JT7uM0eooeYO0xpzE',
+    ),
+  });
+  pushSub = JSON.stringify(push);
+  console.log(pushSub);
+
+  await Axios.post('/api/subscribe', {
+    pushSub,
+  });
+  return pushSub;
+}
 
 function urlB64ToUint8Array(base64String) {
   const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
