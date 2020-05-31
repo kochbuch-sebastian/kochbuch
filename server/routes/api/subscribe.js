@@ -15,6 +15,10 @@ router.post('/', (req, res) => {
   if (!req.body.pushSub) {
     res.status(400).json({ err: 'Push Subscription not sent' });
   }
+
+  console.log('req.body.pushSub: ');
+  console.log(req.body.pushSub);
+
   push
     .sendPush(req.body.pushSub, 'Subscription should have worked')
     .then(() => {
