@@ -97,6 +97,7 @@ export default {
 
 .black-background {
   background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
 }
 
 .center-button {
