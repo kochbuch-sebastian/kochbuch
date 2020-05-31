@@ -15,10 +15,10 @@ export default {
   },
   methods: {
     getPush() {
-      Notification.requestPermission(status => {
+      Notification.requestPermission(async status => {
         console.log('Notifications: ' + status);
         if (status === 'default' || status === 'granted') {
-          this.subscribeToPush()
+          await this.subscribeToPush()
             .then(responseJson => {
               console.log(`Finished subscribing: ${responseJson}`);
               localStorage.pushEnabled = true;
@@ -42,28 +42,27 @@ export default {
       console.log('SubscribeToPush');
       await navigator.serviceWorker.ready.then(
         async serviceWorkerRegistration => {
-          let push;
           try {
-            push = await serviceWorkerRegistration.pushManager.subscribe({
+            const push = await serviceWorkerRegistration.pushManager.subscribe({
               userVisibleOnly: true,
               applicationServerKey: this.urlB64ToUint8Array(
                 'BJ7W-pBAXF91XktUlW4smzlr5DKSn3HZI5ubRO2FL9xzvo3s5r0duXXKCH1o6MWgegXat4JT7uM0eooeYO0xpzE',
               ),
             });
+
+            console.log('push: ');
+            console.log(push);
+
+            const pushSub = JSON.stringify(push);
+            console.log('pushSub: ');
+            console.log(pushSub);
+
+            const response = await axios.post('/api/subscribe', { pushSub });
+            return response.json();
           } catch (err) {
             console.log(err);
+            return err;
           }
-
-          const pushSub = JSON.stringify(push);
-          console.log(pushSub);
-
-          let response;
-          try {
-            response = await axios.post('/api/subscribe', { pushSub });
-          } catch (err) {
-            console.log(err);
-          }
-          return response.json();
         },
       );
     },
