@@ -1,6 +1,6 @@
 <template>
-  <div class="container fullWidth" v-if="!pushEnabled">
-    <button @click="getPush">Benachrichtigungen aktivieren</button>
+  <div class="container fullWidth black-background" v-if="!pushEnabled">
+    <button @click="getPush" class="center-button">Benachrichtigungen aktivieren</button>
   </div>
 </template>
 
@@ -42,17 +42,27 @@ export default {
       console.log('SubscribeToPush');
       await navigator.serviceWorker.ready.then(
         async serviceWorkerRegistration => {
-          const push = await serviceWorkerRegistration.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey: this.urlB64ToUint8Array(
-              'BJ7W-pBAXF91XktUlW4smzlr5DKSn3HZI5ubRO2FL9xzvo3s5r0duXXKCH1o6MWgegXat4JT7uM0eooeYO0xpzE',
-            ),
-          });
+          let push;
+          try {
+            push = await serviceWorkerRegistration.pushManager.subscribe({
+              userVisibleOnly: true,
+              applicationServerKey: this.urlB64ToUint8Array(
+                'BJ7W-pBAXF91XktUlW4smzlr5DKSn3HZI5ubRO2FL9xzvo3s5r0duXXKCH1o6MWgegXat4JT7uM0eooeYO0xpzE',
+              ),
+            });
+          } catch (err) {
+            console.log(err);
+          }
 
           const pushSub = JSON.stringify(push);
           console.log(pushSub);
 
-          const response = await axios.post('/api/subscribe', { pushSub });
+          let response;
+          try {
+            response = await axios.post('/api/subscribe', { pushSub });
+          } catch (err) {
+            console.log(err);
+          }
           return response.json();
         },
       );
@@ -80,5 +90,17 @@ export default {
 .fullWidth {
   width: 100%;
   height: 50px;
+}
+
+.black-background {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.center-button {
+  margin: auto;
+  height: 92%;
+
+  border: none;
+  background-color: var(--navTextColor);
 }
 </style>
