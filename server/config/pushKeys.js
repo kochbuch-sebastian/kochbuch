@@ -1,7 +1,7 @@
 module.exports = {
   vapIDKeys: {
     publicKey:
-      'BJ7W-pBAXF91XktUlW4smzlr5DKSn3HZI5ubRO2FL9xzvo3s5r0duXXKCH1o6MWgegXat4JT7uM0eooeYO0xpzE',
-    privateKey: 'NMC_I-O-k_rqJG-vf1eapL4Ity5pWJPe0FXd64gbhmM',
+      'BKOodfw2GTqW9q0_Z45pCzx2y3gW1Sk2UIgRkAQI0DBkVOTJcGJQK7n28TWq7OAFy3ZWpclXFZktYbR8cCXzKSw',
+    privateKey: '-t7e2nxz4e9gTd5xKlKJ7D9Cx2tXudpZTW-pMvriGSQ',
   },
 };

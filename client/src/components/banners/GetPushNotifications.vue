@@ -15,10 +15,10 @@ export default {
   },
   methods: {
     getPush() {
-      Notification.requestPermission(async status => {
+      Notification.requestPermission(status => {
         console.log('Notifications: ' + status);
         if (status === 'default' || status === 'granted') {
-          await this.subscribeToPush()
+          this.subscribeToPush()
             .then(responseJson => {
               console.log(`Finished subscribing: ${responseJson}`);
               localStorage.pushEnabled = true;
@@ -46,7 +46,7 @@ export default {
             const push = await serviceWorkerRegistration.pushManager.subscribe({
               userVisibleOnly: true,
               applicationServerKey: this.urlB64ToUint8Array(
-                'BJ7W-pBAXF91XktUlW4smzlr5DKSn3HZI5ubRO2FL9xzvo3s5r0duXXKCH1o6MWgegXat4JT7uM0eooeYO0xpzE',
+                'BKOodfw2GTqW9q0_Z45pCzx2y3gW1Sk2UIgRkAQI0DBkVOTJcGJQK7n28TWq7OAFy3ZWpclXFZktYbR8cCXzKSw',
               ),
             });
 
@@ -61,7 +61,7 @@ export default {
             return response.json();
           } catch (err) {
             console.log(err);
-            return err;
+            return { err: err };
           }
         },
       );
