@@ -59,7 +59,7 @@ export default {
 
             const url = '/api/subscribe/';
             const response = await axios.post(url, { pushSub });
-            return response.json();
+            return response;
           } catch (err) {
             console.log(err);
             throw err;
