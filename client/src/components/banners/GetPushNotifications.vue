@@ -46,7 +46,7 @@ export default {
             const push = await serviceWorkerRegistration.pushManager.subscribe({
               userVisibleOnly: true,
               applicationServerKey: this.urlB64ToUint8Array(
-                'BKOodfw2GTqW9q0_Z45pCzx2y3gW1Sk2UIgRkAQI0DBkVOTJcGJQK7n28TWq7OAFy3ZWpclXFZktYbR8cCXzKSw',
+                'BATndbq9yATBnHCvpGMBOyaVGdpw80-UeXDmSR8nyf1Qmk6oi8EUM-sQ90PxAX3VquE9fC_tFxdu9EDOgbxbsZ4',
               ),
             });
 
@@ -89,6 +89,10 @@ export default {
 .fullWidth {
   width: 100%;
   height: 50px;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 
 .black-background {
