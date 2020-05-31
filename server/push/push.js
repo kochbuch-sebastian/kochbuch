@@ -10,6 +10,9 @@ module.exports = {
       pushKeys.vapIDKeys.privateKey,
     );
 
+    console.log('pushSub in push.js: ');
+    console.log(pushSub);
+
     return push.sendNotification(pushSub, payload);
   },
 };

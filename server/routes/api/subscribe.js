@@ -3,8 +3,6 @@ const router = express.Router();
 
 const push = require('../../push/push');
 
-const path = require('path');
-
 router.get('/', (req, res) => {
   res.status(200).json({
     msg: 'From here, you can subscribe with a post request and the pushSub. ',
