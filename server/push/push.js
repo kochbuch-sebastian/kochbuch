@@ -11,9 +11,11 @@ module.exports = {
     );
 
     console.log('pushSub in push.js: ');
-    console.log(pushSub);
 
-    return push.sendNotification(pushSub, payload);
+    parsedPushSub = JSON.parse(pushSub);
+    console.log(parsedPushSub);
+
+    return push.sendNotification(parsedPushSub, payload);
   },
 };
 /*
