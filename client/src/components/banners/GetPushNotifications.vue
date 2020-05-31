@@ -22,6 +22,7 @@ export default {
             .then(responseJson => {
               console.log(`Finished subscribing: ${responseJson}`);
               localStorage.pushEnabled = true;
+              this.pushEnabled = true;
               return true;
             })
             .catch(err => {
