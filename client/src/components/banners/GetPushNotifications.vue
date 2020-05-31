@@ -27,7 +27,7 @@ export default {
             .catch(err => {
               console.log(err);
               localStorage.pushEnabled = false;
-              return false;
+              throw err;
             });
         } else if (status === 'denied') {
           return false;
@@ -61,7 +61,7 @@ export default {
             return response.json();
           } catch (err) {
             console.log(err);
-            return { err: err };
+            throw err;
           }
         },
       );
