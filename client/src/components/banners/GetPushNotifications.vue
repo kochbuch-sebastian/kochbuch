@@ -1,19 +1,34 @@
 <template>
   <div class="container fullWidth black-background" v-if="!pushEnabled">
     <button @click="getPush" class="center-button">Benachrichtigungen aktivieren</button>
+    <PushNotAvailable v-if="pushNotAvailable" />
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import PushNotAvailable from './PushNotAvailable.vue';
 
 export default {
   data() {
     return {
       pushEnabled: localStorage.pushEnabled,
+      pushNotAvailable: false,
     };
   },
+  components: {
+    PushNotAvailable,
+  },
   methods: {
+    showPushNotAvailable() {
+      this.pushNotAvailable = true;
+      this.disappearAfterTenSeconds();
+    },
+    disappearAfterTenSeconds() {
+      setTimeout(() => {
+        this.pushNotAvailable = false;
+      }, 10000);
+    },
     getPush() {
       Notification.requestPermission(status => {
         console.log('Notifications: ' + status);
@@ -28,7 +43,7 @@ export default {
             .catch(err => {
               console.log(err);
               localStorage.pushEnabled = false;
-              throw err;
+              this.showPushNotAvailable = true;
             });
         } else if (status === 'denied') {
           return false;
@@ -40,7 +55,6 @@ export default {
     },
 
     async subscribeToPush() {
-      console.log('SubscribeToPush');
       await navigator.serviceWorker.ready.then(
         async serviceWorkerRegistration => {
           try {
@@ -51,12 +65,7 @@ export default {
               ),
             });
 
-            console.log('push: ');
-            console.log(push);
-
             const pushSub = JSON.stringify(push);
-            console.log('pushSub: ');
-            console.log(pushSub);
 
             const url = '/api/subscribe/';
             const response = await axios.post(url, { pushSub });
@@ -95,6 +104,8 @@ export default {
   position: absolute;
   bottom: 0;
   left: 0;
+
+  border-radius: 15px;
 }
 
 .black-background {
