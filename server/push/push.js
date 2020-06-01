@@ -23,6 +23,8 @@ module.exports = {
 
     Subscription.find().then((subs) => {
       for (sub in subs) {
+        console.log('Sending subscription to: ');
+        console.log(sub);
         push.sendNotification(sub, payload);
       }
     });
