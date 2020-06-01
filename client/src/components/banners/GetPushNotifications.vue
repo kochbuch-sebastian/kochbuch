@@ -68,6 +68,8 @@ export default {
               ),
             });
 
+            console.log(push);
+
             const pushSub = JSON.stringify(push);
 
             const url = '/api/subscribe/';

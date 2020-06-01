@@ -7,6 +7,10 @@ const SubscriptionSchema = new Schema({
     type: String,
     required: true,
   },
+  keys: {
+    type: Schema.Types.Mixed,
+    required: true,
+  },
   expirationTime: {
     type: String,
     required: false,
