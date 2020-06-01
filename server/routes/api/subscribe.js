@@ -38,6 +38,7 @@ router.get('/all', (req, res) => {
 });
 
 router.get('/sendTest', (req, res) => {
+  console.log('testing');
   push.sendPushForEach('Test');
 
   res.status(200).json({ msg: 'worked' });
