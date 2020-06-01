@@ -21,12 +21,14 @@ export default {
   },
   methods: {
     showPushNotAvailable() {
+      console.log('Push in this browser not available');
       this.pushNotAvailable = true;
       this.disappearAfterTenSeconds();
     },
     disappearAfterTenSeconds() {
       setTimeout(() => {
         this.pushNotAvailable = false;
+        console.log('Push not available closed');
       }, 10000);
     },
     getPush() {
