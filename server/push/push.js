@@ -22,18 +22,9 @@ module.exports = {
     );
 
     Subscription.find().then((subs) => {
-      console.log('subs: ');
-      console.log(subs);
-
       subs.forEach((sub) => {
-        console.log('Sending subscription to: ');
-        console.log(sub);
         push.sendNotification(sub, payload);
       });
     });
   },
 };
-/*
-const sub = {};
-push.sendNotification(sub, 'test message');
-*/
