@@ -3,14 +3,10 @@
     <div class="fullWidth black-background" v-if="!pushNotAvailable">
       <button @click="getPush" class="center-button">Benachrichtigungen aktivieren</button>
     </div>
-    <div class="notAvailable" v-show="pushNotAvailable">
-      <h3
+    <div class="notAvailable fullWidth black-background" v-show="pushNotAvailable">
+      <p
         class="error"
-      >Push-Benachrichtigungen werden von Ihrem aktuellen Browser nicht unterstützt. Mögliche Browser sind zum Beispiel:</h3>
-      <ul>
-        <li>Google Chrome</li>
-        <li>Mozilla Firefox</li>
-      </ul>
+      >Push-Benachrichtigungen werden von Ihrem aktuellen Browser nicht unterstützt. Mögliche Browser sind zum Beispiel Google Chrome oder Mozilla Firefox</p>
     </div>
   </div>
 </template>
@@ -34,7 +30,7 @@ export default {
     disappearAfterTenSeconds() {
       setTimeout(() => {
         this.pushNotAvailable = false;
-        console.log('Push not available closed');
+        this.pushEnabled = true;
       }, 10000);
     },
     getPush() {
@@ -42,8 +38,7 @@ export default {
         console.log('Notifications: ' + status);
         if (status === 'default' || status === 'granted') {
           this.subscribeToPush()
-            .then(responseJson => {
-              console.log(`Finished subscribing: ${responseJson}`);
+            .then(() => {
               localStorage.pushEnabled = true;
               this.pushEnabled = true;
               return true;
