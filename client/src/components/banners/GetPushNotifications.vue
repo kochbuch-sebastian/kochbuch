@@ -1,13 +1,22 @@
 <template>
   <div class="container fullWidth black-background" v-if="!pushEnabled">
-    <button @click="getPush" class="center-button">Benachrichtigungen aktivieren</button>
-    <PushNotAvailable v-show="pushNotAvailable" />
+    <div class="activate" v-if="!pushNotAvailable">
+      <button @click="getPush" class="center-button">Benachrichtigungen aktivieren</button>
+    </div>
+    <div class="notAvailable" v-show="pushNotAvailable">
+      <h3
+        class="error"
+      >Push-Benachrichtigungen werden von Ihrem aktuellen Browser nicht unterstützt. Mögliche Browser sind zum Beispiel:</h3>
+      <ul>
+        <li>Google Chrome</li>
+        <li>Mozilla Firefox</li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import PushNotAvailable from './PushNotAvailable.vue';
 
 export default {
   data() {
@@ -15,9 +24,6 @@ export default {
       pushEnabled: localStorage.pushEnabled,
       pushNotAvailable: false,
     };
-  },
-  components: {
-    PushNotAvailable,
   },
   methods: {
     showPushNotAvailable() {
