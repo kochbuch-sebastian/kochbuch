@@ -41,9 +41,9 @@ export default {
               return true;
             })
             .catch(err => {
-              console.log(err);
               localStorage.pushEnabled = false;
-              this.showPushNotAvailable = true;
+              this.showPushNotAvailable();
+              throw err;
             });
         } else if (status === 'denied') {
           return false;
@@ -98,7 +98,7 @@ export default {
 
 <style scoped>
 .fullWidth {
-  width: 100%;
+  width: 98%;
   height: 50px;
 
   position: absolute;
@@ -116,6 +116,8 @@ export default {
 .center-button {
   margin: auto;
   height: 92%;
+
+  color: #ffffff;
 
   border: none;
   background-color: var(--navTextColor);
