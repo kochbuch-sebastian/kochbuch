@@ -10,6 +10,8 @@ const multer = require('multer');
 const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 
+const push = require('../../push/push');
+
 const axios = require('axios');
 
 // DB Config
@@ -123,6 +125,9 @@ router.get('/image/name/:filename', (req, res) => {
 });
 
 router.post('/', upload.single('file'), (req, res) => {
+  push.sendPushForEach(
+    `Ein neues Bild (Name: ${req.file.filename}) wurde hochgeladen. `,
+  );
   res.json({ file: req.file });
 });
 

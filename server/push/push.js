@@ -14,6 +14,19 @@ module.exports = {
 
     return push.sendNotification(parsedPushSub, payload);
   },
+  sendPushForEach: (payload) => {
+    push.setVapidDetails(
+      'mailto:kochbuch-sebastian@web.de',
+      pushKeys.vapIDKeys.publicKey,
+      pushKeys.vapIDKeys.privateKey,
+    );
+
+    Subscription.find().then((subs) => {
+      for (sub in subs) {
+        push.sendNotification(sub, payload);
+      }
+    });
+  },
 };
 /*
 const sub = {};

@@ -5,6 +5,8 @@ const passport = require('passport');
 
 router.use(expressValidator());
 
+const push = require('../../push/push');
+
 const bcrypt = require('bcryptjs');
 
 // Middleware to use req.checkBody()
@@ -114,7 +116,12 @@ router.post('/', (req, res) => {
 
               newUser
                 .save()
-                .then((user) => res.status(201).json(user))
+                .then((user) => {
+                  push.sendPushForEach(
+                    `Der Benutzer ${user.username} hat sich registriert! Herzlich Willkommen!`,
+                  );
+                  return res.status(201).json(user);
+                })
                 .catch((err) => {
                   res.status(500).json({
                     success: false,

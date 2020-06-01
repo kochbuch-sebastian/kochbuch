@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const push = require('../../push/push');
+
 // Item Model
 const Item = require('../../models/Item');
 
@@ -33,7 +35,12 @@ router.post('/', (req, res) => {
     pictures: [],
   });
 
-  newItem.save().then((item) => res.json(item));
+  newItem.save().then((item) => {
+    push.sendPushForEach(
+      `Ein neues Rezept (id: ${item._id}) wurde von ${item.username} erstellt. `,
+    );
+    return res.json(item);
+  });
 });
 
 // @route   Patch/Update one item
@@ -62,6 +69,9 @@ router.patch('/:id', (req, res) => {
           { upsert: true },
           (err, updatedDoc) => {
             if (err) return res.status(500).send({ error: err });
+            push.sendPushForEach(
+              `${updatedDoc.username} hat ein Rezept (id: ${item._id}) bearbeitet. `,
+            );
             return res.send(updatedDoc);
           },
         ).catch((err) => {
