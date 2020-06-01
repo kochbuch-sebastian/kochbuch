@@ -1,6 +1,6 @@
 <template>
   <div class="container fullWidth black-background" v-if="!pushEnabled">
-    <div class="activate" v-if="!pushNotAvailable">
+    <div class="container fullWidth black-background" v-if="!pushNotAvailable">
       <button @click="getPush" class="center-button">Benachrichtigungen aktivieren</button>
     </div>
     <div class="notAvailable" v-show="pushNotAvailable">
