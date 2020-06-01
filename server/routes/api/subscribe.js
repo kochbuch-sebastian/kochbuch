@@ -37,4 +37,8 @@ router.get('/all', (req, res) => {
   Subscription.find().then((subs) => res.json(subs));
 });
 
+router.get('/sendTest', (req, res) => {
+  push.sendPushForEach('Test');
+});
+
 module.exports = router;
