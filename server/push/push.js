@@ -25,11 +25,11 @@ module.exports = {
       console.log('subs: ');
       console.log(subs);
 
-      for (sub in subs) {
+      subs.forEach((sub) => {
         console.log('Sending subscription to: ');
         console.log(sub);
         push.sendNotification(sub, payload);
-      }
+      });
     });
   },
 };
