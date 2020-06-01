@@ -22,6 +22,9 @@ module.exports = {
     );
 
     Subscription.find().then((subs) => {
+      console.log('subs: ');
+      console.log(subs);
+
       for (sub in subs) {
         console.log('Sending subscription to: ');
         console.log(sub);
