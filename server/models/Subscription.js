@@ -23,6 +23,6 @@ const SubscriptionSchema = new Schema({
 
 module.exports = Subscription = mongoose.model(
   'subscription',
-  ItemSchema,
+  SubscriptionSchema,
   'subscriptions',
 );
