@@ -39,6 +39,8 @@ router.get('/all', (req, res) => {
 
 router.get('/sendTest', (req, res) => {
   push.sendPushForEach('Test');
+
+  res.status(200).json({ msg: 'worked' });
 });
 
 module.exports = router;
