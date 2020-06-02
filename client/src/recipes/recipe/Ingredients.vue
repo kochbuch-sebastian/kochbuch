@@ -1,5 +1,5 @@
 <template>
-  <div class="container border shadow">
+  <div class="container border shadow" :style="`max-width: ${this.windowWidth}`">
     <div>
       <h4>Zutaten</h4>
       <table>
@@ -28,6 +28,11 @@ import AddToList from '../../components/shopping/AddToList.vue';
 export default {
   name: 'Ingredients',
   props: ['ingredients'],
+  data() {
+    return {
+      windowWidth: window.innerWidth,
+    };
+  },
   components: {
     AddToList,
   },
@@ -37,11 +42,14 @@ export default {
 <style scoped>
 td {
   padding: 5px 3px 5px 3px;
-  min-width: 100px;
   margin: 0;
 }
 .container {
   max-width: fit-content;
   max-width: 100%;
+}
+
+td:nth-child(3) {
+  max-width: fit-content;
 }
 </style>
