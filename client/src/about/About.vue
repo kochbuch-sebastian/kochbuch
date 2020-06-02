@@ -25,6 +25,7 @@
       Das Frontend wie auch das Backend dieser Applikation habe ich in der Zeit seit den Osterferien 2020 (während der Corona-Zeit) entwickelt.
       Das Backend finden Sie
       <router-link :to="{ name: 'Backend' }" class="router-links noMargin">hier</router-link>.
+      Die Icons wurden teilweise gemalt, teilweise kommen sie von der Seite "www.iconfinder.com".
     </p>
   </div>
 </template>
