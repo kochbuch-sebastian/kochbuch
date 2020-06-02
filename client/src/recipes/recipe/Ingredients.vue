@@ -52,4 +52,10 @@ td {
 td {
   max-width: fit-content;
 }
+td:nth-child(3) {
+  width: 24px;
+}
+th:nth-child(3) {
+  width: 24px;
+}
 </style>
