@@ -1,6 +1,6 @@
 <template>
   <div class="container" style="margin: auto;">
-    <table>
+    <table style="margin: 0 auto;">
       <tr v-if="showTextField" style="width: fit-content;">
         <h4>Zur Liste hinzufügen:</h4>
       </tr>
