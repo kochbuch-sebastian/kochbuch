@@ -16,7 +16,7 @@
           <input type="text" v-model="amountdata" id="amountdata" v-if="showTextField" />
         </div>
       </tr>
-      <tr style="width: 24px;">
+      <tr style="width: 20px; height: 20px;">
         <button @click="addToList" class="addToList">+</button>
       </tr>
     </table>

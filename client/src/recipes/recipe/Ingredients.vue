@@ -6,7 +6,7 @@
         <tr>
           <th>Zutat</th>
           <th>Menge</th>
-          <th style="width: 24px;">
+          <th style="width: 24px; height: 24px;">
             <img src="../../assets/shopping_cart_icon.png" alt="Liste" height="24px" />
           </th>
         </tr>
@@ -49,7 +49,7 @@ td {
   max-width: 100%;
 }
 
-td:nth-child(3) {
+td {
   max-width: fit-content;
 }
 </style>
