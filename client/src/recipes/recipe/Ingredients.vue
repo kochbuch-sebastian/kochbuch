@@ -6,7 +6,9 @@
         <tr>
           <th>Zutat</th>
           <th>Menge</th>
-          <th>Zur Liste</th>
+          <th>
+            <img src="../../assets/shopping_cart_icon.png" alt="Liste" />
+          </th>
         </tr>
         <tr v-for="(ingredient, index) in ingredients" :key="index">
           <td>{{ ingredient.name }}</td>
