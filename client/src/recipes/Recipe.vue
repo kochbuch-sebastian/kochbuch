@@ -58,8 +58,8 @@
     <hr class="fatHr" />
 
     <div class="table">
-      <div style="max-width: fit-content;">
-        <Ingredients :ingredients="item.ingredients" />
+      <div style="max-width: fit-content; max-width: 100%;">
+        <Ingredients :ingredients="item.ingredients" style="max-width: 100%;" />
       </div>
       <div>
         <h4>Beschreibung</h4>

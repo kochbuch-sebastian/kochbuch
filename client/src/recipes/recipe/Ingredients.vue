@@ -42,5 +42,6 @@ td {
 }
 .container {
   max-width: fit-content;
+  max-width: 100%;
 }
 </style>
