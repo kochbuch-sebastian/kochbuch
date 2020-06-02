@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" style="margin: auto;">
     <table>
       <tr v-if="showTextField">
         <h4>Zur Liste hinzufügen:</h4>

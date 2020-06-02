@@ -7,7 +7,7 @@
           <th>Zutat</th>
           <th>Menge</th>
           <th>
-            <img src="../../assets/shopping_cart_icon.png" alt="Liste" />
+            <img src="../../assets/shopping_cart_icon.png" alt="Liste" height="24px" />
           </th>
         </tr>
         <tr v-for="(ingredient, index) in ingredients" :key="index">

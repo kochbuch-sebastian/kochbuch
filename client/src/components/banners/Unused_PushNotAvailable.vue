@@ -21,7 +21,7 @@ export default {
   width: 100%;
   height: 70px;
 
-  position: absolute;
+  position: fixed;
   bottom: 60px;
   left: 0;
 
