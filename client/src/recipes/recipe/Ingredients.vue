@@ -6,7 +6,7 @@
         <tr>
           <th>Zutat</th>
           <th>Menge</th>
-          <th>
+          <th style="width: 24px;">
             <img src="../../assets/shopping_cart_icon.png" alt="Liste" height="24px" />
           </th>
         </tr>

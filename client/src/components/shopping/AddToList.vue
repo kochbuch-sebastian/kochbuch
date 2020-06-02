@@ -1,7 +1,7 @@
 <template>
   <div class="container" style="margin: auto;">
     <table>
-      <tr v-if="showTextField">
+      <tr v-if="showTextField" style="width: fit-content;">
         <h4>Zur Liste hinzufügen:</h4>
       </tr>
       <tr v-if="showTextField">
@@ -16,7 +16,7 @@
           <input type="text" v-model="amountdata" id="amountdata" v-if="showTextField" />
         </div>
       </tr>
-      <tr>
+      <tr style="width: 24px;">
         <button @click="addToList" class="addToList">+</button>
       </tr>
     </table>
