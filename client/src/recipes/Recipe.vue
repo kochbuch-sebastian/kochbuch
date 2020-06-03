@@ -58,10 +58,10 @@
     <hr class="fatHr" />
 
     <div class="table">
-      <div style="max-width: fit-content; max-width: 100%;">
+      <div style="max-width: fit-content; max-width: 100%; float: left;">
         <Ingredients :ingredients="item.ingredients" style="max-width: 100%;" />
       </div>
-      <div>
+      <div style="overflow: hidden;">
         <h4>Beschreibung</h4>
         <pre>{{ this.item.description }}</pre>
       </div>
