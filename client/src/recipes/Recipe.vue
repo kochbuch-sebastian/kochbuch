@@ -2,6 +2,8 @@
   <div class="container">
     <p class="error" v-if="error">{{ error }}</p>
 
+    <button class="genpdf" @click="genpdfButtonClicked" style="width: 50px; height: 50px;">PDF</button>
+
     <button
       class="delete"
       @click="deleteButtonClicked"
@@ -86,6 +88,8 @@ import ShowPictures from '../components/ShowPictures.vue';
 
 import { mapGetters, mapActions } from 'vuex';
 
+import PDFUtils from '../PDFUtils';
+
 export default {
   name: 'Recipe',
   components: {
@@ -129,6 +133,9 @@ export default {
           this.isFavorite = !this.isFavorite;
         });
       }
+    },
+    genpdfButtonClicked() {
+      PDFUtils.createPdfForRecipe(this.item);
     },
     editButtonClicked() {
       this.$router.push({
