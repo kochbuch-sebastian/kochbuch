@@ -1,4 +1,4 @@
-import pdfMake from 'pdfmake';
+import pdfMake from 'pdfmake/build/pdfmake';
 
 class PDFUtils {
   static createPdfForRecipe(item) {
