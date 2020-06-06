@@ -262,7 +262,7 @@ img {
   position: absolute;
   float: right;
   right: 3rem;
-  top: calc(12rem + 104px);
+  top: calc(12rem - 52px);
   padding: 0.5rem 1rem 0.5rem 0.5rem;
   border: 2px solid #555555;
 }
