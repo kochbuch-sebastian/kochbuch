@@ -1,4 +1,4 @@
-import PDF from 'pdfmake';
+import pdfMake from 'pdfmake';
 
 class PDFUtils {
   static createPdfForRecipe(item) {
@@ -25,7 +25,7 @@ class PDFUtils {
       ],
     };
 
-    PDF.createPdf(docDefinition).download();
+    pdfMake.createPdf(docDefinition).download();
   }
 }
 
