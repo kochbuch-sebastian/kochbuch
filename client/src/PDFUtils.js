@@ -1,4 +1,5 @@
 import pdfMake from 'pdfmake/build/pdfmake';
+import 'pdfmake/build/vfs_fonts';
 
 class PDFUtils {
   static createPdfForRecipe(item) {
