@@ -64,6 +64,7 @@ class PDFUtils {
       },
 
       content: [
+        { text: 'Zutaten', bold: true },
         {
           columns: [
             { width: '*', text: '' },
@@ -80,6 +81,7 @@ class PDFUtils {
             { width: '*', text: '' },
           ],
         },
+        { text: 'Beschreibung', bold: true },
         item.description,
       ],
     };
