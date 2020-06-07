@@ -9,6 +9,8 @@ class PDFUtils {
       return [ingredient.name, ingredient.amount];
     });
 
+    console.log(ingredientsArray);
+
     /* var fonts = {
       Roboto: {
         normal: 'fonts/Roboto-Regular.ttf',
@@ -38,6 +40,8 @@ class PDFUtils {
         item.description,
       ],
     };
+
+    console.log(docDefinition);
 
     pdfMake.createPdf(docDefinition).download();
   }
