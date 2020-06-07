@@ -29,6 +29,18 @@ class PDFUtils {
 
     pdfMake.setFonts(fonts); */
 
+    console.log(
+      'IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII',
+    );
+    console.log(
+      item.ingredients.map((ingredient) => {
+        return [ingredient.name, ingredient.amount];
+      }),
+    );
+    console.log(
+      'IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII',
+    );
+
     const docDefinition = {
       footer: {
         columns: ['kochbuch-sebastian.herokuapp.com'],
