@@ -46,6 +46,8 @@ class PDFUtils {
       { text: 'Menge', bold: true },
     ]);
 
+    console.log(ingred);
+
     const docDefinition = {
       footer: {
         columns: ['kochbuch-sebastian.herokuapp.com'],
