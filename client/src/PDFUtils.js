@@ -65,14 +65,20 @@ class PDFUtils {
 
       content: [
         {
-          layout: 'lightHorizontalLines',
-          table: {
-            headerRows: 1,
-            widths: ['auto', 'auto'],
+          columns: [
+            { width: '*', text: '' },
+            {
+              layout: 'lightHorizontalLines',
+              table: {
+                headerRows: 1,
+                widths: ['auto', 'auto'],
 
-            body: ingred,
-            alignment: 'center',
-          },
+                body: ingred,
+                alignment: 'center',
+              },
+            },
+            { width: '*', text: '' },
+          ],
         },
         item.description,
       ],
