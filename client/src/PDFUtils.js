@@ -80,17 +80,8 @@ class PDFUtils {
           ],
         },
         {
-          columns: [
-            { width: '*', text: '' },
-            {
-              text: item.description,
-              bold: true,
-              decoration: 'underline',
-              fontSize: 18,
-              alignment: 'center',
-            },
-            { width: '*', text: '' },
-          ],
+          text: item.description,
+          alignment: 'center',
         },
       ],
     };
