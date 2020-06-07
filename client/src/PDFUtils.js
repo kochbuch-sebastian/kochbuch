@@ -41,10 +41,10 @@ class PDFUtils {
       'IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII',
     );
 
-    const ingred = item.ingredients.unshift([
+    const ingred = [
       { text: 'Zutat', bold: true },
       { text: 'Menge', bold: true },
-    ]);
+    ].concat(item.ingredients);
 
     console.log(ingred);
 
