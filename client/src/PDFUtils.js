@@ -5,42 +5,6 @@ class PDFUtils {
   static createPdfForRecipe(item) {
     pdfMake.vfs = vfsFonts.pdfMake.vfs;
 
-    const ingredientsArray = item.ingredients.map((ingredient) => {
-      return [ingredient.name, ingredient.amount];
-    });
-
-    const ingredientNames = item.ingredients.map((ingredient) => {
-      return ingredient.name;
-    });
-    const ingredientAmounts = item.ingredients.map((ingredient) => {
-      return ingredient.amount;
-    });
-
-    console.log(ingredientsArray);
-
-    /* var fonts = {
-      Roboto: {
-        normal: 'fonts/Roboto-Regular.ttf',
-        bold: 'fonts/Roboto-Medium.ttf',
-        italics: 'fonts/Roboto-Italic.ttf',
-        bolditalics: 'fonts/Roboto-MediumItalic.ttf',
-      },
-    };
-
-    pdfMake.setFonts(fonts); */
-
-    console.log(
-      'IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII',
-    );
-    console.log(
-      item.ingredients.map((ingredient) => {
-        return [ingredient.name, ingredient.amount];
-      }),
-    );
-    console.log(
-      'IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII',
-    );
-
     const ingred = [
       [
         { text: 'Menge', bold: true },
@@ -52,8 +16,6 @@ class PDFUtils {
       }),
     );
 
-    console.log(ingred);
-
     const docDefinition = {
       footer: {
         columns: [
@@ -64,8 +26,30 @@ class PDFUtils {
       },
 
       content: [
-        { text: item.title, bold: true, decoration: 'underline', fontSize: 24 },
-        { text: 'Zutaten', bold: true, decoration: 'underline', fontSize: 18 },
+        {
+          columns: [
+            { width: '*', text: '' },
+            {
+              text: item.title,
+              bold: true,
+              decoration: 'underline',
+              fontSize: 24,
+            },
+            { width: '*', text: '' },
+          ],
+        },
+        {
+          columns: [
+            { width: '*', text: '' },
+            {
+              text: 'Zutaten',
+              bold: true,
+              decoration: 'underline',
+              fontSize: 18,
+            },
+            { width: '*', text: '' },
+          ],
+        },
         {
           columns: [
             { width: '*', text: '' },
@@ -83,18 +67,20 @@ class PDFUtils {
           ],
         },
         {
-          text: 'Beschreibung',
-          bold: true,
-          decoration: 'underline',
-          fontSize: 18,
+          columns: [
+            { width: '*', text: '' },
+            {
+              text: 'Beschreibung',
+              bold: true,
+              decoration: 'underline',
+              fontSize: 18,
+            },
+            { width: '*', text: '' },
+          ],
         },
         item.description,
       ],
     };
-
-    console.log(docDefinition);
-    console.log(ingredientNames);
-    console.log(ingredientAmounts);
 
     pdfMake.createPdf(docDefinition).download(`${item.title}.pdf`);
   }
