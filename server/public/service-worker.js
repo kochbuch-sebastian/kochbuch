@@ -1,4 +1,4 @@
-importScripts("/precache-manifest.d211537ddb4a65b2308b72090992e2c5.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/precache-manifest.4bb1e5f4b2f1304be84d9ee5cefc2e22.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 

@@ -9,6 +9,13 @@ class PDFUtils {
       return [ingredient.name, ingredient.amount];
     });
 
+    const ingredientNames = item.ingredients.map((ingredient) => {
+      return ingredient.name;
+    });
+    const ingredientAmounts = item.ingredients.map((ingredient) => {
+      return ingredient.amount;
+    });
+
     console.log(ingredientsArray);
 
     /* var fonts = {
@@ -34,7 +41,14 @@ class PDFUtils {
             headerRows: 1,
             widths: ['auto', 'auto'],
 
-            body: [['Zutat', 'Menge'], ingredientsArray],
+            body: [
+              [
+                { text: 'Zutat', bold: true },
+                { text: 'Menge', bold: true },
+              ],
+              ['randomZutat', 'randomMenge'],
+              ingredientsArray,
+            ],
           },
         },
         item.description,
@@ -42,6 +56,8 @@ class PDFUtils {
     };
 
     console.log(docDefinition);
+    console.log(ingredientNames);
+    console.log(ingredientAmounts);
 
     pdfMake.createPdf(docDefinition).download();
   }
