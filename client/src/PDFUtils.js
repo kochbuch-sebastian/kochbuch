@@ -46,8 +46,9 @@ class PDFUtils {
                 { text: 'Zutat', bold: true },
                 { text: 'Menge', bold: true },
               ],
-              ['randomZutat', 'randomMenge'],
-              ingredientsArray,
+              item.ingredients.map((ingredient) => {
+                return [ingredient.name, ingredient.amount];
+              }),
             ],
           },
         },
