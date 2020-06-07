@@ -1,8 +1,10 @@
 import pdfMake from 'pdfmake/build/pdfmake';
-import 'pdfmake/build/vfs_fonts';
+import vfsFonts from 'pdfmake/build/vfs_fonts';
 
 class PDFUtils {
   static createPdfForRecipe(item) {
+    pdfMake.vfs = vfsFonts.pdfMake.vfs;
+
     const ingredientsArray = item.ingredients.map((ingredient) => {
       return [ingredient.name, ingredient.amount];
     });
