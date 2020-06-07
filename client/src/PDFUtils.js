@@ -42,9 +42,15 @@ class PDFUtils {
     );
 
     const ingred = [
-      { text: 'Zutat', bold: true },
-      { text: 'Menge', bold: true },
-    ].concat(item.ingredients);
+      [
+        { text: 'Menge', bold: true },
+        { text: 'Zutat', bold: true },
+      ],
+    ].concat(
+      item.ingredients.map((ingredient) => {
+        return [ingredient.name, ingredient.amount];
+      }),
+    );
 
     console.log(ingred);
 
