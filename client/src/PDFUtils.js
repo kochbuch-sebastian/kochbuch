@@ -56,7 +56,11 @@ class PDFUtils {
 
     const docDefinition = {
       footer: {
-        columns: ['kochbuch-sebastian.herokuapp.com'],
+        columns: [
+          { width: '*', text: '' },
+          { text: 'kochbuch-sebastian.herokuapp.com', alignment: 'center' },
+          { width: '*', text: '' },
+        ],
       },
 
       content: [
@@ -67,6 +71,7 @@ class PDFUtils {
             widths: ['auto', 'auto'],
 
             body: ingred,
+            alignment: 'center',
           },
         },
         item.description,
