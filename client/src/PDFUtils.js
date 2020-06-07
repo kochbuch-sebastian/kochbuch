@@ -41,6 +41,11 @@ class PDFUtils {
       'IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII',
     );
 
+    const ingred = item.ingredients.unshift([
+      { text: 'Zutat', bold: true },
+      { text: 'Menge', bold: true },
+    ]);
+
     const docDefinition = {
       footer: {
         columns: ['kochbuch-sebastian.herokuapp.com'],
@@ -53,15 +58,7 @@ class PDFUtils {
             headerRows: 1,
             widths: ['auto', 'auto'],
 
-            body: [
-              [
-                { text: 'Zutat', bold: true },
-                { text: 'Menge', bold: true },
-              ],
-              item.ingredients.map((ingredient) => {
-                return [ingredient.name, ingredient.amount];
-              }),
-            ],
+            body: ingred,
           },
         },
         item.description,
