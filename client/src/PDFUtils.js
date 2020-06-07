@@ -19,9 +19,7 @@ class PDFUtils {
     const docDefinition = {
       footer: {
         columns: [
-          { width: '*', text: '' },
           { text: 'kochbuch-sebastian.herokuapp.com', alignment: 'center' },
-          { width: '*', text: '' },
         ],
       },
 
@@ -34,6 +32,7 @@ class PDFUtils {
               bold: true,
               decoration: 'underline',
               fontSize: 24,
+              alignment: 'center',
             },
             { width: '*', text: '' },
           ],
@@ -74,6 +73,7 @@ class PDFUtils {
               bold: true,
               decoration: 'underline',
               fontSize: 18,
+              alignment: 'center',
             },
             { width: '*', text: '' },
           ],
