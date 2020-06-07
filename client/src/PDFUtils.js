@@ -45,6 +45,7 @@ class PDFUtils {
               bold: true,
               decoration: 'underline',
               fontSize: 18,
+              alignment: 'center',
             },
             { width: '*', text: '' },
           ],
@@ -78,7 +79,19 @@ class PDFUtils {
             { width: '*', text: '' },
           ],
         },
-        item.description,
+        {
+          columns: [
+            { width: '*', text: '' },
+            {
+              text: item.description,
+              bold: true,
+              decoration: 'underline',
+              fontSize: 18,
+              alignment: 'center',
+            },
+            { width: '*', text: '' },
+          ],
+        },
       ],
     };
 
