@@ -64,7 +64,8 @@ class PDFUtils {
       },
 
       content: [
-        { text: 'Zutaten', bold: true },
+        { text: item.title, bold: true, decoration: 'underline', fontSize: 24 },
+        { text: 'Zutaten', bold: true, decoration: 'underline', fontSize: 18 },
         {
           columns: [
             { width: '*', text: '' },
@@ -81,7 +82,12 @@ class PDFUtils {
             { width: '*', text: '' },
           ],
         },
-        { text: 'Beschreibung', bold: true },
+        {
+          text: 'Beschreibung',
+          bold: true,
+          decoration: 'underline',
+          fontSize: 18,
+        },
         item.description,
       ],
     };
@@ -90,7 +96,7 @@ class PDFUtils {
     console.log(ingredientNames);
     console.log(ingredientAmounts);
 
-    pdfMake.createPdf(docDefinition).download();
+    pdfMake.createPdf(docDefinition).download(`${item.title}.pdf`);
   }
 }
 
