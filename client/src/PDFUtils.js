@@ -52,7 +52,7 @@ class PDFUtils {
         },
         {
           columns: [
-            { width: '*', text: '' },
+            { width: '20%', text: '' },
             {
               layout: 'lightHorizontalLines',
               table: {
@@ -63,7 +63,7 @@ class PDFUtils {
                 alignment: 'center',
               },
             },
-            { width: '*', text: '' },
+            { width: '20%', text: '' },
           ],
         },
         {
