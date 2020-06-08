@@ -63,7 +63,8 @@
       </table>
 
       <div class="menu-wrap" v-if="!showNavLinks">
-        <input type="checkbox" class="toggler" />
+        <label for="toggler"></label>
+        <input type="checkbox" name="toggler" id="toggler" class="toggler" />
         <div class="hamburger">
           <div></div>
         </div>
