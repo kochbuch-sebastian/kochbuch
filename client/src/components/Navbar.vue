@@ -63,7 +63,7 @@
       </table>
 
       <div class="menu-wrap" v-if="!showNavLinks">
-        <label for="toggler"></label>
+        <label for="toggler" class="invisible">Menü</label>
         <input type="checkbox" name="toggler" id="toggler" class="toggler" />
         <div class="hamburger">
           <div></div>
@@ -359,5 +359,9 @@ body {
 
 .menu-wrap .menu > div > div > ul > li > router-link {
   transition: color 0.4s ease;
+}
+
+.invisible {
+  visibility: hidden;
 }
 </style>
