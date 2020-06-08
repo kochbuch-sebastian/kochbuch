@@ -245,7 +245,7 @@ img {
 .edit {
   position: absolute;
   float: right;
-  right: 3rem;
+  right: 2rem;
   top: 12rem;
   padding: 0.5rem 1rem 0.5rem 0.5rem;
   border: 2px solid #555555;
@@ -253,7 +253,7 @@ img {
 .delete {
   position: absolute;
   float: right;
-  right: 3rem;
+  right: 2rem;
   top: calc(12rem + 52px);
   padding: 0.5rem 1rem 0.5rem 0.5rem;
   border: 2px solid #555555;
@@ -261,7 +261,7 @@ img {
 .genpdf {
   position: absolute;
   float: right;
-  right: 3rem;
+  right: 2rem;
   top: calc(12rem - 52px);
   padding: 0.5rem 1rem 0.5rem 0.5rem;
   border: 2px solid #555555;

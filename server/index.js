@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+const enforce = require('express-sslify');
+
 const passport = require('passport');
 
 const items = require('./routes/api/items');
@@ -15,6 +17,10 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+
+// Use enforce.HTTPS({ trustProtoHeader: true }) in case you are behind
+// a load balancer (e.g. Heroku). See further comments below
+app.use(enforce.HTTPS());
 
 // Add headers
 app.use(function (req, res, next) {
