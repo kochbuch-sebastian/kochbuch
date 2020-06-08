@@ -18,23 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Use enforce.HTTPS({ trustProtoHeader: true }) in case you are behind
-// a load balancer (e.g. Heroku). See further comments below
 app.use(enforce.HTTPS({ trustProtoHeader: true }));
-
-//HTTPS redirect middleware
-/*app.use((req, res, next) => {
-  //Heroku stores the origin protocol in a header variable. The app itself is isolated within the dyno and all request objects have an HTTP protocol.
-  if (req.get('X-Forwarded-Proto') == 'https' || req.hostname == 'localhost') {
-    next();
-  } else if (
-    req.get('X-Forwarded-Proto') != 'https' &&
-    req.get('X-Forwarded-Port') != '443'
-  ) {
-    //Redirect if not HTTP with original request URL
-    res.redirect('https://' + req.hostname + req.url);
-  }
-});*/
 
 // Add headers
 app.use(function (req, res, next) {
