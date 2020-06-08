@@ -1,4 +1,5 @@
 const path = require('path');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   outputDir: path.resolve(__dirname, '../server/public'),
@@ -15,5 +16,11 @@ module.exports = {
     workboxOptions: {
       swSrc: 'src/service-worker.js',
     },
+  },
+  chainWebpack(config) {
+    config.plugins.delete('prefetch');
+
+    // and this line
+    config.plugin('CompressionPlugin').use(CompressionPlugin);
   },
 };
