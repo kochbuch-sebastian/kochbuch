@@ -1,7 +1,8 @@
 <template>
   <div class="container" v-if="!pushEnabled">
-    <div class="fullWidth black-background" v-if="!pushNotAvailable">
+    <div class="fullWidth black-background" v-if="(!pushNotAvailable) && showPush">
       <button @click="getPush" class="center-button">Benachrichtigungen aktivieren</button>
+      <button class="closeX" :style="`width: ${closeXWidth};`" @click="showPushFalse()">X</button>
     </div>
     <div class="notAvailable fullWidth black-background" v-show="pushNotAvailable">
       <p
@@ -19,9 +20,16 @@ export default {
     return {
       pushEnabled: localStorage.pushEnabled,
       pushNotAvailable: false,
+
+      showPush: true,
+      closeXWidth:
+        window.innerWidth > 600 ? '3%' : window.innerWidth / 8 + 'px',
     };
   },
   methods: {
+    showPushFalse() {
+      this.showPush = false;
+    },
     showPushNotAvailable() {
       console.log('Push in this browser not available');
       this.pushNotAvailable = true;
@@ -120,6 +128,17 @@ export default {
 
 .center-button {
   margin: auto;
+  height: 92%;
+
+  color: #ffffff;
+
+  border: none;
+  background-color: var(--navTextColor);
+}
+
+.closeX {
+  float: right;
+  margin-right: 15px;
   height: 92%;
 
   color: #ffffff;
