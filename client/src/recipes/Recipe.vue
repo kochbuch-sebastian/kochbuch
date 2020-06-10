@@ -76,6 +76,7 @@
         >Bild Hinzufügen</router-link>
       </div>
     </div>
+    <p class="message">{{ message }}</p>
   </div>
 </template>
 
@@ -101,6 +102,7 @@ export default {
     return {
       item: {},
       error: '',
+      message: '',
 
       isFavorite: false,
 
@@ -135,7 +137,13 @@ export default {
       }
     },
     genpdfButtonClicked() {
-      PDFUtils.createPdfForRecipe(this.item);
+      try {
+        PDFUtils.createPdfForRecipe(this.item);
+        this.message =
+          'PDF heruntergeladen. Sie ist im Standard-Ordner für Downloads zu finden. ';
+      } catch (err) {
+        this.error = `Fehler beim generieren der PDF: ${err}`;
+      }
     },
     editButtonClicked() {
       this.$router.push({
