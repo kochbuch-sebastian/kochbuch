@@ -26,6 +26,7 @@
       Das Backend finden Sie
       <router-link :to="{ name: 'Backend' }" class="router-links noMargin">hier</router-link>.
       Die Icons wurden teilweise gemalt, teilweise kommen sie von der Seite "www.iconfinder.com".
+      Das Icon auf der Startseite wie auch das Favicon sind von meiner Schwester gemalt.
     </p>
   </div>
 </template>
