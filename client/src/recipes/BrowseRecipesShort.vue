@@ -88,8 +88,8 @@ export default {
     this.getItems();
   },
   methods: {
-    getItems() {
-      this.items = ItemService.getItems();
+    async getItems() {
+      this.items = await ItemService.getItems();
 
       this.appetizerItems = this.items.filter(el => {
         return el.recipeType === 'appetizer';
