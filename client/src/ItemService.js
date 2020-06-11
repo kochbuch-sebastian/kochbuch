@@ -40,6 +40,9 @@ class ItemService {
         const toCheckStringLowerCase = toCheckString.toLowerCase();
 
         let includes = array.some((el) => {
+          console.log('el');
+          console.log(el);
+
           let elNameLowerCase = el.name.toLowerCase();
           contained = elNameLowerCase.includes(toCheckStringLowerCase);
 
