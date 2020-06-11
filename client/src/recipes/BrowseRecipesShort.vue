@@ -93,30 +93,50 @@ export default {
     async getItems() {
       this.items = await ItemService.getItems();
 
-      this.appetizerItems = this.items.filter(el => {
-        return el.recipeType === 'appetizer';
-      });
-      this.appetizerItems = this.appetizerItems.slice(0, 3);
+      ItemService.getItemsByRecipeType('appetizer')
+        .then(response => {
+          this.appetizerItems = response;
+          this.appetizerItems = this.appetizerItems.slice(0, 3);
+        })
+        .catch(err => {
+          this.error = err;
+        });
 
-      this.heartyItems = this.items.filter(el => {
-        return el.recipeType === 'hearty';
-      });
-      this.heartyItems = this.heartyItems.slice(0, 3);
+      ItemService.getItemsByRecipeType('hearty')
+        .then(response => {
+          this.heartyItems = response;
+          this.heartyItems = this.heartyItems.slice(0, 3);
+        })
+        .catch(err => {
+          this.error = err;
+        });
 
-      this.sweetItems = this.items.filter(el => {
-        return el.recipeType === 'sweet';
-      });
-      this.sweetItems = this.sweetItems.slice(0, 3);
+      ItemService.getItemsByRecipeType('sweet')
+        .then(response => {
+          this.sweetItems = response;
+          this.sweetItems = this.sweetItems.slice(0, 3);
+        })
+        .catch(err => {
+          this.error = err;
+        });
 
-      this.breadItems = this.items.filter(el => {
-        return el.recipeType === 'bread';
-      });
-      this.breadItems = this.breadItems.slice(0, 3);
+      ItemService.getItemsByRecipeType('bread')
+        .then(response => {
+          this.breadItems = response;
+          this.breadItems = this.breadItems.slice(0, 3);
+        })
+        .catch(err => {
+          this.error = err;
+        });
 
-      this.bakeryItems = this.items.filter(el => {
-        return el.recipeType === 'bakery';
-      });
-      this.bakeryItems = this.bakeryItems.slice(0, 3);
+      ItemService.getItemsByRecipeType('bakery')
+        .then(response => {
+          this.bakeryItems = response;
+          this.bakeryItems = this.bakeryItems.slice(0, 3);
+        })
+        .catch(err => {
+          this.error = err;
+        });
     },
   },
 };
