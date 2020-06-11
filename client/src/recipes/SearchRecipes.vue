@@ -55,7 +55,7 @@ export default {
               this.error = err;
             });
         } else {
-          ItemService.getItemsByTitle(this.$route.params.keywords)
+          ItemService.getItemsByTitle(this.keywords)
             .then(response => {
               this.items = response;
             })
@@ -63,7 +63,7 @@ export default {
               this.error = err;
             });
 
-          ItemService.getItemsByIngredients(this.$router.params.keywords)
+          ItemService.getItemsByIngredients(this.keywords)
             .then(response => {
               this.items.concat(response);
             })
