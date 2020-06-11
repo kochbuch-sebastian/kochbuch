@@ -11,7 +11,7 @@
       </h5>
 
       <div class="items">
-        <ShowRecipes :items="appetizerItems"></ShowRecipes>
+        <ShowRecipes :items="appetizerItems" :showNr="false"></ShowRecipes>
       </div>
     </div>
 
@@ -23,7 +23,7 @@
       </h5>
 
       <div class="items">
-        <ShowRecipes :items="heartyItems"></ShowRecipes>
+        <ShowRecipes :items="heartyItems" :showNr="false"></ShowRecipes>
       </div>
     </div>
 
@@ -35,7 +35,7 @@
       </h5>
 
       <div class="items">
-        <ShowRecipes :items="sweetItems"></ShowRecipes>
+        <ShowRecipes :items="sweetItems" :showNr="false"></ShowRecipes>
       </div>
     </div>
 
@@ -47,7 +47,7 @@
       </h5>
 
       <div class="items">
-        <ShowRecipes :items="breadItems"></ShowRecipes>
+        <ShowRecipes :items="breadItems" :showNr="false"></ShowRecipes>
       </div>
     </div>
 
@@ -59,7 +59,7 @@
       </h5>
 
       <div class="items">
-        <ShowRecipes :items="bakeryItems"></ShowRecipes>
+        <ShowRecipes :items="bakeryItems" :showNr="false"></ShowRecipes>
       </div>
     </div>
   </div>
