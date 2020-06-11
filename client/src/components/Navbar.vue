@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav id="nav" :style="!showNavLinks ? 'height: 45px;': ''">
+    <nav id="nav" :style="!showNavLinks ? 'height: 55px;': ''">
       <table id="navTable">
         <tr>
           <td v-for="(item, index) in navLinks" :key="index">
@@ -31,6 +31,7 @@
                   height: 46px;
                   font-size: 14px;
                   margin-left: 2px;
+                  width: 125px;
                 "
               />
               <button
