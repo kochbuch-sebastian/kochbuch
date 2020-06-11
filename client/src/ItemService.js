@@ -109,9 +109,12 @@ class ItemService {
       })
         .then((res) => {
           resolve(
-            res.data.filter((item) =>
-              this.arrayCheckContains(item.ingredients, ing),
-            ),
+            res.data.filter((item) => {
+              let contains = this.arrayCheckContains(item.ingredients, ing);
+              console.log(item);
+              console.log(contains);
+              return contains;
+            }),
           );
         })
         .catch((err) => reject(err));
