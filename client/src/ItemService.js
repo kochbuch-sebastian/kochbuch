@@ -26,7 +26,6 @@ class ItemService {
   }
 
   static arrayCheckContains(array, toCheck) {
-    console.log('ArrayCheckContains');
     const toCheckStrings = toCheck.split('+');
     let contained = false;
 
@@ -42,7 +41,7 @@ class ItemService {
           contained = elNameLowerCase.includes(toCheckStringLowerCase);
           if (contained) return true;
         });
-        console.log(includes);
+
         if (includes) return true;
       }
     }
@@ -111,8 +110,6 @@ class ItemService {
           resolve(
             res.data.filter((item) => {
               let contains = this.arrayCheckContains(item.ingredients, ing);
-              console.log(item);
-              console.log(contains);
               return contains;
             }),
           );
