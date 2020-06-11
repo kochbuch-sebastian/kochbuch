@@ -12,7 +12,7 @@
 
       <div class="items">
         <ShowRecipes :items="appetizerItems" :showNr="false"></ShowRecipes>
-        <router-link :to="{name: 'BrowseAppetizers'}" class="router-links">mehr</router-link>
+        <router-link :to="{name: 'BrowseAppetizers'}" class="router-links">mehr...</router-link>
       </div>
     </div>
 
@@ -25,7 +25,7 @@
 
       <div class="items">
         <ShowRecipes :items="heartyItems" :showNr="false"></ShowRecipes>
-        <router-link :to="{name: 'BrowseHearty'}" class="router-links">mehr</router-link>
+        <router-link :to="{name: 'BrowseHearty'}" class="router-links">mehr...</router-link>
       </div>
     </div>
 
@@ -38,7 +38,7 @@
 
       <div class="items">
         <ShowRecipes :items="sweetItems" :showNr="false"></ShowRecipes>
-        <router-link :to="{name: 'BrowseSweet'}" class="router-links">mehr</router-link>
+        <router-link :to="{name: 'BrowseSweet'}" class="router-links">mehr...</router-link>
       </div>
     </div>
 
@@ -51,7 +51,7 @@
 
       <div class="items">
         <ShowRecipes :items="breadItems" :showNr="false"></ShowRecipes>
-        <router-link :to="{name: 'BrowseBread'}" class="router-links">mehr</router-link>
+        <router-link :to="{name: 'BrowseBread'}" class="router-links">mehr...</router-link>
       </div>
     </div>
 
@@ -64,7 +64,7 @@
 
       <div class="items">
         <ShowRecipes :items="bakeryItems" :showNr="false"></ShowRecipes>
-        <router-link :to="{name: 'BrowseBakery'}" class="router-links">mehr</router-link>
+        <router-link :to="{name: 'BrowseBakery'}" class="router-links">mehr...</router-link>
       </div>
     </div>
   </div>
