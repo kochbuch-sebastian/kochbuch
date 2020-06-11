@@ -2,7 +2,7 @@
   <div class="container">
     <p class="error" v-if="error">{{ this.error }}</p>
     <div v-show="items.length === 0">Keine Rezepte gefunden!</div>
-    <div v-show="items.length !== 0">Anzahl Rezepte: {{ items.length }}</div>
+    <div v-show="items.length !== 0 && showNr">Anzahl Rezepte: {{ items.length }}</div>
 
     <div v-if="showUnderEachOther">
       <ul
@@ -50,7 +50,13 @@ export default {
       return window.innerWidth < 500;
     },
   },
-  props: ['items'],
+  props: {
+    items: Object,
+    showNr: {
+      type: Boolean,
+      default: true,
+    },
+  },
   created() {},
 };
 </script>

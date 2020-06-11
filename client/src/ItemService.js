@@ -25,6 +25,29 @@ class ItemService {
     return true;
   }
 
+  static arrayCheckContains(array, toCheck) {
+    const toCheckStrings = toCheck.split('+');
+    let contained = false;
+
+    contained = false;
+    for (let i = 0; i < toCheckStrings.length; i += 1) {
+      const toCheckString = toCheckStrings[i];
+      if (toCheckString !== '+') {
+        const toCheckStringLowerCase = toCheckString.toLowerCase();
+
+        let includes = array.some((el) => {
+          let elName = el.name;
+          let elNameLowerCase = elName.toLowerCase();
+          contained = elNameLowerCase.includes(toCheckStringLowerCase);
+          if (contained) return true;
+        });
+
+        if (includes) return true;
+      }
+    }
+    return false;
+  }
+
   // Get Items
   static getItems() {
     return new Promise((resolve, reject) => {
@@ -60,7 +83,7 @@ class ItemService {
     });
   }
 
-  // Get one Item by title
+  // Get some Items by title
   static getItemsByTitle(title) {
     return new Promise((resolve, reject) => {
       axios({
@@ -70,6 +93,25 @@ class ItemService {
         .then((res) => {
           resolve(
             res.data.filter((item) => this.checkContains(item.title, title)),
+          );
+        })
+        .catch((err) => reject(err));
+    });
+  }
+
+  // Get some Items by ingredients
+  static getItemsByIngredients(ing) {
+    return new Promise((resolve, reject) => {
+      axios({
+        method: 'get',
+        url,
+      })
+        .then((res) => {
+          resolve(
+            res.data.filter((item) => {
+              let contains = this.arrayCheckContains(item.ingredients, ing);
+              return contains;
+            }),
           );
         })
         .catch((err) => reject(err));

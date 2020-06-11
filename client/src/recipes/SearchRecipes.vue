@@ -2,10 +2,18 @@
   <div class="container">
     <p class="error" v-if="error">{{ this.error }}</p>
 
-    <h3 v-show="this.keywords !== null">Rezepte, die "{{ keywords }}" enthalten</h3>
-    <h3 v-show="this.keywords === null">Alle Rezepte</h3>
+    <div>
+      <h3 v-show="this.keywords !== null">Rezepte, die "{{ keywords }}" enthalten</h3>
+      <h3 v-show="this.keywords === null">Alle Rezepte</h3>
 
-    <ShowRecipes :items="items"></ShowRecipes>
+      <ShowRecipes :items="items" />
+    </div>
+
+    <div v-show="this.keywords !== null">
+      <h3>Rezepte, deren Zutaten "{{ keywords }}" enthalten</h3>
+
+      <ShowRecipes :items="ingredientItems" />
+    </div>
   </div>
 </template>
 
@@ -18,9 +26,11 @@ export default {
   name: 'SearchRecipes',
   data() {
     return {
-      items: [],
-      keywords: '',
       error: '',
+      items: [],
+      ingredientItems: [],
+
+      keywords: '',
     };
   },
   components: {
@@ -55,9 +65,17 @@ export default {
               this.error = err;
             });
         } else {
-          ItemService.getItemsByTitle(this.$route.params.keywords)
+          ItemService.getItemsByTitle(this.keywords)
             .then(response => {
               this.items = response;
+            })
+            .catch(err => {
+              this.error = err;
+            });
+
+          ItemService.getItemsByIngredients(this.keywords)
+            .then(response => {
+              this.ingredientItems = response;
             })
             .catch(err => {
               this.error = err;
