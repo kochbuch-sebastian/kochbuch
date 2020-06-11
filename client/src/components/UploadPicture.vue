@@ -2,7 +2,7 @@
   <div class="container">
     <h3>Bild uploaden</h3>
 
-    <form enctype="multipart/form-data" @submit.prevent="submitFile">
+    <form enctype="multipart/form-data" @submit.prevent="submitFile" v-if="loggedIn">
       <table>
         <tr>
           <td>
@@ -21,6 +21,9 @@
         </tr>
       </table>
     </form>
+    <div v-if="loggedIn">
+      <p>Sie sind nicht eingeloggt; loggen Sie sich ein; dann können Sie ein Bild hochladen.</p>
+    </div>
     <p class="message">{{ message }}</p>
 
     <!--<form enctype="multipart/form-data">
@@ -64,6 +67,8 @@
 <script>
 import ImageService from '../ImageService';
 
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'UploadPicture',
   data() {
@@ -73,6 +78,7 @@ export default {
       message: '',
     };
   },
+  computed: { ...mapGetters(['loggedIn']) },
   methods: {
     async submitFile() {
       this.message = 'Bitte kurz warten, das Bild wird gerade hochgeladen. ';
