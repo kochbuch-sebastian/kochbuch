@@ -29,6 +29,10 @@ class ItemService {
     const toCheckStrings = toCheck.split('+');
     let contained = false;
 
+    console.log('');
+    console.log('toCheckStrings');
+    console.log(toCheckStrings);
+
     contained = false;
     for (let i = 0; i < toCheckStrings.length; i += 1) {
       const toCheckString = toCheckStrings[i];
@@ -41,6 +45,8 @@ class ItemService {
 
           if (contained === false) {
             return false;
+          } else {
+            return true;
           }
         });
         if (!includes) return false;
