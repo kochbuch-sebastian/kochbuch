@@ -29,10 +29,6 @@ class ItemService {
     const toCheckStrings = toCheck.split('+');
     let contained = false;
 
-    console.log('');
-    console.log('toCheckStrings');
-    console.log(toCheckStrings);
-
     contained = false;
     for (let i = 0; i < toCheckStrings.length; i += 1) {
       const toCheckString = toCheckStrings[i];
@@ -40,26 +36,15 @@ class ItemService {
         const toCheckStringLowerCase = toCheckString.toLowerCase();
 
         let includes = array.some((el) => {
-          console.log('el');
-          console.log(el);
-
           let elName = el.name;
           let elNameLowerCase = elName.toLowerCase();
           contained = elNameLowerCase.includes(toCheckStringLowerCase);
-
-          console.log(`${elNameLowerCase}.includes(${toCheckStringLowerCase})`);
-          console.log(contained);
-
-          if (contained === false) {
-            return false;
-          } else {
-            return true;
-          }
+          if (contained) return true;
         });
-        if (!includes) return false;
+        if (includes) return true;
       }
     }
-    return true;
+    return false;
   }
 
   // Get Items
