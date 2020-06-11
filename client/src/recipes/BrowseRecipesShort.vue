@@ -7,10 +7,7 @@
 
     <div>
       <h5>
-        <router-link
-          :to="{name: 'BrowseAppetizers'}"
-          class="router-links router-links-h5"
-        >Vorspeisen / Salate</router-link>
+        <router-link :to="{name: 'BrowseAppetizers'}" class="router-links-h5">Vorspeisen / Salate</router-link>
       </h5>
 
       <div class="items">
@@ -20,7 +17,7 @@
 
     <div>
       <h5>
-        <router-link :to="{name: 'BrowseHearty'}" class="router-links router-links-h5">Hauptgerichte</router-link>
+        <router-link :to="{name: 'BrowseHearty'}" class="router-links-h5">Hauptgerichte</router-link>
       </h5>
 
       <div class="items">
@@ -30,10 +27,7 @@
 
     <div>
       <h5>
-        <router-link
-          :to="{name: 'BrowseSweet'}"
-          class="router-links router-links-h5"
-        >Desserts / Nachspeisen</router-link>
+        <router-link :to="{name: 'BrowseSweet'}" class="router-links-h5">Desserts / Nachspeisen</router-link>
       </h5>
 
       <div class="items">
@@ -43,10 +37,7 @@
 
     <div>
       <h5>
-        <router-link
-          :to="{name: 'BrowseBread'}"
-          class="router-links router-links-h5"
-        >Brote / Brötchen</router-link>
+        <router-link :to="{name: 'BrowseBread'}" class="router-links-h5">Brote / Brötchen</router-link>
       </h5>
 
       <div class="items">
@@ -56,10 +47,7 @@
 
     <div>
       <h5>
-        <router-link
-          :to="{name: 'BrowseBakery'}"
-          class="router-links router-links-h5"
-        >sonstige Backwaren</router-link>
+        <router-link :to="{name: 'BrowseBakery'}" class="router-links-h5">sonstige Backwaren</router-link>
       </h5>
 
       <div class="items">
@@ -71,7 +59,7 @@
 
 <script>
 import ItemService from '../ItemService';
-import ShowRecipes from './ShowRecipes.vue'
+import ShowRecipes from './ShowRecipes.vue';
 
 export default {
   name: 'BrowseRecipesShort',
@@ -148,7 +136,4 @@ export default {
 </script>
 
 <style scoped>
-.router-links-h5 {
-  font-size: 16px;
-}
 </style>
