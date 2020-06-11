@@ -122,7 +122,7 @@ h4 {
   font-weight: bold;
   min-height: 25px;
   margin: 8px 10px 5px 10px;
-  font-size: 16px !important;
+  font-size: 20px !important;
 }
 
 /* Search in navigation-bar */

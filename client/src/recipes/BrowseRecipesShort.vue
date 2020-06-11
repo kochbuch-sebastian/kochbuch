@@ -15,6 +15,8 @@
       </div>
     </div>
 
+    <hr class="fatHr" />
+
     <div>
       <h5>
         <router-link :to="{name: 'BrowseHearty'}" class="router-links-h5">Hauptgerichte</router-link>
@@ -24,6 +26,8 @@
         <ShowRecipes :items="heartyItems"></ShowRecipes>
       </div>
     </div>
+
+    <hr class="fatHr" />
 
     <div>
       <h5>
@@ -35,6 +39,8 @@
       </div>
     </div>
 
+    <hr class="fatHr" />
+
     <div>
       <h5>
         <router-link :to="{name: 'BrowseBread'}" class="router-links-h5">Brote / Brötchen</router-link>
@@ -44,6 +50,8 @@
         <ShowRecipes :items="breadItems"></ShowRecipes>
       </div>
     </div>
+
+    <hr class="fatHr" />
 
     <div>
       <h5>
