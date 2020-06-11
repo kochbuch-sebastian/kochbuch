@@ -71,6 +71,8 @@
 
 <script>
 import ItemService from '../ItemService';
+import ShowRecipes from './ShowRecipes.vue'
+
 export default {
   name: 'BrowseRecipesShort',
   data() {
@@ -85,6 +87,9 @@ export default {
       breadItems: [],
       bakeryItems: [],
     };
+  },
+  components: {
+    ShowRecipes,
   },
   created() {
     this.getItems();
