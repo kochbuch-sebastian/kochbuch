@@ -26,6 +26,7 @@ class ItemService {
   }
 
   static arrayCheckContains(array, toCheck) {
+    console.log('ArrayCheckContains');
     const toCheckStrings = toCheck.split('+');
     let contained = false;
 
