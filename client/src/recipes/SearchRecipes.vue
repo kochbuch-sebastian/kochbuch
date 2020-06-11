@@ -62,6 +62,14 @@ export default {
             .catch(err => {
               this.error = err;
             });
+
+          ItemService.getItemsByIngredients(this.$router.params.keywords)
+            .then(response => {
+              this.items.concat(response);
+            })
+            .catch(err => {
+              this.error = err;
+            });
         }
       } catch (err) {
         this.error = err.message;
