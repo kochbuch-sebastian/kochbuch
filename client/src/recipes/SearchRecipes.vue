@@ -67,6 +67,8 @@ export default {
 
           ItemService.getItemsByIngredients(this.keywords)
             .then(response => {
+              console.log('response: ');
+              console.log(response);
               this.ingredientItems = response;
             })
             .catch(err => {
