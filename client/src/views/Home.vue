@@ -45,19 +45,19 @@
     <div class="categories">
       <BrowseRecipesShort />
     </div>
-    <hr class="fatHr" />
+    <!--<hr class="fatHr" />
     <div id="recipesDivision">
       <h3>Alle Rezepte</h3>
       <p>Hier sehen Sie alle unsere Rezepte. Wenn Sie mögen, probieren Sie sie doch direkt aus!</p>
 
       <ShowRecipes :items="this.recipes"></ShowRecipes>
-    </div>
+    </div>-->
   </div>
 </template>
 
 <script>
 import BrowseRecipesShort from '../recipes/BrowseRecipesShort.vue';
-import ShowRecipes from '../recipes/ShowRecipes.vue';
+// import ShowRecipes from '../recipes/ShowRecipes.vue';
 import ShowFavoriteRecipes from '../recipes/favorites/ShowFavoriteRecipes.vue';
 
 import { mapGetters, mapActions } from 'vuex';
@@ -86,7 +86,7 @@ export default {
     this.fetchRecipes();
   },
   components: {
-    ShowRecipes,
+    // ShowRecipes,
     ShowFavoriteRecipes,
     BrowseRecipesShort,
   },

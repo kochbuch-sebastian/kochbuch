@@ -3,7 +3,7 @@
     <h3>Rezepte</h3>
 
     <p class="error" v-if="error">{{ this.error }}</p>
-    <p>Hier finden Sie alle unsere Rezepte; sortiert nach Typ:</p>
+    <p>Hier finden Sie einige unserer Rezepte; sortiert nach Typ:</p>
 
     <div>
       <h5>
