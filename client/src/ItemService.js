@@ -41,6 +41,7 @@ class ItemService {
           contained = elNameLowerCase.includes(toCheckStringLowerCase);
           if (contained) return true;
         });
+        console.log(includes);
         if (includes) return true;
       }
     }
