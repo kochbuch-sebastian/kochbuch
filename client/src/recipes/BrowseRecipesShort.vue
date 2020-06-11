@@ -75,6 +75,8 @@ export default {
   name: 'BrowseRecipesShort',
   data() {
     return {
+      error: '',
+
       items: [],
 
       appetizerItems: [],
