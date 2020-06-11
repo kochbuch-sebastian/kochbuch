@@ -42,19 +42,22 @@
       </div>
       <hr class="fatHr" />
     </div>
+    <div class="categories">
+      <BrowseRecipesShort />
+    </div>
+    <!--<hr class="fatHr" />
     <div id="recipesDivision">
       <h3>Alle Rezepte</h3>
       <p>Hier sehen Sie alle unsere Rezepte. Wenn Sie mögen, probieren Sie sie doch direkt aus!</p>
 
       <ShowRecipes :items="this.recipes"></ShowRecipes>
-    </div>
+    </div>-->
   </div>
 </template>
 
 <script>
-// import ItemService from '../ItemService';
-
-import ShowRecipes from '../recipes/ShowRecipes.vue';
+import BrowseRecipesShort from '../recipes/BrowseRecipesShort.vue';
+// import ShowRecipes from '../recipes/ShowRecipes.vue';
 import ShowFavoriteRecipes from '../recipes/favorites/ShowFavoriteRecipes.vue';
 
 import { mapGetters, mapActions } from 'vuex';
@@ -73,7 +76,6 @@ export default {
     };
   },
   beforeMount() {
-    // this.username = this.user === null ? '' : this.user.username;
     this.username = sessionStorage.username ? sessionStorage.username : '';
   },
   computed: mapGetters(['user', 'loggedIn', 'recipes']),
@@ -84,8 +86,9 @@ export default {
     this.fetchRecipes();
   },
   components: {
-    ShowRecipes,
+    // ShowRecipes,
     ShowFavoriteRecipes,
+    BrowseRecipesShort,
   },
   methods: {
     ...mapActions(['fetchRecipes', 'fetchUser']),

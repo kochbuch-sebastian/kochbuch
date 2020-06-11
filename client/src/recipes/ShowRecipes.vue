@@ -51,6 +51,7 @@ export default {
     },
   },
   props: ['items'],
+  created() {},
 };
 </script>
 

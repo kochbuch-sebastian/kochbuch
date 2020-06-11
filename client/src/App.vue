@@ -117,6 +117,13 @@ h4 {
 .router-link-exact-active {
   color: #666666;
 }
+.router-links-h5 {
+  color: var(--navTextColor);
+  font-weight: bold;
+  min-height: 25px;
+  margin: 8px 10px 5px 10px;
+  font-size: 20px !important;
+}
 
 /* Search in navigation-bar */
 .search {

@@ -1,19 +1,21 @@
 <template>
   <div>
-    <nav id="nav" :style="!showNavLinks ? 'height: 45px;': ''">
+    <nav id="nav" :style="!showNavLinks ? 'height: 55px;': ''">
       <table id="navTable">
-        <tr v-if="showNavLinks">
+        <tr>
           <td v-for="(item, index) in navLinks" :key="index">
-            <span v-if="item.vif">
-              <router-link
-                :to="{ name: item.name }"
-                class="router-links"
-                style="margin-left: 0rem;"
-                exact
-              >{{ item.text }}</router-link>
+            <span v-if="showNavLinks">
+              <span v-if="item.vif">
+                <router-link
+                  :to="{ name: item.name }"
+                  class="router-links"
+                  style="margin-left: 0rem;"
+                  exact
+                >{{ item.text }}</router-link>
+              </span>
+              <span v-if="showPipe(item, index)">|</span>
+              <span v-if="showMargin(item, index)"></span>
             </span>
-            <span v-if="showPipe(item, index)">|</span>
-            <span v-if="showMargin(item, index)"></span>
           </td>
 
           <td>
@@ -29,6 +31,7 @@
                   height: 46px;
                   font-size: 14px;
                   margin-left: 2px;
+                  width: 125px;
                 "
               />
               <button
