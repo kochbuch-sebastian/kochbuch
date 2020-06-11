@@ -5,7 +5,11 @@
     <h3 v-show="this.keywords !== null">Rezepte, die "{{ keywords }}" enthalten</h3>
     <h3 v-show="this.keywords === null">Alle Rezepte</h3>
 
-    <ShowRecipes :items="items"></ShowRecipes>
+    <ShowRecipes :items="items" />
+
+    <h3 v-show="this.keywords !== null">Rezepte, deren Zutaten "{{ keywords }}" enthalten</h3>
+
+    <ShowRecipes :items="ingredientItems" v-if="this.keywords !== null" />
   </div>
 </template>
 
