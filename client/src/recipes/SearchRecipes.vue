@@ -18,9 +18,11 @@ export default {
   name: 'SearchRecipes',
   data() {
     return {
-      items: [],
-      keywords: '',
       error: '',
+      items: [],
+      ingredientItems: [],
+
+      keywords: '',
     };
   },
   components: {
@@ -65,7 +67,7 @@ export default {
 
           ItemService.getItemsByIngredients(this.keywords)
             .then(response => {
-              this.items.concat(response);
+              this.ingredientItems = response;
             })
             .catch(err => {
               this.error = err;
