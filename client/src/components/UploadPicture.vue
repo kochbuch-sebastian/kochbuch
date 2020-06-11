@@ -21,7 +21,7 @@
         </tr>
       </table>
     </form>
-    <div v-if="loggedIn">
+    <div v-if="!loggedIn">
       <p>Sie sind nicht eingeloggt; loggen Sie sich ein; dann können Sie ein Bild hochladen.</p>
     </div>
     <p class="message">{{ message }}</p>
