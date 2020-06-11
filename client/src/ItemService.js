@@ -43,8 +43,12 @@ class ItemService {
           console.log('el');
           console.log(el);
 
-          let elNameLowerCase = el.name.toLowerCase();
+          let elName = el.name;
+          let elNameLowerCase = elName.toLowerCase();
           contained = elNameLowerCase.includes(toCheckStringLowerCase);
+
+          console.log(`${elNameLowerCase}.includes(${toCheckStringLowerCase})`);
+          console.log(contained);
 
           if (contained === false) {
             return false;
