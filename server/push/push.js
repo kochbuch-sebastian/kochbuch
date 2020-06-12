@@ -86,7 +86,24 @@ module.exports = {
       __v: 0,
     };
 
+    const sub2 = {
+      _id: { $oid: '5ee33280e01d3a0017157ebf' },
+      endpoint:
+        'https://updates.push.services.mozilla.com/wpush/v2/gAAAAABe4zJ_heU-2G0rdIID_IZ_8bOlmd7x6MnVUY42M8spwlMk4of_KU3ZabprXRHPcsDTKCX_kV9ogscdVh8CemHnUnieiQjikh-1W7qAsRE8DvSaPjxXI_SvoLYmtDb-H0HPZgpNaisGQeb9thHQeR298zgI-B7ADNrByRYnz467c7OmkSA',
+      keys: {
+        auth: 'H9u-aF1ybDMA25QIlXgCkQ',
+        p256dh:
+          'BH6UvvU2y7Ha4owMYDR2MpPgtpoB5UKVk3bCjOvQZfOHf0OXQFyyFGpAg8aDF94n7KuQOle0emFi9_sdvwp8A10',
+      },
+      date: { $date: '2020-06-12T07:45:04.029Z' },
+      __v: 0,
+    };
     push.sendNotification(sub, {
+      type: 'Test',
+      payload: 'This is a test',
+      testName: 'Testname',
+    });
+    push.sendNotification(sub2, {
       type: 'Test',
       payload: 'This is a test',
       testName: 'Testname',
