@@ -36,8 +36,9 @@ router.post('/', (req, res) => {
   });
 
   newItem.save().then((item) => {
-    push.sendPushForEach(
+    push.sendPushForEachToRecipe(
       `Ein neues Rezept (id: ${item._id}) wurde von ${item.username} erstellt. `,
+      item._id,
     );
     return res.json(item);
   });
@@ -69,9 +70,6 @@ router.patch('/:id', (req, res) => {
           { upsert: true },
           (err, updatedDoc) => {
             if (err) return res.status(500).send({ error: err });
-            push.sendPushForEach(
-              `${updatedDoc.username} hat ein Rezept (id: ${item._id}) bearbeitet. `,
-            );
             return res.send(updatedDoc);
           },
         ).catch((err) => {

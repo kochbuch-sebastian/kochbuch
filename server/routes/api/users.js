@@ -117,8 +117,9 @@ router.post('/', (req, res) => {
               newUser
                 .save()
                 .then((user) => {
-                  push.sendPushForEach(
+                  push.sendPushForEachToUser(
                     `Der Benutzer ${user.username} hat sich registriert! Herzlich Willkommen!`,
+                    user.username,
                   );
                   return res.status(201).json(user);
                 })
