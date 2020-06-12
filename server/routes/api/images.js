@@ -125,12 +125,9 @@ router.get('/image/name/:filename', (req, res) => {
 });
 
 router.post('/', upload.single('file'), (req, res) => {
-  /* push.sendPushForEachToImage(
+  push.sendPushForEachToImage(
     `Ein neues Bild (Name: ${req.file.filename}) wurde hochgeladen. `,
     req.file.filename,
-  ); */
-  push.sendPushForEach(
-    `Ein neues Bild (Name: ${req.file.filename}) wurde hochgeladen. `,
   );
   res.json({ file: req.file });
 });

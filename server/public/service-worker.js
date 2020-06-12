@@ -47,16 +47,27 @@ workbox.routing.registerRoute(
 let click_open_url;
 self.addEventListener('push', (event) => {
   // let message = event.data.text();
-  let notification = event.data;
+  let notification = event.data.json().notification;
 
-  console.log('event');
-  console.log(event);
+  let link = '';
+  switch (notification.type) {
+    case 'recipe':
+      link = `recipes/${notification.recipeId}`;
+      break;
+    case 'user':
+      link = `user/${notification.username}`;
+      break;
+    case 'image':
+      link = `api/images/image/name/${notification.filename}`;
+      break;
+    default:
+      break;
+  }
 
-  click_open_url = 'https://kochbuch-sebastian.herokuapp.com';
+  click_open_url = `https://kochbuch-sebastian.herokuapp.com/${link}`;
 
   const options = {
-    body: notification,
-    text: 'This here might not exist: the text',
+    body: notification.payload,
     icon: './img/icons/android-chrome-192x192.png',
     vibrate: [200, 100, 200, 100, 200, 100, 200],
     tag: 'vibration-sample',
