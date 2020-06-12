@@ -46,6 +46,9 @@ let click_open_url;
 self.addEventListener('push', (event) => {
   let message = event.data.text();
 
+  console.log('event');
+  console.log(event);
+
   click_open_url = 'https://kochbuch-sebastian.herokuapp.com';
 
   const options = {
