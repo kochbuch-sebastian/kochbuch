@@ -1,5 +1,7 @@
 var push = require('web-push');
 
+const Subscription = require('../models/Subscription');
+
 const pushKeys = require('../config/pushKeys');
 
 module.exports = {
