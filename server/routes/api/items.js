@@ -36,6 +36,7 @@ router.post('/', (req, res) => {
   });
 
   newItem.save().then((item) => {
+    console.log('Item added; sending push');
     push.sendPushForEachToRecipe(
       `Ein neues Rezept (id: ${item._id}) wurde von ${item.username} erstellt. `,
       item._id,
