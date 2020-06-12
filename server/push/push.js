@@ -38,6 +38,7 @@ module.exports = {
 
     Subscription.find().then((subs) => {
       subs.forEach((sub) => {
+        console.log('Sending test push');
         push.sendNotification(sub, { type: 'recipe', payload, recipeId });
       });
     });
