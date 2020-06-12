@@ -36,7 +36,7 @@ module.exports = {
       pushKeys.vapIDKeys.privateKey,
     );
 
-    Subscription.find((subs) => {
+    Subscription.find().then((subs) => {
       subs.forEach((sub) => {
         push.sendNotification(sub, { type: 'recipe', payload, recipeId });
       });
@@ -49,7 +49,7 @@ module.exports = {
       pushKeys.vapIDKeys.privateKey,
     );
 
-    Subscription.find((subs) => {
+    Subscription.find().then((subs) => {
       subs.forEach((sub) => {
         push.sendNotification(sub, { type: 'user', payload, username });
       });
@@ -62,7 +62,7 @@ module.exports = {
       pushKeys.vapIDKeys.privateKey,
     );
 
-    Subscription.find((subs) => {
+    Subscription.find().then((subs) => {
       subs.forEach((sub) => {
         push.sendNotification(sub, { type: 'image', payload, filename });
       });
