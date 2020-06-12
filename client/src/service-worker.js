@@ -44,7 +44,8 @@ workbox.routing.registerRoute(
 
 let click_open_url;
 self.addEventListener('push', (event) => {
-  let message = event.data.text();
+  // let message = event.data.text();
+  let notification = event.data;
 
   console.log('event');
   console.log(event);
@@ -52,7 +53,7 @@ self.addEventListener('push', (event) => {
   click_open_url = 'https://kochbuch-sebastian.herokuapp.com';
 
   const options = {
-    body: message,
+    body: notification,
     text: 'This here might not exist: the text',
     icon: './img/icons/android-chrome-192x192.png',
     vibrate: [200, 100, 200, 100, 200, 100, 200],
