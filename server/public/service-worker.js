@@ -54,15 +54,16 @@ self.addEventListener('push', (event) => {
   let link = '';
   switch (notificationPayloads[2]) {
     case 'recipe':
-      link = `recipes/${notificationPayloads[1]}`;
+      link = `#/recipes/${notificationPayloads[1]}`;
       break;
     case 'user':
-      link = `user/${notificationPayloads[1]}`;
+      link = `#/user/${notificationPayloads[1]}`;
       break;
     case 'image':
       link = `api/images/image/name/${notificationPayloads[1]}`;
       break;
     default:
+      link = '#/';
       break;
   }
 
