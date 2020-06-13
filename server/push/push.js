@@ -38,8 +38,7 @@ module.exports = {
 
     Subscription.find().then((subs) => {
       subs.forEach((sub) => {
-        console.log('Sending test push');
-        push.sendNotification(sub, { type: 'recipe', payload, recipeId });
+        push.sendNotification(sub, `${payload}||${recipeId}||recipe`);
       });
     });
   },
@@ -52,7 +51,7 @@ module.exports = {
 
     Subscription.find().then((subs) => {
       subs.forEach((sub) => {
-        push.sendNotification(sub, { type: 'user', payload, username });
+        push.sendNotification(sub, `${payload}||${username}||user`);
       });
     });
   },
@@ -65,7 +64,7 @@ module.exports = {
 
     Subscription.find().then((subs) => {
       subs.forEach((sub) => {
-        push.sendNotification(sub, { type: 'image', payload, filename });
+        push.sendNotification(sub, `${payload}||${filename}||image`);
       });
     });
   },

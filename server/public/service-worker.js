@@ -47,18 +47,20 @@ workbox.routing.registerRoute(
 let click_open_url;
 self.addEventListener('push', (event) => {
   // let message = event.data.text();
-  let notification = event.data.json().notification;
+  let notification = event.data.text();
+
+  const notificationPayloads = notification.split(/||/g);
 
   let link = '';
-  switch (notification.type) {
+  switch (notificationPayloads[2]) {
     case 'recipe':
-      link = `recipes/${notification.recipeId}`;
+      link = `recipes/${notificationPayloads[1]}`;
       break;
     case 'user':
-      link = `user/${notification.username}`;
+      link = `user/${notificationPayloads[1]}`;
       break;
     case 'image':
-      link = `api/images/image/name/${notification.filename}`;
+      link = `api/images/image/name/${notificationPayloads[1]}`;
       break;
     default:
       break;
