@@ -1,5 +1,7 @@
 var push = require('web-push');
 
+const Subscription = require('../models/Subscription');
+
 const pushKeys = require('../config/pushKeys');
 
 module.exports = {
@@ -34,9 +36,9 @@ module.exports = {
       pushKeys.vapIDKeys.privateKey,
     );
 
-    Subscription.find((subs) => {
+    Subscription.find().then((subs) => {
       subs.forEach((sub) => {
-        push.sendNotification(sub, { type: 'recipe', payload, recipeId });
+        push.sendNotification(sub, `${payload}%%${recipeId}%%recipe`);
       });
     });
   },
@@ -47,9 +49,9 @@ module.exports = {
       pushKeys.vapIDKeys.privateKey,
     );
 
-    Subscription.find((subs) => {
+    Subscription.find().then((subs) => {
       subs.forEach((sub) => {
-        push.sendNotification(sub, { type: 'user', payload, username });
+        push.sendNotification(sub, `${payload}||${username}||user`);
       });
     });
   },
@@ -60,9 +62,9 @@ module.exports = {
       pushKeys.vapIDKeys.privateKey,
     );
 
-    Subscription.find((subs) => {
+    Subscription.find().then((subs) => {
       subs.forEach((sub) => {
-        push.sendNotification(sub, { type: 'image', payload, filename });
+        push.sendNotification(sub, `${payload}||${filename}||image`);
       });
     });
   },

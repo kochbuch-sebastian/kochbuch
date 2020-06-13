@@ -36,12 +36,10 @@ router.post('/', (req, res) => {
   });
 
   newItem.save().then((item) => {
-    /* push.sendPushForEachToRecipe(
+    console.log('Item added; sending push');
+    push.sendPushForEachToRecipe(
       `Ein neues Rezept (id: ${item._id}) wurde von ${item.username} erstellt. `,
       item._id,
-    ); */
-    push.sendPushForEach(
-      `Ein neues Rezept (id: ${item._id}) wurde von ${item.username} erstellt. `,
     );
     return res.json(item);
   });
