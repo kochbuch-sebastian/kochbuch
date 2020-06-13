@@ -61,7 +61,7 @@ self.addEventListener('push', (event) => {
       link = `api/images/image/name/${notificationPayloads[1]}`;
       break;
     default:
-      link = '#/';
+      link = `#/${notificationPayloads[2]}`;
       break;
   }
 
