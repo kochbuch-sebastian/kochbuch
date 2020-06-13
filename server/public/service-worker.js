@@ -70,9 +70,7 @@ self.addEventListener('push', (event) => {
   click_open_url = `https://kochbuch-sebastian.herokuapp.com/${link}`;
 
   const options = {
-    body: `${JSON.stringify(notification)}\n${JSON.stringify(
-      notificationPayloads,
-    )}`,
+    body: `${JSON.stringify(notificationPayloads)}`,
     icon: './img/icons/android-chrome-192x192.png',
     vibrate: [200, 100, 200, 100, 200, 100, 200],
     tag: 'vibration-sample',
