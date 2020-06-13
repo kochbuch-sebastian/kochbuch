@@ -1,79 +1,82 @@
 <template>
   <div class="container">
     <p class="error" v-if="error">{{ error }}</p>
+    <p class="noneFound" v-if="!item">Das Rezept existiert nicht (mehr)...</p>
 
-    <button class="genpdf" @click="genpdfButtonClicked" style="width: 50px; height: 50px;">PDF</button>
+    <div v-if="item">
+      <button class="genpdf" @click="genpdfButtonClicked" style="width: 50px; height: 50px;">PDF</button>
 
-    <button
-      class="delete"
-      @click="deleteButtonClicked"
-      v-if="loggedIn && user.username === item.username"
-      style="width: 50px; height: 50px;"
-    >
-      <img
-        id="editIcon"
-        src="../assets/delete_icon.png"
-        alt="Suchen"
-        style="width: 30px; height: 30px;"
-      />
-    </button>
+      <button
+        class="delete"
+        @click="deleteButtonClicked"
+        v-if="loggedIn && user.username === item.username"
+        style="width: 50px; height: 50px;"
+      >
+        <img
+          id="editIcon"
+          src="../assets/delete_icon.png"
+          alt="Suchen"
+          style="width: 30px; height: 30px;"
+        />
+      </button>
 
-    <button
-      class="edit"
-      @click="editButtonClicked"
-      v-if="loggedIn && user.username === item.username"
-      style="width: 50px; height: 50px;"
-    >
-      <img
-        id="editIcon"
-        src="../assets/edit_icon.png"
-        alt="Suchen"
-        style="width: 30px; height: 30px;"
-      />
-    </button>
+      <button
+        class="edit"
+        @click="editButtonClicked"
+        v-if="loggedIn && user.username === item.username"
+        style="width: 50px; height: 50px;"
+      >
+        <img
+          id="editIcon"
+          src="../assets/edit_icon.png"
+          alt="Suchen"
+          style="width: 30px; height: 30px;"
+        />
+      </button>
 
-    <button
-      class="favorite"
-      @click="favoriteButtonClicked"
-      v-if="loggedIn"
-      style="width: 50px; height: 50px;"
-      :class="{favoriteClass: isFavorite}"
-    >
-      <img
-        id="favoriteIcon"
-        src="../assets/favorite_icon.svg"
-        alt="Lieblingsrezept"
-        style="width: 30px; height: 30px;"
-      />
-    </button>
+      <button
+        class="favorite"
+        @click="favoriteButtonClicked"
+        v-if="loggedIn"
+        style="width: 50px; height: 50px;"
+        :class="{favoriteClass: isFavorite}"
+      >
+        <img
+          id="favoriteIcon"
+          src="../assets/favorite_icon.svg"
+          alt="Lieblingsrezept"
+          style="width: 30px; height: 30px;"
+        />
+      </button>
 
-    <h3>Rezept:</h3>
-    <h4>{{ item.title }}</h4>
-    <p>
-      Hinzugefügt von
-      <router-link
-        :to="{name: 'User', params: {username: this.item.username}}"
-        class="router-links noMargin"
-      >{{ this.item.username }}</router-link>
-      am {{ this.createdAt }}
-    </p>
-    <hr class="fatHr" />
-
-    <div class="table">
-      <div style="max-width: fit-content; max-width: 100%; float: left;">
-        <Ingredients :ingredients="item.ingredients" style="max-width: 100%;" />
-      </div>
-      <div style="overflow: hidden;">
-        <h4>Beschreibung</h4>
-        <pre>{{ this.item.description }}</pre>
-      </div>
-
-      <div class="pictures">
-        <ShowPictures :recipeId="this.$route.params.id"></ShowPictures>
+      <h3>Rezept:</h3>
+      <h4>{{ item.title }}</h4>
+      <p>
+        Hinzugefügt von
         <router-link
-          :to="{name: 'AddPicture', params: {recipeId: this.item._id}}"
-          class="router-links"
-        >Bild Hinzufügen</router-link>
+          :to="{name: 'User', params: {username: this.item.username}}"
+          class="router-links noMargin"
+        >{{ this.item.username }}</router-link>
+        am {{ this.createdAt }}
+      </p>
+      <hr class="fatHr" />
+
+      <div class="table">
+        <div style="max-width: fit-content; max-width: 100%; float: left;">
+          <Ingredients :ingredients="item.ingredients" style="max-width: 100%;" />
+        </div>
+        <div style="overflow: hidden;">
+          <h4>Beschreibung</h4>
+          <pre>{{ this.item.description }}</pre>
+        </div>
+
+        <div class="pictures">
+          <ShowPictures :recipeId="this.$route.params.id"></ShowPictures>
+          <router-link
+            :to="{name: 'AddPicture', params: {recipeId: this.item._id}}"
+            class="router-links"
+          >Bild Hinzufügen</router-link>
+        </div>
       </div>
     </div>
     <p class="message">{{ message }}</p>
@@ -253,7 +256,7 @@ img {
 .edit {
   position: absolute;
   float: right;
-  right: 2rem;
+  right: 1rem;
   top: 12rem;
   padding: 0.5rem 1rem 0.5rem 0.5rem;
   border: 2px solid #555555;
@@ -261,7 +264,7 @@ img {
 .delete {
   position: absolute;
   float: right;
-  right: 2rem;
+  right: 1rem;
   top: calc(12rem + 52px);
   padding: 0.5rem 1rem 0.5rem 0.5rem;
   border: 2px solid #555555;
@@ -269,7 +272,7 @@ img {
 .genpdf {
   position: absolute;
   float: right;
-  right: 2rem;
+  right: 1rem;
   top: calc(12rem - 52px);
   padding: 0.5rem 1rem 0.5rem 0.5rem;
   border: 2px solid #555555;
