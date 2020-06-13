@@ -49,7 +49,8 @@ self.addEventListener('push', (event) => {
   // let message = event.data.text();
   let notification = event.data.text();
 
-  const notificationPayloads = notification.split(/||/g);
+  const splitter = new RegExp('%%', 'g');
+  const notificationPayloads = notification.split(splitter);
 
   let link = '';
   switch (notificationPayloads[2]) {

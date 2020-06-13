@@ -38,7 +38,7 @@ module.exports = {
 
     Subscription.find().then((subs) => {
       subs.forEach((sub) => {
-        push.sendNotification(sub, `${payload}||${recipeId}||recipe`);
+        push.sendNotification(sub, `${payload}%%${recipeId}%%recipe`);
       });
     });
   },
