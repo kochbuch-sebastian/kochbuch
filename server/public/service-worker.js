@@ -44,7 +44,6 @@ workbox.routing.registerRoute(
   }),
 );
 
-let click_open_url;
 self.addEventListener('push', (event) => {
   // let message = event.data.text();
   let notification = event.data.text();
@@ -68,11 +67,13 @@ self.addEventListener('push', (event) => {
       break;
   }
 
-  click_open_url = `https://kochbuch-sebastian.herokuapp.com/${link}`;
+  const click_open_url = `https://kochbuch-sebastian.herokuapp.com/${link}`;
 
   const options = {
     body: `${notificationPayloads[0]}`,
     icon: './img/icons/android-chrome-192x192.png',
+    data: { url: click_open_url },
+
     vibrate: [200, 100, 200, 100, 200, 100, 200],
     tag: 'vibration-sample',
   };
@@ -81,10 +82,12 @@ self.addEventListener('push', (event) => {
 
 self.addEventListener('notificationclick', (event) => {
   const clickedNotification = event.notification;
+
+  const openUrl = event.notification.data.url;
+
   clickedNotification.close();
-  if (click_open_url) {
-    const promiseChain = clients.openWindow(click_open_url);
-    event.waitUntil(promiseChain);
+  if (openUrl) {
+    event.waitUntil(clients.openWindow(openUrl));
   }
 });
 
