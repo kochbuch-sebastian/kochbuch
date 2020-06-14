@@ -67,6 +67,6 @@ li {
 }
 ul {
   text-align: left;
-  left: 1rem;
+  padding: 0;
 }
 </style>
