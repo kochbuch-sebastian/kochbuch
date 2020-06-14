@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" width="100%">
     <p class="error" v-if="error">{{ this.error }}</p>
     <div v-show="items.length === 0">Keine Rezepte gefunden!</div>
     <div v-show="items.length !== 0 && showNr">Anzahl Rezepte: {{ items.length }}</div>
