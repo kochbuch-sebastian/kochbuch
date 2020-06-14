@@ -65,4 +65,8 @@ export default {
 li {
   list-style-type: none;
 }
+ul {
+  text-align: left;
+  left: 1rem;
+}
 </style>
