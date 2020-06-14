@@ -63,7 +63,7 @@ export default {
 
 <style scoped>
 li {
-  list-style-type: none;
+  list-style-type: '- ';
 }
 ul {
   text-align: left;
