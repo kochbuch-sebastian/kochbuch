@@ -1,5 +1,5 @@
 <template>
-  <div class="container" v-if="!pushEnabled">
+  <div class="container pushNotBanner" v-if="!pushEnabled">
     <div class="fullWidth black-background" v-if="(!pushNotAvailable) && showPush">
       <button @click="getPush" class="center-button">Benachrichtigungen aktivieren</button>
       <button class="closeX" :style="`width: ${closeXWidth};`" @click="showPushFalse()">X</button>

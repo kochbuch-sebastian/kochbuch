@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <GetPushNotifications />
+    <CookieBanner />
     <Navbar />
     <div>
       <h1 id="title">Sebastians Kochbuch</h1>
@@ -11,6 +12,7 @@
 
 <script>
 import GetPushNotifications from './components/banners/GetPushNotifications.vue';
+import CookieBanner from './components/banners/CookieBanner.vue';
 import Navbar from './components/Navbar.vue';
 
 import { mapActions } from 'vuex';
@@ -20,6 +22,7 @@ export default {
 
   components: {
     GetPushNotifications,
+    CookieBanner,
     Navbar,
   },
   mounted() {
