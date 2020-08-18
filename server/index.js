@@ -21,29 +21,29 @@ app.use(cors());
 app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 // Add headers
-app.use(function (req, res, next) {
-  // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://192.168.2.100:8080');
+// app.use(function (req, res, next) {
+//   // Website you wish to allow to connect
+//   res.setHeader('Access-Control-Allow-Origin', 'http://192.168.2.100:8080');
 
-  // Request methods you wish to allow
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-  );
+//   // Request methods you wish to allow
+//   res.setHeader(
+//     'Access-Control-Allow-Methods',
+//     'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+//   );
 
-  // Request headers you wish to allow
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-Requested-With,content-type',
-  );
+//   // Request headers you wish to allow
+//   res.setHeader(
+//     'Access-Control-Allow-Headers',
+//     'X-Requested-With,content-type'
+//   );
 
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
+//   // Set to true if you need the website to include cookies in the requests sent
+//   // to the API (e.g. in case you use sessions)
+//   res.setHeader('Access-Control-Allow-Credentials', true);
 
-  // Pass to next layer of middleware
-  next();
-});
+//   // Pass to next layer of middleware
+//   next();
+// });
 
 // DB Config
 const db = require('./config/keys').mongoURI;
