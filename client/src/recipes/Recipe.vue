@@ -258,7 +258,13 @@ export default {
       }
     } catch (err) {
       console.log('ERR: ' + err);
-      this.error = err.message;
+
+      if (this.error.includes('Network err')) {
+        console.log('Network error, probably offline');
+        this.offline = true;
+      } else {
+        this.error = err.message;
+      }
     }
     this.initColors();
   },
