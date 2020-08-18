@@ -257,8 +257,6 @@ export default {
         });
       }
     } catch (err) {
-      console.log('ERR: ' + err);
-
       console.log('I am in catch');
       console.log(err.message);
 
