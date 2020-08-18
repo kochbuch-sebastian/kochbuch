@@ -259,6 +259,9 @@ export default {
     } catch (err) {
       console.log('ERR: ' + err);
 
+      console.log('I am in catch');
+      console.log(err.message);
+
       if (err.message.includes('Network')) {
         console.log('Network error, probably offline');
         this.offline = true;
