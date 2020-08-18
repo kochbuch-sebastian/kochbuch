@@ -4,7 +4,13 @@
     <p class="noneFound" v-if="!item">Das Rezept existiert nicht (mehr)...</p>
 
     <div v-if="item">
-      <button class="genpdf" @click="genpdfButtonClicked" style="width: 50px; height: 50px;">PDF</button>
+      <button
+        class="genpdf"
+        @click="genpdfButtonClicked"
+        style="width: 50px; height: 50px;"
+      >
+        PDF
+      </button>
 
       <button
         class="delete"
@@ -39,7 +45,7 @@
         @click="favoriteButtonClicked"
         v-if="loggedIn"
         style="width: 50px; height: 50px;"
-        :class="{favoriteClass: isFavorite}"
+        :class="{ favoriteClass: isFavorite }"
       >
         <img
           id="favoriteIcon"
@@ -54,16 +60,20 @@
       <p>
         Hinzugefügt von
         <router-link
-          :to="{name: 'User', params: {username: this.item.username}}"
+          :to="{ name: 'User', params: { username: this.item.username } }"
           class="router-links noMargin"
-        >{{ this.item.username }}</router-link>
+          >{{ this.item.username }}</router-link
+        >
         am {{ this.createdAt }}
       </p>
       <hr class="fatHr" />
 
       <div class="table">
         <div style="max-width: fit-content; max-width: 100%; float: left;">
-          <Ingredients :ingredients="item.ingredients" style="max-width: 100%;" />
+          <Ingredients
+            :ingredients="item.ingredients"
+            style="max-width: 100%;"
+          />
         </div>
         <div style="overflow: hidden;">
           <h4>Beschreibung</h4>
@@ -73,9 +83,10 @@
         <div class="pictures">
           <ShowPictures :recipeId="this.$route.params.id"></ShowPictures>
           <router-link
-            :to="{name: 'AddPicture', params: {recipeId: this.item._id}}"
+            :to="{ name: 'AddPicture', params: { recipeId: this.item._id } }"
             class="router-links"
-          >Bild Hinzufügen</router-link>
+            >Bild Hinzufügen</router-link
+          >
         </div>
       </div>
     </div>
@@ -129,7 +140,7 @@ export default {
           () => {
             this.fetchUser(sessionStorage.username);
             this.isFavorite = !this.isFavorite;
-          },
+          }
         );
       } else {
         console.log(`Adding ${this.item._id} to favorites`);
@@ -214,6 +225,11 @@ export default {
       document.documentElement.style.setProperty('--color2', this.color2);
       document.documentElement.style.setProperty('--textColor', this.textColor);
     },
+    waitForError(callback) {
+      if (!this.error) {
+        setTimeout(this.waitForError(callback), 200);
+      }
+    },
   },
   async created() {
     try {
@@ -223,13 +239,14 @@ export default {
       }
 
       this.date = new Date(this.item.date);
-      this.createdAt = `${this.date.getDate()}.${this.date.getMonth() +
-        1}.${this.date.getFullYear()}`;
+      this.createdAt = `${this.date.getDate()}.${
+        this.date.getMonth() + 1
+      }.${this.date.getFullYear()}`;
 
       if (this.loggedIn) {
         this.fetchUser(sessionStorage.username).then(() => {
           this.isFavorite = this.user.favorites.includes(
-            this.item._id.toString(),
+            this.item._id.toString()
           );
         });
       }
@@ -240,9 +257,13 @@ export default {
     this.initColors();
   },
   beforeMount() {
-    if (this.error.includes('Network err')) {
-      console.log('Network error, probably offline');
-      this.$router.push({ name: 'Offline' });
+    if (!this.error) {
+      this.waitForError(() => {
+        if (this.error.includes('Network err')) {
+          console.log('Network error, probably offline');
+          this.$router.push({ name: 'Offline' });
+        }
+      });
     }
   },
 };
