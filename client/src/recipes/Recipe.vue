@@ -115,7 +115,7 @@ export default {
     ShowPictures,
     Offline,
   },
-  computed: { ...mapGetters(['user', 'loggedIn']) },
+  computed: { ...mapGetters(['user', 'loggedIn', 'recipes']) },
   data() {
     return {
       item: {},
@@ -259,7 +259,7 @@ export default {
     } catch (err) {
       console.log('ERR: ' + err);
 
-      if (this.error.includes('Network')) {
+      if (err.message.includes('Network')) {
         console.log('Network error, probably offline');
         this.offline = true;
       } else {
