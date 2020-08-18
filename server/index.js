@@ -1,24 +1,24 @@
-import express, { json, static } from 'express';
-import { connect } from 'mongoose';
-import cors from 'cors';
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
 
-import { HTTPS } from 'express-sslify';
+const enforce = require('express-sslify');
 
-import passport, { initialize, session } from 'passport';
+const passport = require('passport');
 
-import items from './routes/api/items';
-import users from './routes/api/users';
-import images from './routes/api/images';
-import icons from './routes/api/icons';
-import send from './routes/api/send';
-import subscribe from './routes/api/subscribe';
+const items = require('./routes/api/items');
+const users = require('./routes/api/users');
+const images = require('./routes/api/images');
+const icons = require('./routes/api/icons');
+const send = require('./routes/api/send');
+const subscribe = require('./routes/api/subscribe');
 
 const app = express();
 
-app.use(json());
+app.use(express.json());
 app.use(cors());
 
-app.use(HTTPS({ trustProtoHeader: true }));
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 // Not needed!!! following 15 lines...
 /*
@@ -50,18 +50,19 @@ app.use(function (req, res, next) {
 */
 
 // DB Config
-import { mongoURI as db } from './config/keys';
+const db = require('./config/keys').mongoURI;
 
 //Connect to DB
-connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose
+  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB Connected'))
   .catch((err) => console.log(err));
 
 // Passport Config
 require('./config/passport')(passport);
 
-app.use(initialize());
-app.use(session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Use routes
 app.use('/api/items', items);
@@ -74,7 +75,7 @@ app.use('/api/subscribe', subscribe);
 
 // Handle production
 if (process.env.NODE_ENV === 'production') {
-  app.use(static(__dirname + '/public/'));
+  app.use(express.static(__dirname + '/public/'));
 
   // Handle Single Page Application
   app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
