@@ -259,7 +259,7 @@ export default {
     } catch (err) {
       console.log('ERR: ' + err);
 
-      if (this.error.includes('Network err')) {
+      if (this.error.includes('Network')) {
         console.log('Network error, probably offline');
         this.offline = true;
       } else {
