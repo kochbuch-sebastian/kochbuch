@@ -73,10 +73,10 @@ class ItemService {
             res.data.filter((item) => {
               const isRightType = this.checkContains(
                 item.recipeType,
-                recipeType,
+                recipeType
               );
               return isRightType;
-            }),
+            })
           );
         })
         .catch((err) => reject(err));
@@ -92,7 +92,7 @@ class ItemService {
       })
         .then((res) => {
           resolve(
-            res.data.filter((item) => this.checkContains(item.title, title)),
+            res.data.filter((item) => this.checkContains(item.title, title))
           );
         })
         .catch((err) => reject(err));
@@ -111,7 +111,7 @@ class ItemService {
             res.data.filter((item) => {
               let contains = this.arrayCheckContains(item.ingredients, ing);
               return contains;
-            }),
+            })
           );
         })
         .catch((err) => reject(err));
@@ -125,6 +125,7 @@ class ItemService {
       axios
         .get(`${url}${id}`)
         .then((res) => {
+          console.log('Resolved');
           resolve(res.data);
         })
         .catch((err) => reject(err));
