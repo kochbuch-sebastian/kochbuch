@@ -29,7 +29,7 @@ class SendEmail {
     let worked = false;
 
     try {
-      const request = await axios.post(`${url}/html`, {
+      const request = await axios.post(`${url}html`, {
         address,
         subject,
         htmlContent,
