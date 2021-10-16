@@ -1,6 +1,6 @@
 # kochbuch
 
-You can find this application [here](https://kochbuch-sebastian.herokuapp.com/).
+You can find this application [here](https://kochbuch.sthomas.com/).
 
 This app is in fact a school project i began in 2020 and worked on since.
 
