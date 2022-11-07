@@ -1,6 +1,6 @@
-const keys = require('./keys');
+const keys = process.env;
 
 module.exports = {
-  database: keys.mongoURI,
+  database: keys.MONGO_URI,
   secret: 'nosecret',
 };
