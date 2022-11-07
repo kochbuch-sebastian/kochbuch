@@ -15,7 +15,7 @@ const push = require('../../push/push');
 const axios = require('axios');
 
 // DB Config
-const db = require('../../config/keys').mongoURI;
+const db = process.env.mongoURI;
 
 //Connect to DB
 mongoose.set('useUnifiedTopology', true);
