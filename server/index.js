@@ -19,7 +19,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+// app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 // DB Config
 const db = process.env.MONGO_URI;
