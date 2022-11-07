@@ -11,7 +11,7 @@ const GridFsStorage = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 
 // DB Config
-const db = require('../../config/keys').mongoURI;
+const db = process.env.MONGO_URI;
 
 //Connect to DB
 mongoose.set('useUnifiedTopology', true);
