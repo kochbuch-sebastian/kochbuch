@@ -1,9 +1,9 @@
-import pdfMake from 'pdfmake/build/pdfmake';
-import vfsFonts from 'pdfmake/build/vfs_fonts';
+import pdfMake from 'pdfmake/build/pdfmake'
+import vfsFonts from 'pdfmake/build/vfs_fonts'
 
 class PDFUtils {
   static createPdfForRecipe(item) {
-    pdfMake.vfs = vfsFonts.pdfMake.vfs;
+    pdfMake.vfs = vfsFonts.pdfMake.vfs
 
     const ingred = [
       [
@@ -11,16 +11,14 @@ class PDFUtils {
         { text: 'Zutat', bold: true },
       ],
     ].concat(
-      item.ingredients.map((ingredient) => {
-        return [ingredient.name, ingredient.amount];
-      }),
-    );
+      item.ingredients.map(ingredient => {
+        return [ingredient.name, ingredient.amount]
+      })
+    )
 
     const docDefinition = {
       footer: {
-        columns: [
-          { text: 'kochbuch-sebastian.herokuapp.com', alignment: 'center' },
-        ],
+        columns: [{ text: 'kochbuch.sthomas.ch', alignment: 'center' }],
       },
 
       content: [
@@ -84,10 +82,10 @@ class PDFUtils {
           alignment: 'center',
         },
       ],
-    };
+    }
 
-    pdfMake.createPdf(docDefinition).download(`${item.title}.pdf`);
+    pdfMake.createPdf(docDefinition).download(`${item.title}.pdf`)
   }
 }
 
-export default PDFUtils;
+export default PDFUtils

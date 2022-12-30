@@ -15,7 +15,8 @@
             <label for="subjectInput">Betreff:</label>
           </td>
           <td>
-            <input name="subjectInput" id="subjectInput" cols="40" rows="10" v-model="subjectData" />
+            <input name="subjectInput" id="subjectInput" cols="40" rows="10"
+              v-model="subjectData" />
           </td>
         </tr>
       </table>
@@ -24,9 +25,8 @@
         <input type="checkbox" v-model="sendAsHtml" name="sendAsHtml" id="sendAsHtml" />
       </div>
       <div>
-        <label
-          for="clearListAfter"
-        >Nach erfolgreichem Senden der Email alle Elemente aus der Liste entfernen</label>
+        <label for="clearListAfter">Nach erfolgreichem Senden der Email alle Elemente aus der Liste
+          entfernen</label>
         <input type="checkbox" v-model="clearListAfter" name="clearListAfter" id="clearListAfter" />
       </div>
       <div>
@@ -156,13 +156,14 @@ export default {
         }
       } else {
         this.error =
-          'Keine gültige Email-Adresse eingegeben. Sollte Sie doch gültig sein, bitte senden Sie eine Mail mit dem Betreff "Bug: Email Address" an kochbuch-sebastian@web.de. Danke!';
+          'Keine gültige Email-Adresse eingegeben. Sollte Sie doch gültig sein, bitte senden Sie eine Mail mit dem Betreff "Bug: Email Address" an kochbuch@sthomas.ch. Danke!';
       }
     },
   },
-  created() {},
+  created() { },
 };
 </script>
 
 <style scoped>
+
 </style>

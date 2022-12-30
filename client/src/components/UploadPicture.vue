@@ -85,12 +85,19 @@ export default {
 
       this.image = this.$refs.file.files[0];
 
-      await ImageService.addPicture(this.$route.params.recipeId, this.image);
-      this.$router.push({ name: 'Home' });
+      try {
+        await ImageService.addPicture(this.$route.params.recipeId, this.image);
+        this.$router.push({ name: 'Home' });
+      } catch (err) {
+        this.error = 'Dieses Bild konnte leider nicht hochgeladen werden. Übersteigt es die Maximalgröße?'
+        console.error('Image not uploaded:')
+        console.error(err)
+      }
     },
   },
 };
 </script>
 
 <style scoped>
+
 </style>
