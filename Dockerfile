@@ -23,4 +23,4 @@ EXPOSE $PORT
 # Copy files to container
 
 USER node
-CMD ["ls -la /app/server/", "&&", "npm", "start"]
+CMD ["npm", "start"]
