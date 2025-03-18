@@ -67,7 +67,7 @@ export default {
       this.error = err.message;
     }
   },
-  destroyed() {
+  unmounted() {
     document.removeEventListener('keypress', event => this.keyListener(event));
   },
   methods: {

@@ -176,7 +176,7 @@ export default {
   mounted() {
     this.addIngredient();
   },
-  destroyed() {
+  unmounted() {
     document.removeEventListener('keypress', event => this.keyListener(event));
   },
   methods: {

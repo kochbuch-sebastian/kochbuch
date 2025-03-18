@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  outputDir: path.resolve(__dirname, '../server/public'),
+  outputDir: 'dist',
   devServer: {
     proxy: {
       '^/api': {
@@ -13,7 +13,7 @@ module.exports = {
     name: 'kochbuch-sebastian',
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
-      swSrc: 'src/service-worker.js',
+      swSrc: './src/service-worker.js',
     },
   },
 };

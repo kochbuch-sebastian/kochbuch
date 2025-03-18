@@ -62,7 +62,7 @@ export default {
   beforeMount() {
     this.username = this.user === null ? '' : this.user.username;
   },
-  destroyed() {
+  unmounted() {
     document.removeEventListener('keypress', event => this.keyListener(event));
   },
   methods: {
