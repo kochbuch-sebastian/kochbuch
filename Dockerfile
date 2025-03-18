@@ -14,8 +14,9 @@ ENV PORT=$PORT
 WORKDIR /app
 
 COPY server/ ./server
+RUN ls -la /app/server
 COPY --from=vue-build /frontend-src/dist/ ./server/public
-COPY ["package.json", "package-lock.json*", "./server/"]
+COPY ["package.json", "package-lock.json*", "./"]
 # Final setup and installation of node
 RUN cd server && npm install
 EXPOSE $PORT

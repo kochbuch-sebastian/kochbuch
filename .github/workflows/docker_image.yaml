@@ -35,4 +35,4 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/kochbuch-sebastian:latest
-        platforms: linux/amd64, linux/armv8
+        platforms: linux/amd64
