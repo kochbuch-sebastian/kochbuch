@@ -4,6 +4,8 @@ services:
   kochbuch-db: 
     image: mongo
     restart: always
+    volumes:
+      - ./storage:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example

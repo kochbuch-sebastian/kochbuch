@@ -19,8 +19,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-if (process.env && ["production", "prod"].includes(process.env.NODE_ENV))
-  app.use(enforce.HTTPS({ trustProtoHeader: true }));
+// if (process.env && ["production", "prod"].includes(process.env.NODE_ENV))
+//   app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 // DB Config
 const db = process.env.MONGO_URI;
