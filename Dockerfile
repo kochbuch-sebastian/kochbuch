@@ -17,7 +17,7 @@ COPY server ./server
 COPY --from=vue-build /frontend-src/dist/ ./server/public
 COPY ["package.json", "package-lock.json*", "./server/"]
 # Final setup and installation of node
-RUN npm install
+RUN cd server && npm install
 EXPOSE $PORT
 # Copy files to container
 
