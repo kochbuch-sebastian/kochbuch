@@ -13,7 +13,7 @@ ENV NODE_ENV=$NODE_ENV
 ENV PORT=$PORT
 WORKDIR /app
 
-COPY server ./server
+COPY server/ ./server
 COPY --from=vue-build /frontend-src/dist/ ./server/public
 COPY ["package.json", "package-lock.json*", "./server/"]
 # Final setup and installation of node
