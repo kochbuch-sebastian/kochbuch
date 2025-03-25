@@ -9,7 +9,7 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
 
 workbox.routing.registerRoute(
   new RegExp('items/'),
-  workbox.strategies.networkFirst({
+  new workbox.strategies.NetworkFirst({
     cacheName: 'v2',
     method: 'GET',
     plugins: [],
@@ -19,7 +19,7 @@ workbox.routing.registerRoute(
 
 workbox.routing.registerRoute(
   new RegExp('icons/'),
-  workbox.strategies.networkFirst({
+  new workbox.strategies.NetworkFirst({
     cacheName: 'v2',
     method: 'GET',
     plugins: [],
@@ -29,7 +29,7 @@ workbox.routing.registerRoute(
 
 workbox.routing.registerRoute(
   new RegExp('images/'),
-  workbox.strategies.networkFirst({
+  new workbox.strategies.NetworkFirst({
     cacheName: 'v2',
     method: 'GET',
     plugins: [],
@@ -39,7 +39,7 @@ workbox.routing.registerRoute(
 
 workbox.routing.registerRoute(
   new RegExp('users/'),
-  workbox.strategies.networkFirst({
+  new workbox.strategies.NetworkFirst({
     cacheName: 'v2',
     method: 'GET',
     plugins: [],
